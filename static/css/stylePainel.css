@@ -1,0 +1,129 @@
+/*Geral*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: helvetica;
+    color: black;
+    border: none;
+    }
+    body{
+        background-image: url(../img/background.jpg);
+        background-size: cover;      
+    }
+	h1{
+		font-size: 30px;
+		font-family: 'Courier New', Courier, monospace;
+	
+	}
+    textarea:focus, input:focus{
+        outline: none;        
+    }
+    a, label{
+        font-size: .8rem;
+    }
+    a:hover{
+        color: blue;
+    }
+    /*Container Login*/
+
+    #painel-container{
+
+        background-color: white;
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px 30px;
+        margin-top: 10vh;
+        border-radius: 10px;
+        text-align: center;
+    }
+	#delete-container{
+
+        background-color: white;
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px 30px;
+        margin-top: 10vh;
+        border-radius: 10px;
+        text-align: center;
+    }
+    form{
+        margin-top: 30px;
+        margin-bottom: 40px;        
+    }
+    .full-box{
+        flex: 1 1 100%;
+        position: relative;
+    }
+    .half-box{
+        flex: 1 1 45%;
+        position: relative;
+    }
+    label, input, button{
+        display: block;
+        width: 100%;
+        
+    }
+    label{
+        font-weight: bold;
+		text-align: center; 
+		font-size: 17px;
+    }
+    input{
+        border-bottom: 2px solid black;
+        padding: 10px;
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    input:focus{
+        border-bottom: 2px solid #070bf1;
+    }
+    input[type="submit"]{
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        border: none;
+        height: 40px;
+        border-radius: 20px;
+        margin-top: 40px;
+        color: blanchedalmond;
+        background-color: chocolate;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover{
+        background-color: black;
+        transition: .5s;
+    }
+    
+        
+.error-validation{
+    color: #ff1a1a;
+    position: absolute;
+    top: 58px;
+    font-size: .8rem;
+    font-weight: bold;
+}
+.template{
+    display: none;
+}
+button{
+	background-color:chocolate;
+    color: blanchedalmond;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    width: 340px;
+	font-weight: bold;
+	margin-top: 25px;
+
+}
+button:hover{
+    background-color: black;
+    transition: .5s;
+}

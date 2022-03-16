@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleAtualizaEquipamentos.css')}}">
+    
+    
+    <title>Easylub</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">
+            <img class="logo" src="/static/img/engrenagem-verde.png" width="100px">
+            <button class="btn btn-outline-success me-2" type="button" href="index.html">Easylub</button>
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <div class="dropdown show">
+                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Usuários
+                          </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/cadastro">Cadastrar usuários</a></li>
+                            <li><a class="dropdown-item" href="/listarUsuarios">Listar usuários</a></li>
+                            <li><a class="dropdown-item" href="/update">Atualizar Usuarios</a></li>
+                            <li><a class="dropdown-item" href="/delete">Deletar Usuários</a></li>                   
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown show">
+                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Máquinas
+                          </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/cadastroMaquinas">Cadastrar Máquinas</a></li>
+                            <li><a class="dropdown-item"  href="/visualizar_equipamentos">Visualizar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/atualizar_equipamentos">Atualizar Máquinas</a></li>
+                            <li><a class="dropdown-item"  href="/deletar_equipamentos">Deletar máquinas</a></li>
+                                                      
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown show">
+                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Lubrificantes
+                          </a>
+                        <ul class="dropdown-menu">                            
+                            <li><a class="dropdown-item" href="">Cadastrar Óleos</a></li>
+                            <li><a class="dropdown-item"  href="">Visualizar Óleos</a></li>
+                            <li><a class="dropdown-item" href="">Cadastrar Graxas</a></li>
+                            <li><a class="dropdown-item"  href="">Visualizar Graxas</a></li>
+                            <li><a class="dropdown-item" href="">Cadastrar Spray</a></li>
+                            <li><a class="dropdown-item"  href="">Visualizar Spray</a></li>                          
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown show">
+                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Serviços
+                          </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="">Cadastrar Serviços</a></li>
+                            <li><a class="dropdown-item"  href="">Visualizar Serviços</a></li>                            
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <section id="equipamentos">
+            <div class="container-fluid agenda text-center margin">
+                <div>
+                    <h1>Atualizar Máquinas</h1>
+                </div>
+                <form action="">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">ID:</span>
+                        <input id="idMaq" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Nome da Máquina:</span>
+                        <input id="nomeMaq" type="text" class="form-control"  aria-label="Username">
+                     </div>
+                     <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">linha: </span>
+                        <input id="linhaMaq" type="text" class="form-control"  aria-label="Server">
+                     </div>
+                     <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Trecho: </span>
+                        <input id="trechoMaq" type="text" class="form-control"  aria-label="Server">
+                     </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    
+</body>
+<footer class="text-center">
+
+    <div>
+        <button onclick="atualizar_equipamento()" type="submit" id="btn"
+                            class="btn btn-primary">Atualizar</button>        
+    </div>
+
+   
+    <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='JScript/scriptAtualizarEquipamento.js')}}"></script>
+</footer>
+
+</html>

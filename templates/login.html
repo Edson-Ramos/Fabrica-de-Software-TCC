@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Venha Conhecer Nosso Sistema de Lubrificação de Maquinas">
+        <meta name="author" content="Edson Ramos, Eduardo Henrique, Williany Oliveira, Suiany Patricia, Jonas Endew">
+        <meta name="generator" content="Edson Ramos  1.0">
+        
+        
+		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+       
+
+
+        <title>Login</title>
+    </head>
+    <body> 
+        
+        
+               
+        <div id="login-container">
+            <h1>Login</h1>
+            <form action="" id="login-form" method="POST">
+                <div class="full-box">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email" placeholder="Digite Seu E-mail" autocomplete="off" data-min-length="3" data-required data-email-validate>
+                </div>
+                <div class="full-box">
+                    <label for="password">Senha</label>
+                    <input type="password" name="password" id="password" placeholder="Digite Sua Senha" data-required data-password-validate>
+                </div>
+                <div class="full-box">
+                    <a href="#" id="forgot-pass">Esqueceu a Senha?</a>
+                    <input type="submit" id="btn-login" value="Login">
+                </div>
+            </form>         
+        </div>
+        
+        <p class="error-validation template"></p>
+       
+        <script src="{{url_for('static', filename='JScript/scriptLogin.js')}}"></script>
+    </body>
+</html>

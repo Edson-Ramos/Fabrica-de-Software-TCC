@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Venha Conhecer Nosso Sistema de Lubrificação de Maquinas">
+        <meta name="author" content="Edson Ramos, Eduardo Henrique, Williany Oliveira, Suiany Patricia, Jonas Endew">
+        <meta name="generator" content="Edson Ramos  1.0">
+        
+        <script src="https://kit.fontawesome.com/897c08d2c3.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/stylePainel.css') }}">
+
+
+        <title>Painel de Controle</title>
+    </head>
+    <body> 
+        
+        
+               
+        <div id="painel-container">
+            <h1>Painel de Controle</h1>
+            <form action="" id="painel-form" method="">                
+                <div class="full-box">
+					<label for="">Liste Funcionários Cadastrados</label>
+					<button type="button" onclick="location.href='/listarUsuarios'" id="btn-listar" class="btn-lista">Lista Usuário</button>
+                </div>
+				<div class="full-box">
+                    <label for="">Delete Funcionários Cadastrados</label>
+                    <button type="button" onclick="location.href='/delete'" name="delete" id="btn-del" class="btn-del">Deletar Funcionarios</button>
+                </div>
+				<div class="full-box">
+                    <label for="">Altere os Dados do Funcionários</label>
+                    <button type="button" onclick="location.href='/update'" name="update" id="btn-update" class="btn-update">Atualizar Funcionarios</button>
+                </div>
+				<div class="full-box">
+                    <label for="">Cadastro de Funcionários</label>
+                    <button type="button" onclick="location.href='/cadastro'" id="btn-cadas" class="btn-cadas">Cadastrar Funcionarios</button>
+                </div>
+                <div class="full-box">
+                    <label for="">Cadastro de Mquinas</label>
+                    <button type="button" onclick="location.href='/cadastroMaquinas'" id="btn-cadas" class="btn-cadas">Cadastrar Maquinas</button>
+                </div>
+            </form>    
+		</div>
+        
+        <p class="error-validation template"></p>
+        <script src="{{url_for('static', filename='JScript/scriptPainel.js')}}"></script>
+    </body>
+</html>

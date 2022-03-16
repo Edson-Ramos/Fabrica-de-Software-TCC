@@ -1,0 +1,12 @@
+.input-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    left: 400px;
+}
+.input-group-text{
+    width: 15%;
+    align-items: center;
+}
