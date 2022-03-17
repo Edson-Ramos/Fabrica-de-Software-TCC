@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand">
-            <img class="logo" src="/static/img/engrenagem-verde.png" width="100px">
+            <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
             <button class="btn btn-outline-success mt-1 me-2" type="button" href="index.html">Easylub</button>
         </a>
         <div class="collapse navbar-collapse">
@@ -78,39 +78,39 @@
     <div class="container">
         <section id="equipamentos">
             <div class="container-fluid agenda text-center margin">
-                <h3>Equipamentos</h3>
-                <br>
-            
-                <input class="form-control" type="text" placeholder="ID" id="id_equipamento">
-                <input class="form-control" type="text" placeholder="Nome do equipamento" id="nome_equipamento">
-                <div class="form-row">
-                    <div class="row-b">
-                        <select id="linha" class="form-select" aria-label="Default select example">
-                            <option selected>Linha</option>
-                            <option value="L001">L001</option>
-                            <option value="L002">L002</option>
-                            <option value="L003">L003</option>
-                        </select>
-                    </div>
-                    <div class="row-b">
-                        <select id="local" class="form-select" aria-label="Default select example">
-                            <option selected>Treche</option>
-                            <option value="Mancal">Mancal</option>
-                            <option value="Redutor">Redutor</option>
-                            <option value="cxTransmissao">Caixa de transmissão</option>
-                        </select>
-                    </div>                    
-                    <div class="row-d">
-                        <button onclick="cadastrar_equipamento()" type="submit" id="btn"
-                            class="btn btn-primary">Cadastrar</button>
-                            <div class="btn btn-primary" onclick="location.href='/painel'">Voltar</div>
-                    </div>
+                <div>
+                    <h1>Atualizar Máquinas</h1>
                 </div>
-            
+                <form action="" class="form">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">ID:</span>
+                        <input id="idMaq" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Nome da Máquina:</span>
+                        <input id="nomeMaq" type="text" class="form-control"  aria-label="Username">
+                     </div>
+                     <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">linha: </span>
+                        <input id="linhaMaq" type="text" class="form-control"  aria-label="Server">
+                     </div>
+                     <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Trecho: </span>
+                        <input id="trechoMaq" type="text" class="form-control"  aria-label="Server">
+                    </div>
+                </form>
+            </div>
+            <div class="row-d">
+                <button onclick="cadastrar_equipamento()" type="submit" id="btn"
+                    class="btn btn-primary">Cadastrar</button>
             </div>
         </section>
+    </div>                    
+                            
+                        
+                
 
-    </div>
+    
 
 
 </body>

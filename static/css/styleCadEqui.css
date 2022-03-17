@@ -3,41 +3,6 @@ body{
     background-image: url(../img/background.jpg);
     background-size: cover;
 }
-.text{
-    text-align: justify;
-    font-size: 25px;
-}
-.text-equipamentos{
-    margin-top: 30px;
-    font-size: 25px;
-}
-
-.form-control{
-    margin: 10px;
-    width: 1px;    
-}
-.img-fluid{
-    width: 400px;
-    height: 400px;
- }
-.margin{
-    padding: 30px;
-}
-
-.form-row{
-    float:left;
-    display: inline-block;  
-}
-
-.row-b{
-    display: inline-block;
-    margin: 30px;
-}
-.row-c{
-    display: inline-block;
-    margin-right: 40px;
-    margin-top: 30px;
-}
 
 .container{
     
@@ -46,15 +11,22 @@ body{
     -webkit-backdrop-filter: blur(10px);
     max-width: fit-content;
     max-height: fit-content;
-    margin-top: 30px;   
-    padding-bottom: 150px;
-
+    margin-top: 30px;
+    text-align: center;
+    border-radius: 20px;    
 }
 .row-d{
-    float: right;
-    display: inline;
-    margin-top: 30px;
-
+    margin: 20px;
+    padding: 20px
+}
+.navbar{
+    background: #0a090a;
+}
+.dropdown-item {
+    color: rgb(2, 90, 2)
+}
+.btn {
+    color: rgb(3, 78, 3)
 }
 
   

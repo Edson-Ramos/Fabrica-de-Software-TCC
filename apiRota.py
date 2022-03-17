@@ -21,21 +21,15 @@ def cadastro():
 @app.route('/cadastro', methods=['POST'])
 def cadastro_post():
 	try:	
-		nome = request.form['name']
-		sobreNome = request.form['lastname']
-		email = request.form['email']
-		senha = request.form['password']
-		confSenha = request.form['confpassword']
+		dados = request.get_json()
+		nome = dados['nome']
+		sobreNome = dados['sobreNome']
+		email = dados['email']
+		senha = dados['senha']
+		confSenha = dados['cSenha']
 		numbers = any(map(str.isdigit, senha))
-		uppercases = any(map(str.isupper, senha))
-
-		if (senha != confSenha):
-			return render_template('cadastro.html')
-		if (uppercases == False):
-			return render_template('cadastro.html')
-		if (numbers == False):
-			return render_template('cadastro.html')
-
+		uppercases = any(map(str.isupper, senha))	
+		
 		usuario = User(None, nome, sobreNome, email, senha)
 		UsuarioDAO.insertUser(usuario)
 		return "Usuário Cadastrado Com Sucesso!"
@@ -94,22 +88,32 @@ def delete_post():
 def update():
 	return render_template('atualizar_usuario.html')
 
-@app.route('/update', methods=['POST'])
+@app.route('/atualizar_usuarios', methods=['POST'])
 def update_post():
-	id = request.form['id']
-	idInt = int(id)
-	nome = request.form['name']
-	sobreNome = request.form['lastname']
-	email = request.form['email']
-	senha = request.form['password']
-	confSenha = request.form['confpassword']
+	try:
+		dados = request.get_json()
+		nome = dados['nome']
+		id = int(dados['id'])
+		sNome = dados['sNome']
+		email = dados['email']
+		senha = dados['senha']
+		cSenha = dados['cSenha']
+		numbers = any(map(str.isdigit, senha))
+		uppercases = any(map(str.isupper, senha))
 
-	if senha != confSenha:
-		return "<h1>Senhas Não Confere!</h1>"
-
-	usuario = User(idInt, nome, sobreNome, email, senha)
-	UsuarioDAO.updateUser(usuario)
-	return render_template('painel.html')
+		if (senha != cSenha):
+			return render_template('atualizar_usuario.html')
+		if (uppercases == False):
+			return render_template('atualizar_usuario.html')
+		if (numbers == False):
+			return render_template('atualizar_usuario.html')
+		
+		usuario = User(id, nome, sNome, email, senha)
+		UsuarioDAO.updateUser(usuario)
+		return "Usuário Atualizado Com Sucesso!"
+			
+	except:
+		return flask.Response("Erro Ao Atualizar o Usuário", status=500)
 
 
 @app.route('/cadastroMaquinas', methods = ['GET'])
