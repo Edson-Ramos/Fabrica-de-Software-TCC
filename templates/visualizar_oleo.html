@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="aula_bootstrap\css\style.css">
+    
     
     <title>Easylub</title>
 </head>
@@ -81,19 +81,13 @@
                     <thead>
                         <tr>      
                         <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Linha</th>
-                        <th scope="col">Trecho</th>           
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Viscosidade</th>                                 
                         </tr>
                     </thead>
-                    <div>
-                            <tbody id="tbody"></tbody>   
-                    </div>  
-                </table>
-               
+                </table> 
             </div>
         </section>
-
     </div>
 
     
@@ -103,8 +97,6 @@
     <div>
         <button onclick="getEquipamentos()" type="submit" id="btn"
                             class="btn btn-primary">listar</button>
-        <button onclick="location.href='/painel'" type="submit" id="btn"
-                            class="btn btn-primary">Voltar</button>
     </div>
 
     <script src="jquery-3.2.1.min.js"></script>

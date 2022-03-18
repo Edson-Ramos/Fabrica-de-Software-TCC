@@ -14,23 +14,32 @@ function cadastrar_usuario() {
        senha : senha,
        cSenha : cSenha   
        
-    } 
-    fetch("/cadastro",
-    {
-        method: "POST",
-        body:JSON.stringify(dados_usuarios),
-        headers:{
-            "Content-Type" : "application/json"
-        }
-    })
-    .then((resposta) => {
-        if (resposta.status == 200)
-            return resposta.text()
-        else
-            return "Erro Ao Cadastrar Usuário"
-    })
-    .then((repostaTexto) => {
-        alert(repostaTexto)
-        document.location.reload(true);
-    })
+    }
+    if(nome == "" || sobreNome == "" || email == "" || senha == "" || cSenha == ""){
+        return alert("Todos os Campos São Obrigatorios!")
+    }else{
+       if (senha == cSenha) {
+                fetch("/cadastro",
+            {
+                method: "POST",
+                body:JSON.stringify(dados_usuarios),
+                headers:{
+                    "Content-Type" : "application/json"
+                }
+            })
+            .then((resposta) => {
+                if (resposta.status == 200)
+                    return resposta.text()
+                else
+                    return "Erro Ao Cadastrar Usuário"
+            })
+            .then((repostaTexto) => {
+                alert(repostaTexto)
+                document.location.reload(true);
+            })
+        }else
+            return alert("ERROr: Senhas Diferentes!") 
+            }
+    
 }
+    

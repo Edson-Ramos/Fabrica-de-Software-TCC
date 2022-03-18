@@ -4,10 +4,11 @@ from user import User
 import UsuarioDAO
 from equipamento import Equipamento
 import EquipamentosDAO
+import LubrificantesDAO
+from lubrificantes import Oleo, Graxa, Spray
 from connection import getConnection, closeConnection
 
 
 
-equipamento = User(8,None,None,None,None)
-
-UsuarioDAO.deleteUser(equipamento)
+spray = Spray(1, "000", "1")
+LubrificantesDAO.insertSpray(spray)

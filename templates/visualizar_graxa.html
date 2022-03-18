@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="aula_bootstrap\css\style.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleVisualizar.css')}}">
+    
     
     <title>Easylub</title>
 </head>
@@ -81,14 +82,13 @@
                     <thead>
                         <tr>      
                         <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Linha</th>
-                        <th scope="col">Trecho</th>           
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Consistência</th>           
                         </tr>
                     </thead>
                     <div>
-                            <tbody id="tbody"></tbody>   
-                    </div>  
+                        <tbody id="tbody"></tbody>   
+                </div> 
                 </table>
                
             </div>
@@ -101,13 +101,11 @@
 <footer class="text-center">
 
     <div>
-        <button onclick="getEquipamentos()" type="submit" id="btn"
-                            class="btn btn-primary">listar</button>
-        <button onclick="location.href='/painel'" type="submit" id="btn"
-                            class="btn btn-primary">Voltar</button>
+        <button onclick="getGraxa()" type="submit" id="btn"
+                            class="btn btn-primary">listar</button>>
     </div>
 
-    <script src="jquery-3.2.1.min.js"></script>
+   
     <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
