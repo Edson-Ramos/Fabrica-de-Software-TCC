@@ -10,5 +10,5 @@ from connection import getConnection, closeConnection
 
 
 
-spray = Spray(1, "000", "1")
-LubrificantesDAO.insertSpray(spray)
+grax = Graxa(1, "Spray1", 11)
+LubrificantesDAO.updateGraxa(grax)

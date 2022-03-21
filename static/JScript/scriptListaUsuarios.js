@@ -22,24 +22,51 @@ function createFile(file){
     
 
     let tdId = document.createElement("td")
+    tdId.className = "lista"
     tdId.innerText = `${file.id}`
 
     let tdNome = document.createElement("td")
+    tdNome.className = "lista"
     tdNome.innerText = `${file.nome}`
 
     let tdSobreN = document.createElement("td")
+    tdSobreN.className = "lista"
     tdSobreN.innerText = `${file.sobreNome}`
 
     let tdEmail = document.createElement("td")
+    tdEmail.className = "lista"
     tdEmail.innerText = `${file.email}`
 
     let tdSenha = document.createElement("td")
+    tdSenha.className = "lista"
     tdSenha.innerText = `${file.senha}`
+    
 
-    tbody.appendChild(tr)
-    tr.appendChild(tdId);
-    tr.appendChild(tdNome);
-    tr.appendChild(tdSobreN);
-    tr.appendChild(tdEmail);  
-    tr.appendChild(tdSenha);
+    let tdTipo = document.createElement("td")
+    tdTipo.className = "lista"
+    
+
+    if (file.tipo == 1){
+        tdTipo.innerText = `Administrador`
+        tbody.appendChild(tr)
+        tr.appendChild(tdId);
+        tr.appendChild(tdNome);
+        tr.appendChild(tdSobreN);
+        tr.appendChild(tdEmail);  
+        tr.appendChild(tdSenha);
+        tr.appendChild(tdTipo);
+    }else{
+        tdTipo.innerText = `Funcionário`
+        tbody.appendChild(tr)
+        tr.appendChild(tdId);
+        tr.appendChild(tdNome);
+        tr.appendChild(tdSobreN);
+        tr.appendChild(tdEmail);  
+        tr.appendChild(tdSenha);
+        tr.appendChild(tdTipo);
+    }
+        
+    
+
+    
 }

@@ -1,20 +1,20 @@
-const rota = 'http://localhost:5000'
+const rota = 'http://localhost:5000/'
 
-function getSpray(){
+function getGraxa(){
 
-    fetch(`${rota}/listar_spray`)
+    fetch(`${rota}/listar_graxa`)
     .then(data => {
         return data.json();
     })
 .then(data => {
     for(arquivo of data.arquivos)
-      listaSpray(arquivo);
+        listaGraxa(arquivo);
     })
 }
 
 var tbody = document.getElementById("tbody")
 
-function listaSpray(arquivo){     
+function listaGraxa(arquivo){     
 
     let tr = document.createElement("tr");    
 
@@ -26,14 +26,14 @@ function listaSpray(arquivo){
     tdTipo.className = "lista"
     tdTipo.innerText = `${arquivo.tipo}`
 
-    let tdVisco = document.createElement("td");
-    tdVisco.className = "lista"
-    tdVisco.innerText = `${arquivo.visco}`   
+    let tdConsis = document.createElement("td");
+    tdConsis.className = "lista"
+    tdConsis.innerText = `${arquivo.consis}`   
 
 
     tbody.appendChild(tr)
     tr.appendChild(tdId);
     tr.appendChild(tdTipo);
-    tr.appendChild(tdVisco);
+    tr.appendChild(tdConsis);
 }
     

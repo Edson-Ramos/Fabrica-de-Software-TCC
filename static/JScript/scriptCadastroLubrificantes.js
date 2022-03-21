@@ -1,7 +1,7 @@
 function get_pg_lubificantes(){
     let select = document.getElementById("tipos")
     let valor = select.options[select.selectedIndex].value
-    console.log(valor)
+    
     
     if (valor == "default"){
         return alert("Selecione um Tipo de Lubrificante!")

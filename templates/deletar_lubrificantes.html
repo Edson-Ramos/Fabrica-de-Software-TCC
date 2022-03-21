@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleVisualizarLubrificantes.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleDeletar.css')}}">
     
     
     <title>Easylub</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light">
         <a class="navbar-brand">
             <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
             <button class="btn btn-outline-success me-2" type="button" href="index.html">Easylub</button>
@@ -36,13 +36,13 @@
                 <li class="nav-item">
                     <div class="dropdown show">
                         <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Máquinas
+                            Equipamentos
                           </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/cadastrar_equipamentos">Cadastrar Máquinas</a></li>
-                            <li><a class="dropdown-item"  href="/visualizar_equipamentos">Visualizar Máquinas</a></li>
-                            <li><a class="dropdown-item" href="/atualizar_equipamentos">Atualizar Máquinas</a></li>
-                            <li><a class="dropdown-item"  href="/deletar_equipamentos">Deletar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/cadastrar_equipamentos">Cadastrar Equipamentos</a></li>
+                            <li><a class="dropdown-item"  href="/visualizar_equipamentos">Listar Equipamentos</a></li>
+                            <li><a class="dropdown-item" href="/atualizar_equipamentos">Atualizar Equipamentos</a></li>
+                            <li><a class="dropdown-item"  href="/deletar_equipamentos">Deletar Equipamentos</a></li>
                                                       
                         </ul>
                     </div>
@@ -54,7 +54,7 @@
                           </a>
                         <ul class="dropdown-menu">                            
                             <li><a class="dropdown-item" href="/cadastrar_lubrificantes">Cadastrar Lubrificantes</a></li>
-                            <li><a class="dropdown-item"  href="/visualizar_lubrificantes">Visualizar Lubrificantes</a></li>
+                            <li><a class="dropdown-item"  href="/visualizar_lubrificantes">Listar Lubrificantes</a></li>
                             <li><a class="dropdown-item"  href="/atualizar_lubrificantes">Atualizar Lubrificantes</a></li>
                             <li><a class="dropdown-item"  href="deletar_lubrificantes">Deletar Lubrificantes</a></li>                          
                         </ul>
@@ -67,13 +67,13 @@
                           </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="">Cadastrar Serviços</a></li>
-                            <li><a class="dropdown-item"  href="">Visualizar Serviços</a></li>                            
+                            <li><a class="dropdown-item"  href="">Listar Serviços</a></li>                            
                         </ul>
                     </div>
                 </li>
             </ul>
         </div>
-    </nav>>
+    </nav>
     <div class="container">
         <section id="equipamentos">
             <div class="container-fluid agenda text-center margin">

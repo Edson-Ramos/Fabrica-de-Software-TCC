@@ -1,4 +1,4 @@
-function cadastro_spray(){
+function cadastro_oleo(){
     id = document.getElementById("id").value
     tipo = document.getElementById("tipo").value
     visco = document.getElementById("visco").value

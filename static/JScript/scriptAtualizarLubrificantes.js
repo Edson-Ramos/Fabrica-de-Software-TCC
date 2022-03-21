@@ -7,13 +7,13 @@ function list_lubificantes(){
         return alert("Selecione um Tipo de Lubrificante!")
 
     }else if (valor == "oleo"){
-        return window.location.href ="visualizar_oleo"
+        return window.location.href ="atualizar_oleo"
 
     }else if (valor == "graxa"){
-        return window.location.href = "visualizar_graxa"
+        return window.location.href = "atualizar_graxa"
 
     }else if (valor == "spray"){
-        return window.location.href = "visualizar_spray"
+        return window.location.href = "atualizar_spray"
     }
          
 }

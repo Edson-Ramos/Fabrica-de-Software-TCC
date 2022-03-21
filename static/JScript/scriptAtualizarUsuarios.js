@@ -7,6 +7,9 @@ function atualizar_equipamento() {
     let email = document.getElementById("email").value
     let senha = document.getElementById("senha").value
     let cSenha = document.getElementById("cSenha").value
+    let select = document.getElementById("tipos")
+    let tipo = select.options[select.selectedIndex].value
+
 
     let dados_usuario = {
         nome : nome,
@@ -14,7 +17,8 @@ function atualizar_equipamento() {
         sNome: sNome,
         email : email,
         senha : senha,
-        cSenha : cSenha
+        cSenha : cSenha,
+        tipo : tipo
     }    
 
     fetch("/atualizar_usuarios",

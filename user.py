@@ -1,10 +1,11 @@
 class User:
-	def __init__(self, id, name, sobrenome, email, senha):
+	def __init__(self, id, name, sobrenome, email, senha, tipo):
 		self.id = id
 		self.name = name
 		self.sobrenome = sobrenome
 		self.email = email	
 		self.senha = senha
+		self.tipo = tipo
 		
 		
 
@@ -31,6 +32,11 @@ class User:
 	def getSenha(self):
 		return self.senha
 	def setSenha(self, senha):
-		self.senha = senha	
+		self.senha = senha
+  
+	def getTipo(self):
+		return self.tipo
+	def setTipo(self, tipo):
+		self.tipo = tipo
 
 	

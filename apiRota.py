@@ -28,11 +28,12 @@ def cadastrar_usuarios_Post():
 		sobreNome = dados['sobreNome']
 		email = dados['email']
 		senha = dados['senha']
+		tipo = dados['tipo']
 		confSenha = dados['cSenha']
 		numbers = any(map(str.isdigit, senha))
 		uppercases = any(map(str.isupper, senha))	
 		
-		usuario = User(None, nome, sobreNome, email, senha)
+		usuario = User(None, nome, sobreNome, email, senha, tipo)
 		UsuarioDAO.insertUser(usuario)
 		return "Usuário Cadastrado Com Sucesso!"
 
@@ -53,12 +54,14 @@ def visualizar_Usuarios_Get_1():
 		email_Usuario = arquivos.email
 		sobreNome_Usuario = arquivos.sobrenome
 		senha_Usuario = arquivos.senha
+		tipo_Usuario = arquivos.tipo
 
 		file = {'id': id_Usuario,
 				 'nome': nome_Usuario,
 				 'sobreNome': sobreNome_Usuario,
 				 'email': email_Usuario,				 
-				 'senha': senha_Usuario}
+				 'senha': senha_Usuario,
+     			 'tipo': tipo_Usuario}
 
 		resposta ['files'].append(file)
 
@@ -78,6 +81,7 @@ def atualizar_usuarios_Post():
 		email = dados['email']
 		senha = dados['senha']
 		cSenha = dados['cSenha']
+		tipo = dados['tipo']
 		numbers = any(map(str.isdigit, senha))
 		uppercases = any(map(str.isupper, senha))
 
@@ -88,7 +92,7 @@ def atualizar_usuarios_Post():
 		if (numbers == False):
 			return render_template('atualizar_usuario.html')
 		
-		usuario = User(id, nome, sNome, email, senha)
+		usuario = User(id, nome, sNome, email, senha, tipo)
 		UsuarioDAO.updateUser(usuario)
 		return "Usuário Atualizado Com Sucesso!"
 			
@@ -153,8 +157,7 @@ def cadastrar_equipamentos_Post():
 		nome_maquina = dados["nome"]	
 		linha = dados["linha"]
 		trecho = dados["trecho"]
-		print(dados)
-
+	
 		equipamento = Equipamento(id_maquina, nome_maquina, linha, trecho)
 		EquipamentosDAO.insertEquipamentos(equipamento)
 		return "Equipamento Cadastrado com Sucesso!"
@@ -167,7 +170,7 @@ def cadastrar_equipamentos_Post():
 @app.route("/visualizar_equipamentos", methods=['GET'])
 def listar_equipamentos_Get():
     return render_template('visualizar_equipamentos.html')
-@app.route("/visualizar_equipamentos", methods=['POST'])
+@app.route("/listar_equipamentos", methods=['GET'])
 def listar_equipamentos_Post():
     resposta = {'arquivos' : []}
     
@@ -261,18 +264,18 @@ def cadastrar_graxa_Post():
 @app.route('/visualizar_graxa', methods=['GET'])
 def visualizar_graxa_Get():
     return render_template('visualizar_graxa.html')
-@app.route("/visualizar_graxa", methods=['POST'])
+@app.route("/listar_graxa", methods=['GET'])
 def listar_graxa_Post():
     resposta = {'arquivos' : []}
     
     for dados in LubrificantesDAO.listGraxa():
-        id_graxa = dados.id_graxa
+        idGRa = dados.idGra
         tipo = dados.tipo
         consis = dados.consis
         
-        file = {'id' : id_graxa,
-                'nome' : tipo,
-                'linha' : consis}
+        file = {'id' : idGRa,
+                'tipo' : tipo,
+                'consis' : consis}
                
         
         resposta ['arquivos'].append(file)
@@ -289,11 +292,12 @@ def atualizar_graxa_Post():
 		idGra = dados["idGra"]
 		idGra = int(idGra)
 		tipo = dados["tipo"]
-		consis = dados["consis"]		
-
+		consis = dados["consis"]
+  
 		graxa = Graxa(idGra, tipo, consis)
+		print(graxa)
 		LubrificantesDAO.updateGraxa(graxa)
-		return "Máquina Atualizar com Sucesso!"
+		return "Graxa Atualizada com Sucesso!"
 	except:
      		return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500) 
 
@@ -301,16 +305,16 @@ def atualizar_graxa_Post():
 def deletar_graxa_Get():
     return render_template("deletar_graxa.html")
 @app.route('/deletar_graxa', methods=['POST'])
-def deletar_graxa_Post():	
-	idGra = request.form['delete']
-	idGra = int(idGra)
-	graxa = Graxa(idGra, None, None)	
-
-	if idGra != True:
+def deletar_graxa_Post():
+	try:	
+		dado = request.get_json()
+		idGra = dado["idGra"]
+		idGra = int(idGra)
+		graxa = Graxa(idGra, None, None)	
 		LubrificantesDAO.deleteGraxa(graxa)
-		return render_template('deletar_graxa.html')
-	else:
-		return "<h1>Id Não Existe!</h1>"
+		return "Graxa Excluida com Sucesso!"
+	except:
+		return flask.Response("Erro ao Deletar Graxa", status=500)
 
 
 
@@ -333,18 +337,18 @@ def cadastrar_oleo_Post():
 @app.route('/visualizar_oleo', methods=['GET'])
 def visualizar_oleo_Get():
     return render_template('visualizar_oleo.html')
-@app.route("/visualizar_oleo", methods=['POST'])
+@app.route("/listar_oleo", methods=['GET'])
 def visualizar_oleo_Post():
     resposta = {'arquivos' : []}
     
     for dados in LubrificantesDAO.listOleo():
-        id_graxa = dados.id_graxa
+        idOleo = dados.idOleo
         tipo = dados.tipo
         visco = dados.visco
         
-        file = {'id' : id_graxa,
-                'nome' : tipo,
-                'linha' : visco}
+        file = {'id' : idOleo,
+                'tipo' : tipo,
+                'visco' : visco}
                
         
         resposta ['arquivos'].append(file)
@@ -365,24 +369,24 @@ def atualizar_oleo_Post():
 
 		oleo = Oleo(idOleo, tipo, visco)
 		LubrificantesDAO.updateOleo(oleo)
-		return "Máquina Atualizar com Sucesso!"
+		return "Óleo Atualizado com Sucesso!"
 	except:	
-		return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500)
+		return flask.Response("Erro Ao Atualizar o Óleo!", status=500)
 
 @app.route('/deletar_oleo', methods=['GET'])
 def deletar_oleo_Get():
     return render_template('deletar_oleo.html')
 @app.route('/deletar_oleo', methods=['POST'])
-def deletar_oleo_Post():	
-	idOleo = request.form['delete']
-	idOleo = int(idOleo)
-	oleo = Oleo(idOleo, None, None)	
-
-	if idOleo != True:
-		LubrificantesDAO.deleteGraxa(oleo)
-		return render_template('deletar_oleo.html')
-	else:
-		return "<h1>Id Não Existe!</h1>"       
+def deletar_oleo_Post():
+	try:	
+		dado = request.get_json()
+		idOleo = dado["idOleo"]
+		idOleo = int(idOleo)
+		oleo = Oleo(idOleo, None, None)
+		LubrificantesDAO.deleteOleo(oleo)
+		return "Oleo Excluido Com Sucesso!"
+	except:
+		return flask.Response("Erro ao Excluir Óleo", status=500)
 
 
 
@@ -405,18 +409,18 @@ def cadastro_spray_Post():
 @app.route('/visualizar_spray', methods=['GET'])
 def visualizar_spray_Get():
     return render_template('visualizar_spray.html')
-@app.route('/visualizar_spray' , methods=['POST'])
+@app.route('/listar_spray' , methods=['GET'])
 def visualizar_spray_Post():
         resposta = {'arquivos' : []}
         
         for dados in LubrificantesDAO.listSpray():
             idSpray = dados.idSpray
-            tipo = dados.tipos
-            consis = dados.consis
+            tipo = dados.tipo
+            visco = dados.visco
             
             file = {'id' : idSpray,
                     'tipo' : tipo,
-                    'consis' : consis}
+                    'visco' : visco}
             resposta ['arquivos'].append(file)
             return(resposta)
 
@@ -434,24 +438,27 @@ def atualizar_spray_Post():
 
 		spray = Spray(idSpray, tipo, visco)
 		LubrificantesDAO.updateSpray(spray)
-		return "Máquina Atualizar com Sucesso!"
+		return "Spray Atualizado Com Sucesso!"
 	except:	
-		return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500)
+		return flask.Response("Erro Ao Atualizar Spray!", status=500)
 
 @app.route('/deletar_spray', methods=['GET'])
 def deletar_spray_Get():
     return render_template("deletar_spray.html")
 @app.route('/deletar_spray', methods=['POST'])
-def deletar_spray_Post():	
-	idSpray = request.form['delete']
-	idSpray = int(idSpray)
-	spray = Spray(idSpray, None, None)	
-
-	if idSpray != True:
-		LubrificantesDAO.deleteGraxa(spray)
-		return render_template('deletar_spray.html')
-	else:
-		return "<h1>Id Não Existe!</h1>"
+def deletar_spray_Post():
+	try:
+		dados = request.get_json()
+		idSpray = dados["idSpray"]
+		idSpray = int(idSpray)
+		
+		spray = Spray(idSpray, None, None)
+		LubrificantesDAO.deleteSpray(spray)
+		return "Spray Deletado Com Sucesso!"
+    
+	except:
+		return flask.Response("Erro ao Deletar Spray!", status=500)
+	
 
 
 if __name__=="__main__":

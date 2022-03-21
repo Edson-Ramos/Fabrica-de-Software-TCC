@@ -22,14 +22,15 @@ def insertGraxa(lubrificantes):
 
 def updateGraxa(lubrificantes):
     try:
-        sql_query = """UPDATE `graxa` SET idGra=%s, tipo=%s, consis=%s WHERE idGra = %s;"""
-        tuple = (lubrificantes.getidGra(), lubrificantes.gettipo(), lubrificantes.getConsis())
+        sql_query = """UPDATE `graxa` SET tipo=%s, consis=%s WHERE idGra = %s;"""
+        tuple = (lubrificantes.getTipo(), lubrificantes.getConsis(), lubrificantes.getIdGra())
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
     except mysql.connector.Error as error:
         connection.rollback()
-        print("Falha ao atualizar registro de usuário no banco de dados!")
+        print("Falha ao Atualizar Registro no banco de dados!")
+        raise error
 
 def listGraxa():
     try:
@@ -48,8 +49,8 @@ def listGraxa():
 	
 def deleteGraxa(lubrificantes):
     try:
-        sql_query = """DELETE FROM `graxa` WHERE idGra = %s;"""%lubrificantes.getidGra()
-        id_get = lubrificantes.getidGra()		
+        sql_query = """DELETE FROM `graxa` WHERE idGra = %s;"""%lubrificantes.getIdGra()
+        id_get = lubrificantes.getIdGra()		
         cursor.execute(sql_query)		
         connection.commit()
         print("Id: ", id_get, " Excluido com Sucesso!")
@@ -77,14 +78,14 @@ def insertOleo(lubrificantes):
 
 def updateOleo(lubrificantes):
     try:
-        sql_query = """UPDATE `oleo` SET idOleo=%s, tipo=%s, visco=%s WHERE idGra = %s;"""
-        tuple = (lubrificantes.getidGra(), lubrificantes.gettipo(), lubrificantes.getVisco())
+        sql_query = """UPDATE `oleo` SET  tipo=%s, visco=%s WHERE idOleo = %s;"""
+        tuple = (lubrificantes.getTipo(), lubrificantes.getVisco(), lubrificantes.getIdOleo())
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
     except mysql.connector.Error as error:
         connection.rollback()
-        print("Falha ao atualizar registro de usuário no banco de dados!")
+        print("Falha ao atualizar registro no banco de dados!")
 
 def listOleo():
     try:
@@ -103,7 +104,7 @@ def listOleo():
 	
 def deleteOleo(lubrificantes):
     try:
-        sql_query = """DELETE FROM `oleo` WHERE idOleo = %s;"""%lubrificantes.getIdoleo()
+        sql_query = """DELETE FROM `oleo` WHERE idOleo = %s;"""%lubrificantes.getIdOleo()
         id_get = lubrificantes.getIdOleo()		
         cursor.execute(sql_query)		
         connection.commit()
@@ -132,14 +133,15 @@ def insertSpray(lubrificantes):
 
 def updateSpray(lubrificantes):
     try:
-        sql_query = """UPDATE `spray` SET idSpray=%s, tipo=%s, visco=%s WHERE idSpray = %s;"""
-        tuple = (lubrificantes.getidSpray(), lubrificantes.gettipo(), lubrificantes.getVisco())
+        sql_query = """UPDATE `spray` SET tipo=%s, visco=%s WHERE idSpray = %s;"""
+        tuple = (lubrificantes.getTipo(), lubrificantes.getVisco(), lubrificantes.getIdSpray())
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
     except mysql.connector.Error as error:
         connection.rollback()
-        print("Falha ao atualizar registro de usuário no banco de dados!")
+        print("Falha ao atualizar registro no banco de dados!")
+        raise error
 
 def listSpray():
     try:

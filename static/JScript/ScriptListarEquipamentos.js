@@ -2,7 +2,7 @@ const rota = 'http://localhost:5000/'
 
 function getEquipamentos(){
 
-    fetch(`${rota}/visualizarEquipamentos`)
+    fetch(`${rota}/listar_equipamentos`)
     .then(data => {
         return data.json();
     })
@@ -19,15 +19,19 @@ function listaEquipamentos(arquivo){
     let tr = document.createElement("tr");    
 
     let tdId = document.createElement("td");
+    tdId.className = "lista"
     tdId.innerText = `${arquivo.id}`
 
     let tdNome = document.createElement("td");
+    tdNome.className = "lista"
     tdNome.innerText = `${arquivo.nome}`
 
     let tdLinha = document.createElement("td");
+    tdLinha.className = "lista"
     tdLinha.innerText = `${arquivo.linha}`
 
     let tdTrecho = document.createElement("td");
+    tdTrecho.className = "lista"
     tdTrecho.innerText = `${arquivo.trecho}`
 
 

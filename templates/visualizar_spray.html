@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
-    
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleVisualizar.css')}}">
     
     <title>Easylub</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light " >
         <a class="navbar-brand">
             <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
             <button class="btn btn-outline-success me-2" type="button" href="index.html">Easylub</button>
@@ -35,13 +35,13 @@
                 <li class="nav-item">
                     <div class="dropdown show">
                         <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Máquinas
+                            Equipamentos
                           </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/cadastrar_equipamentos">Cadastrar Máquinas</a></li>
-                            <li><a class="dropdown-item"  href="/visualizar_equipamentos">Visualizar Máquinas</a></li>
-                            <li><a class="dropdown-item" href="/atualizar_equipamentos">Atualizar Máquinas</a></li>
-                            <li><a class="dropdown-item"  href="/deletar_equipamentos">Deletar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/cadastrar_equipamentos">Cadastrar Equipamentos</a></li>
+                            <li><a class="dropdown-item"  href="/visualizar_equipamentos">Listar Equipamentos</a></li>
+                            <li><a class="dropdown-item" href="/atualizar_equipamentos">Atualizar Equipamentos</a></li>
+                            <li><a class="dropdown-item"  href="/deletar_equipamentos">Deletar Equipamentos</a></li>
                                                       
                         </ul>
                     </div>
@@ -53,7 +53,7 @@
                           </a>
                         <ul class="dropdown-menu">                            
                             <li><a class="dropdown-item" href="/cadastrar_lubrificantes">Cadastrar Lubrificantes</a></li>
-                            <li><a class="dropdown-item"  href="/visualizar_lubrificantes">Visualizar Lubrificantes</a></li>
+                            <li><a class="dropdown-item"  href="/visualizar_lubrificantes">Listar Lubrificantes</a></li>
                             <li><a class="dropdown-item"  href="/atualizar_lubrificantes">Atualizar Lubrificantes</a></li>
                             <li><a class="dropdown-item"  href="deletar_lubrificantes">Deletar Lubrificantes</a></li>                          
                         </ul>
@@ -66,7 +66,7 @@
                           </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="">Cadastrar Serviços</a></li>
-                            <li><a class="dropdown-item"  href="">Visualizar Serviços</a></li>                            
+                            <li><a class="dropdown-item"  href="">Listar Serviços</a></li>                            
                         </ul>
                     </div>
                 </li>
@@ -75,19 +75,19 @@
     </nav>
     <div class="container">
         <section id="equipamentos">
-            <div class="container-fluid agenda text-center margin">
- 
+            <div class="container-fluid agenda text-center margin">                
+                <div class="titulo"><h1>Visualizar Spray</h1></div> 
                 <table class="table">
                     <thead>
                         <tr>      
-                        <th scope="col">ID</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Viscosidade</th>         
+                        <th class="lista" scope="col">ID</th>
+                        <th class="lista" scope="col">Tipo</th>
+                        <th class="lista" scope="col">Viscosidade</th>           
                         </tr>
                     </thead>
                     <div>
-                            <tbody id="tbody"></tbody>   
-                    </div>  
+                        <tbody class="lista" id="tbody"></tbody>   
+                </div> 
                 </table>
                
             </div>
@@ -100,10 +100,7 @@
 <footer class="text-center">
 
     <div>
-        <button onclick="getEquipamentos()" type="submit" id="btn"
-                            class="btn btn-primary">listar</button>
-        <button onclick="location.href='/painel'" type="submit" id="btn"
-                            class="btn btn-primary">Voltar</button>
+        <button onclick="getSpray()" type="submit" id="btn" class="btn btn-primary">listar</button>        
     </div>
 
     

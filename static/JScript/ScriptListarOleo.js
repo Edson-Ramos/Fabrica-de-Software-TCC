@@ -1,20 +1,20 @@
-const rota = 'http://localhost:5000'
+const rota = 'http://localhost:5000/'
 
-function getSpray(){
+function getOleo(){
 
-    fetch(`${rota}/listar_spray`)
+    fetch(`${rota}/listar_oleo`)
     .then(data => {
         return data.json();
     })
 .then(data => {
     for(arquivo of data.arquivos)
-      listaSpray(arquivo);
+        listaOleo(arquivo);
     })
 }
 
 var tbody = document.getElementById("tbody")
 
-function listaSpray(arquivo){     
+function listaOleo(arquivo){     
 
     let tr = document.createElement("tr");    
 
@@ -37,3 +37,4 @@ function listaSpray(arquivo){
     tr.appendChild(tdVisco);
 }
     
+

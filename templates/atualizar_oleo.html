@@ -6,43 +6,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="css/cadastro_equipamento.css">
-
-
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleAtualizar.css')}}">
+    
+    
     <title>Easylub</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light " >
         <a class="navbar-brand">
-            <img class="logo" src="/static/img/engrenagem-verde.png" width="100px">
+            <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
             <button class="btn btn-outline-success me-2" type="button" href="index.html">Easylub</button>
         </a>
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">           
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <div class="dropdown show">
                         <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Usuários
                           </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/cadastro">Cadastrar usuários</a></li>
-                            <li><a class="dropdown-item" href="/listarUsuarios">Listar usuários</a></li>
-                            <li><a class="dropdown-item" href="/update">Atualizar Usuarios</a></li>
-                            <li><a class="dropdown-item" href="/delete">Deletar Usuários</a></li>                   
+                            <li><a class="dropdown-item" href="/cadastrar_usuarios">Cadastrar usuários</a></li>
+                            <li><a class="dropdown-item" href="/visualizar_usuarios">Listar usuários</a></li>
+                            <li><a class="dropdown-item" href="/atualizar_usuarios">Atualizar Usuarios</a></li>
+                            <li><a class="dropdown-item" href="/deletar_usuarios">Deletar Usuários</a></li>                   
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown show">
                         <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Máquinas
+                            Equipamentos
                           </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/cadastroMaquinas">Cadastrar Máquinas</a></li>
-                            <li><a class="dropdown-item"  href="/visualizar_equipamentos">Visualizar Máquinas</a></li>
-                            <li><a class="dropdown-item" href="">Atualizar Máquinas</a></li>
-                            <li><a class="dropdown-item"  href="">Deletar máquinas</a></li>
+                            <li><a class="dropdown-item" href="/cadastrar_equipamentos">Cadastrar Equipamentos</a></li>
+                            <li><a class="dropdown-item"  href="/visualizar_equipamentos">Listar Equipamentos</a></li>
+                            <li><a class="dropdown-item" href="/atualizar_equipamentos">Atualizar Equipamentos</a></li>
+                            <li><a class="dropdown-item"  href="/deletar_equipamentos">Deletar Equipamentos</a></li>
                                                       
                         </ul>
                     </div>
@@ -53,12 +53,10 @@
                             Lubrificantes
                           </a>
                         <ul class="dropdown-menu">                            
-                            <li><a class="dropdown-item" href="">Cadastrar Óleos</a></li>
-                            <li><a class="dropdown-item"  href="">Visualizar Óleos</a></li>
-                            <li><a class="dropdown-item" href="">Cadastrar Graxas</a></li>
-                            <li><a class="dropdown-item"  href="">Visualizar Graxas</a></li>
-                            <li><a class="dropdown-item" href="">Cadastrar Spray</a></li>
-                            <li><a class="dropdown-item"  href="">Visualizar Spray</a></li>                          
+                            <li><a class="dropdown-item" href="/cadastrar_lubrificantes">Cadastrar Lubrificantes</a></li>
+                            <li><a class="dropdown-item"  href="/visualizar_lubrificantes">Listar Lubrificantes</a></li>
+                            <li><a class="dropdown-item"  href="/atualizar_lubrificantes">Atualizar Lubrificantes</a></li>
+                            <li><a class="dropdown-item"  href="deletar_lubrificantes">Deletar Lubrificantes</a></li>                          
                         </ul>
                     </div>
                 </li>
@@ -69,7 +67,7 @@
                           </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="">Cadastrar Serviços</a></li>
-                            <li><a class="dropdown-item"  href="">Visualizar Serviços</a></li>                            
+                            <li><a class="dropdown-item"  href="">Listar Serviços</a></li>                            
                         </ul>
                     </div>
                 </li>
@@ -77,49 +75,44 @@
         </div>
     </nav>
     <div class="container">
-        <section id="funcionarios">
-
+        <section id="equipamentos">
             <div class="container-fluid agenda text-center margin">
-                <br>
-                <h3>Visualizar Funcionários</h3>
-                <br>
-                <table class="table">
-                    <thead>
-                      <tr>                        
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Sobre Nome</th>
-                        <th scope="col">Email</th> 
-                        <th scope="col">Senha</th>           
-                      </tr>
-                    </thead>
-                    <div>
-                     <tbody id="tbody">   
-                    </tbody>   
+                <div>
+                    <h1 class="titulo">Atualizar Óleo</h1>
+                </div>
+                <form action="">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">ID:</span>
+                        <input id="id" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Tipo:</span>
+                        <input id="tipo" type="text" class="form-control"  aria-label="Username">
+                     </div>
+                     <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Viscosidade: </span>
+                        <input id="visco" type="text" class="form-control"  aria-label="Server">
+                     </div>
+                     <div class="row-d">
+                    <button onclick="atualizar_oleo()" type="submit" id="btn" class="btn btn-primary">Atualizar</button>        
                     </div>
-                    <div>
-                      
-                </table>
-                <button onclick="getArquivos()" type="submit" id="btn"
-                class="btn btn-primary">listar</button>
-<button onclick="location.href='/painel'" type="submit" id="btn"
-                class="btn btn-primary">Voltar</button>
-</div>
-
+                </form>
             </div>
         </section>
-           
     </div>
- 
+    
 </body>
 <footer class="text-center">
-    <script src="jquery-3.2.1.min.js"></script>
-    <script src="bootstrap.min.js"></script>
+
+    
+
+   
+    <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="{{url_for('static', filename='JScript/scriptListaUsuarios.js')}}"></script>
+    <script src="{{url_for('static', filename='JScript/scriptAtualizarOleo.js')}}"></script>
 </footer>
 
 </html>

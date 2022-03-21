@@ -6,20 +6,23 @@ function cadastrar_usuario() {
     let email = document.getElementById("email").value;
     let senha = document.getElementById("password").value
     let cSenha = document.getElementById("confpassword").value;
+    let select = document.getElementById("tipos")
+    let tipo = select.options[select.selectedIndex].value
 
     let dados_usuarios = {
        nome : nome,
        sobreNome : sobreNome,
        email : email,
        senha : senha,
-       cSenha : cSenha   
+       cSenha : cSenha,
+       tipo : tipo  
        
     }
-    if(nome == "" || sobreNome == "" || email == "" || senha == "" || cSenha == ""){
+    if(nome == "" || sobreNome == "" || email == "" || senha == "" || cSenha == "" || tipo == ""){
         return alert("Todos os Campos São Obrigatorios!")
     }else{
        if (senha == cSenha) {
-                fetch("/cadastro",
+                fetch("/cadastrar_usuarios",
             {
                 method: "POST",
                 body:JSON.stringify(dados_usuarios),
