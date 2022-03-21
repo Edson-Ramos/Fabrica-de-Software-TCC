@@ -1,4 +1,3 @@
-from logging import exception
 import flask
 from flask.globals import request
 from flask.templating import render_template
@@ -6,8 +5,7 @@ import UsuarioDAO
 import EquipamentosDAO
 import LubrificantesDAO
 from equipamento import Equipamento
-from user import User
-
+from user import User 
 from lubrificantes import Oleo, Graxa, Spray
 
 
@@ -119,7 +117,7 @@ def deletar_usuarios_Post():
 
 
 
-@app.route("/login", methods=['GET'])
+@app.route("/", methods=['GET'])
 def login():			
 	return render_template('login.html')
 @app.route('/login', methods=['POST'])

@@ -2,10 +2,11 @@ body{
     padding-top: 5vh;
     background-image: url(../img/background.jpg);
     background-size: cover;
+    width: 100%;
 }
 .input-group{
 
-    width: 500px;
+    width: 100%;
     height: auto;
     left: 300px;
     

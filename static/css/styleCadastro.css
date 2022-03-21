@@ -5,7 +5,7 @@ body{
 }
 .input-group{
 
-    width: 500px;
+    width: 100%;
     height: auto;
     left: 300px;
     
@@ -39,6 +39,7 @@ body{
 }
 .btn{
     color: white;
+  
 }
 .btn:hover{
     background-color: rgb(115, 255, 255);
