@@ -30,7 +30,9 @@ function atualizar_equipamento() {
             return "Erro Ao Atualizar Equipamento"
     })
     .then((respostaTexto) => {
+        document.location.reload(true)
         alert(respostaTexto)
+        
     }) 
     }
     
