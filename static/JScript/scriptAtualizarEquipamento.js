@@ -1,19 +1,21 @@
 
 
 function atualizar_equipamento() {    
-    let idMaq = document.getElementById("idMaq");
-    let nomeMaq = document.getElementById("nomeMaq");
-    let linhaMaq = document.getElementById("linhaMaq");
-    let trechoMaq = document.getElementById("trechoMaq");
+    let idMaq = document.getElementById("idMaq").value
+    let nomeMaq = document.getElementById("nomeMaq").value
+    let linhaMaq = document.getElementById("linhaMaq").value
+    let trechoMaq = document.getElementById("trechoMaq").value
 
     let dados_maquina = {
-        idMaq: idMaq.value,
-        nome: nomeMaq.value,
-        linha: linhaMaq.value,
-        trecho: trechoMaq.value
+        idMaq: idMaq,
+        nome: nomeMaq,
+        linha: linhaMaq,
+        trecho: trechoMaq
     }    
-
-    fetch("/atualizar_equipamentos",
+    if (idMaq == "" || nomeMaq == "" || linhaMaq == "" || trechoMaq == ""){
+        return alert("Todos os Campos São Obrigatorios!")
+    }else{
+       fetch("/atualizar_equipamentos",
     {
         method: "POST",
         body:JSON.stringify(dados_maquina),
@@ -29,5 +31,7 @@ function atualizar_equipamento() {
     })
     .then((respostaTexto) => {
         alert(respostaTexto)
-    })
+    }) 
+    }
+    
 }
