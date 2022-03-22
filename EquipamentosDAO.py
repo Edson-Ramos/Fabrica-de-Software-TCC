@@ -23,7 +23,7 @@ def insertEquipamentos(equipamento):
 
 def atualizarEquipamentos(equipamento):
     try:
-        sql_query = """UPDATE maquina SET nome = %s, linha = %s, trecho = %s WHERE idMaq = %s;"""
+        sql_query = """UPDATE `maquina` SET nome = %s, linha = %s, trecho = %s WHERE idMaq = %s;"""
         tuple = (equipamento.getNome(), equipamento.getLinha(), equipamento.getTrecho(), equipamento.getIdMaq())
         cursor.execute(sql_query, tuple)
         connection.commit()
