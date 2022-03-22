@@ -11,7 +11,7 @@ def closeConnection():
 
 def insertUser(user):
 	try:
-		sql_query = """INSERT INTO `usuario`(nome , sobreNome, email , senha, tipo ) VALUES (%s,%s,%s,%s,%s)"""
+		sql_query = """INSERT INTO `usuarios`(nome , sobreNome, email , senha, tipo ) VALUES (%s,%s,%s,%s,%s)"""
 		tuple = (user.getName(), user.getSobreNome(), user.getEmail(), user.getSenha(), user.getTipo())
 		cursor.execute(sql_query, tuple)
 		connection.commit()
@@ -23,7 +23,7 @@ def insertUser(user):
 
 def updateUser(user):
     try:
-        sql_query = """UPDATE `usuario` SET nome=%s, sobreNome=%s,email=%s, senha=%s, tipo=%s WHERE id = %s;"""
+        sql_query = """UPDATE `usuarios` SET nome=%s, sobreNome=%s,email=%s, senha=%s, tipo=%s WHERE id = %s;"""
         tuple = (user.getName(), user.getSobreNome(), user.getEmail(), user.getSenha(), user.getTipo(), user.getId())
         cursor.execute(sql_query,tuple)
         connection.commit()
@@ -34,7 +34,7 @@ def updateUser(user):
 
 def listAllUsers():
     try:
-        sql_query = "SELECT * FROM usuario"
+        sql_query = "SELECT * FROM usuarios"
         cursor.execute(sql_query)
         result = cursor.fetchall()
         retorno = []
@@ -49,7 +49,7 @@ def listAllUsers():
 	
 def deleteUser(user):
 	try:
-		sql_query = """DELETE FROM `usuario` WHERE id = %s;"""%user.getId()
+		sql_query = """DELETE FROM `usuarios` WHERE id = %s;"""%user.getId()
 		id_get = user.getId()		
 		cursor.execute(sql_query)		
 		connection.commit()
