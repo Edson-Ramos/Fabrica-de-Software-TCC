@@ -1,48 +1,36 @@
 
-
-function cadastrar_usuario() {    
-    let nome = document.getElementById("nome").value;
-    let sobreNome = document.getElementById("lastname").value;
-    let email = document.getElementById("email").value;
-    let senha = document.getElementById("password").value
-    let cSenha = document.getElementById("confpassword").value;
-    let select = document.getElementById("tipos")
-    let tipo = select.options[select.selectedIndex].value
-
-    let dados_usuarios = {
-       nome : nome,
-       sobreNome : sobreNome,
-       email : email,
-       senha : senha,
-       cSenha : cSenha,
-       tipo : tipo  
-       
-    }
-    if(nome == "" || sobreNome == "" || email == "" || senha == "" || cSenha == "" || tipo == ""){
-        return alert("Todos os Campos São Obrigatorios!")
-    }else{
-       if (senha == cSenha) {
-                fetch("/cadastrar_usuarios",
-            {
-                method: "POST",
-                body:JSON.stringify(dados_usuarios),
-                headers:{
-                    "Content-Type" : "application/json"
-                }
-            })
-            .then((resposta) => {
-                if (resposta.status == 200)
-                    return resposta.text()
-                else
-                    return "Erro Ao Cadastrar Usuário"
-            })
-            .then((repostaTexto) => {
-                alert(repostaTexto)
-                document.location.reload(true);
-            })
-        }else
-            return alert("ERROr: Senhas Diferentes!") 
-            }
+function cadastrar_equipamento() {
+	let nome = document.getElementById("nome_equipamento").value;
+	let id = document.getElementById("id_equipamento").value;
+	let linha = document.getElementById("linha").value;
+	let local = document.getElementById("local").value;
+    
+	let dados_equipamento = {
+		id: id,
+        nome: nome,		
+		linha: linha,
+		trecho: local		
+    
+	}
+	fetch("/cadastro_maquinas",
+    {
+        method:"POST",
+        body:JSON.stringify(dados_equipamento),
+        headers:{
+            "Content-Type": "application/json"
+        }        
+    })    
+    .then((resposta) => {
+        
+        if (resposta.status == 200)
+            return resposta.text()
+        else 
+            return "Erro Ao Cadastrar o Equipamento"          
+    })
+    .then((respostaTexto) => {
+        alert(respostaTexto)
+    })  
+    
     
 }
     
