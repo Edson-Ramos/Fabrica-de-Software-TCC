@@ -1,8 +1,8 @@
 class User:
 	def __init__(self, id, nome, sobreNome, email, senha, tipo):
 		self.id = id
-		self.name = nome
-		self.sobrenome = sobreNome
+		self.nome = nome
+		self.sobreNome = sobreNome
 		self.email = email	
 		self.senha = senha
 		self.tipo = tipo

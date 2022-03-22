@@ -1,6 +1,6 @@
 from user import User
 import mysql.connector
-from connection import getConnection
+from connection import getConnection, closeConnection
 
 connection = getConnection()[0]
 cursor = getConnection()[1]
