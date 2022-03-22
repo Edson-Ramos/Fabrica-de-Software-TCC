@@ -151,12 +151,12 @@ def cadastrar_equipamentos_Get():
 def cadastrar_equipamentos_Post():
 	try:
 		dados = request.get_json()
-		id_maquina = dados["id"]
-		nome_maquina = dados["nome"]	
+		idMaq = dados["id"]
+		nome = dados["nome"]	
 		linha = dados["linha"]
 		trecho = dados["trecho"]
 	
-		equipamento = Equipamento(id_maquina, nome_maquina, linha, trecho)
+		equipamento = Equipamento(idMaq, nome, linha, trecho)
 		EquipamentosDAO.insertEquipamentos(equipamento)
 		return "Equipamento Cadastrado com Sucesso!"
 
