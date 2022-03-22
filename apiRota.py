@@ -104,13 +104,8 @@ def deletar_usuarios_Post():
 	id = request.form['delete']
 	intId = int(id)
 	teste = User(intId,None,None,None,None, None)
-	
-	
-	if id != True:
-		UsuarioDAO.deleteUser(teste)
-		return render_template('deletar_usuarios.html')
-	else:
-		return 	"<h1>Id Não Existe!</h1>"
+	UsuarioDAO.deleteUser(teste)
+		
 
 
 
