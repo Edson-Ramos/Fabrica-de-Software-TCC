@@ -109,7 +109,7 @@ def deletar_usuarios_Post():
 		UsuarioDAO.deleteUser(idusuario)
 		return "Usuário Excluido!"
 	except:
-		return flask.Response("Erro ao Deletar Usuário!")
+		return flask.Response("Erro ao Deletar Usuário!", status=500)
 		
 
 
