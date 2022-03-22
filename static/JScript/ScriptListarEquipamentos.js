@@ -1,4 +1,4 @@
-const rota = 'https://easylub.herokuapp.com/'
+const rota = 'https://easylub.herokuapp.com'
 
 function getEquipamentos(){
 
