@@ -27,8 +27,8 @@ function delete_usuario() {
                 else
                     return alert("Erro Ao Deletar Usuário")
             })
-            .then((repostaTexto) => {
-                alert(repostaTexto)
+            .then((respostaTexto) => {
+                alert(respostaTexto)
                 document.location.reload(true);
             })          
         }

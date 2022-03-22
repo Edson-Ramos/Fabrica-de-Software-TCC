@@ -27,8 +27,8 @@ function delete_equipamento() {
                 else
                     return alert("Erro Ao Deletar Equipamento")
             })
-            .then((repostaTexto) => {
-                alert(repostaTexto)
+            .then((respostaTexto) => {
+                alert(respostaTexto)
                 document.location.reload(true);
             })          
         }
