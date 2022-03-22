@@ -101,10 +101,15 @@ def deletar_usuaros_Get():
 	return render_template('deletar_usuarios.html')
 @app.route('/deletar_usuarios', methods=['POST'])
 def deletar_usuarios_Post():
-	id = request.form['delete']
-	intId = int(id)
-	teste = User(intId,None,None,None,None, None)
-	UsuarioDAO.deleteUser(teste)
+	try:
+		stringId = request.get_json()
+		id = stringId['id']
+		intId = int(id)
+		idusuario = User(intId,None,None,None,None, None)
+		UsuarioDAO.deleteUser(idusuario)
+		return "Usuário Excluido!"
+	except:
+		return flask.Response("Erro ao Deletar Usuário!")
 		
 
 
