@@ -213,16 +213,19 @@ def atualizar_equipamentos_Post():
 def deletar_equipamentos_Get():
 	return render_template('deletar_equipamentos.html')
 @app.route('/deletar_equipamentos', methods=['POST'])
-def deletar_equipamentos_Post():	
-	idMaq = request.form['delete']
-	idMaq = int(idMaq)
-	elemento = Equipamento(idMaq,None,None,None)	
+def deletar_equipamentos_Post():
+	try:
+		id = request.get_json()
+		idMaq = id["idEquipamento"]
+		idMaq = int(idMaq)
+		equipamento = Equipamento(idMaq,None,None,None)
+		
+		if idMaq != True:
+			EquipamentosDAO.deleteEquipamento(equipamento)
+		return "Equipamento Excluido!"
 
-	if idMaq != True:
-		EquipamentosDAO.deleteEquipamento(elemento)
-		return render_template('deletar_equipamentos.html')
-	else:
-		return 	"<h1>Id Não Existe!</h1>"
+	except:
+		return flask.Response("Erro ao Deletar o Equipamento", status=500)
 
 
 @app.route('/cadastrar_lubrificantes', methods=['GET'])
