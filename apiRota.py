@@ -103,7 +103,7 @@ def deletar_usuaros_Get():
 def deletar_usuarios_Post():
 	try:
 		stringId = request.get_json()
-		id = stringId['id']
+		id = stringId['idUsuario']
 		intId = int(id)
 		idusuario = User(intId,None,None,None,None, None)
 		UsuarioDAO.deleteUser(idusuario)

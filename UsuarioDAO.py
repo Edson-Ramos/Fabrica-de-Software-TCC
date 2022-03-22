@@ -47,13 +47,13 @@ def listAllUsers():
         raise error
 	
 def deleteUser(user):
-	try:
-		sql_query = """DELETE FROM `usuarios` WHERE id = %s;"""%user.getId()
-		id_get = user.getId()		
-		cursor.execute(sql_query)		
-		connection.commit()
-		print("Id: ", id_get, " Excluido com Sucesso!")
-		
-	except mysql.connector.Error as error:
-		connection.rollback()
-		print("Falha ao deletar registro da base de dados!")
+    try:
+        sql_query = """DELETE FROM `usuarios` WHERE id = %s;"""%user.getId()
+        id_get = user.getId()		
+        cursor.execute(sql_query)		
+        connection.commit()
+        print( "Id: ", id_get, " Excluido com Sucesso!")
+    except mysql.connector.Error as error:
+        connection.rollback()
+        print("Falha ao deletar registro da base de dados!")
+        raise error
