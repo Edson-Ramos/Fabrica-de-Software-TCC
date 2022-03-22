@@ -106,8 +106,12 @@ def deletar_usuarios_Post():
 		id = stringId['idUsuario']
 		intId = int(id)
 		idusuario = User(intId,None,None,None,None, None)
-		UsuarioDAO.deleteUser(idusuario)
-		return "Usuário Excluido!"
+	
+		if id != True:
+			UsuarioDAO.deleteUser(idusuario)
+			return render_template('deletar_usuarios.html')
+		else:
+			return 	"<h1>Id Não Existe!</h1>"
 	except:
 		return flask.Response("Erro ao Deletar Usuário!", status=500)
 		
