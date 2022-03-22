@@ -12,7 +12,11 @@ function cadastrar_equipamento() {
 		trecho: trecho		
     
 	}
-	fetch("/cadastrar_equipamentos",
+
+    if (id == "" || nome == "" || linha == "" || trecho == ""){
+        return alert("Todos os Campos São Obrigatorios!")
+    }else{
+        fetch("/cadastrar_equipamentos",
     {
         method:"POST",
         body:JSON.stringify(dados_equipamento),
@@ -29,7 +33,9 @@ function cadastrar_equipamento() {
     })
     .then((respostaTexto) => {
         alert(respostaTexto)
-    })  
+    })
+    }
+	  
     
     
 }

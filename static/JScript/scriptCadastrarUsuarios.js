@@ -41,7 +41,7 @@ function cadastrar_usuario() {
                 document.location.reload(true);
             })
         }else
-            return alert("ERROr: Senhas Diferentes!") 
+            return alert("ERROR: Senhas Diferentes!") 
             }
     
 }
