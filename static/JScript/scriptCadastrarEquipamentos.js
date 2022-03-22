@@ -1,15 +1,15 @@
 
 function cadastrar_equipamento() {
-	let nome = document.getElementById("nome_equipamento").value;
-	let id = document.getElementById("id_equipamento").value;
-	let linha = document.getElementById("linha").value;
-	let local = document.getElementById("local").value;
+    let id = document.getElementById("idMaq").value;
+	let nome = document.getElementById("nomeMaq").value;
+	let linha = document.getElementById("linhaMaq").value;
+	let trecho = document.getElementById("trechoMaq").value;
     
 	let dados_equipamento = {
 		id: id,
         nome: nome,		
 		linha: linha,
-		trecho: local		
+		trecho: trecho		
     
 	}
 	fetch("/cadastro_maquinas",
