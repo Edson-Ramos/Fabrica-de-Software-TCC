@@ -12,7 +12,7 @@ function cadastrar_equipamento() {
 		trecho: trecho		
     
 	}
-	fetch("/cadastro_maquinas",
+	fetch("/cadastrar_equipamentos",
     {
         method:"POST",
         body:JSON.stringify(dados_equipamento),
