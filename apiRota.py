@@ -106,7 +106,7 @@ def deletar_usuaros_Get():
 def deletar_usuarios_Post():
 	id = request.form['delete']
 	intId = int(id)
-	teste = User(intId,None,None,None,None)
+	teste = User(intId,None,None,None,None, None)
 	
 	
 	if id != True:
