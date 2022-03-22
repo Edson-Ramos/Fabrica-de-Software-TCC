@@ -27,10 +27,7 @@ def cadastrar_usuarios_Post():
 		email = dados['email']
 		senha = dados['senha']
 		tipo = dados['tipo']
-		confSenha = dados['cSenha']
-		numbers = any(map(str.isdigit, senha))
-		uppercases = any(map(str.isupper, senha))	
-		
+				
 		usuario = User(None, nome, sobreNome, email, senha, tipo)
 		UsuarioDAO.insertUser(usuario)
 		return "Usuário Cadastrado Com Sucesso!"

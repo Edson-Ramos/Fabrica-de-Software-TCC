@@ -11,7 +11,7 @@ def closeConnection():
 
 def insertEquipamentos(equipamento):
 	try:
-		sql_query = """INSERT INTO `maquina`(idMaq, maq, linha, trecho ) VALUES (%s,%s,%s,%s)"""
+		sql_query = """INSERT INTO `maquina`(idMaq, nome, linha, trecho ) VALUES (%s,%s,%s,%s)"""
 		tuple = (equipamento.getId(), equipamento.getNome(), equipamento.getLinha(), equipamento.getTrecho())
 		cursor.execute(sql_query, tuple)
 		connection.commit()

@@ -1,5 +1,4 @@
 from user import User
-from equipamento import Equipamento
 import mysql.connector
 from connection import getConnection, closeConnection
 
