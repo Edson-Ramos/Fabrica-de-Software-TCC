@@ -198,13 +198,13 @@ def atualizar_equipamentos_Post():
 		dados = request.get_json()
 		idMaq = dados["idMaq"]
 		idMaq = int(idMaq)
-		nomeMaq = dados["nomeMaq"]
-		linhaMaq = dados["linhaMaq"]
-		trechoMaq = dados["trechoMaq"]	
+		nome = dados["nome"]
+		linha = dados["linha"]
+		trecho = dados["trecho"]	
 
-		equipamento = Equipamento(idMaq, nomeMaq, linhaMaq, trechoMaq)
+		equipamento = Equipamento(idMaq, nome, linha, trecho)
 		EquipamentosDAO.atualizarEquipamentos(equipamento)
-		return "Máquina Atualizar com Sucesso!"
+		return "Equipamento Atualizar com Sucesso!"
 	except:
      		return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500) 
 

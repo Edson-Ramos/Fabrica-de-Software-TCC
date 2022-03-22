@@ -8,9 +8,9 @@ function atualizar_equipamento() {
 
     let dados_maquina = {
         idMaq: idMaq.value,
-        nomeMaq: nomeMaq.value,
-        linhaMaq: linhaMaq.value,
-        trechoMaq: trechoMaq.value
+        nome: nomeMaq.value,
+        linha: linhaMaq.value,
+        trecho: trechoMaq.value
     }    
 
     fetch("/atualizar_equipamentos",
@@ -25,9 +25,9 @@ function atualizar_equipamento() {
         if (resposta.status == 200)
             return resposta.text()
         else
-            return "Erro Ao Atualizar a Máquina"
+            return "Erro Ao Atualizar Equipamento"
     })
-    .then((repostaTexto) => {
-        alert(repostaTexto)
+    .then((respostaTexto) => {
+        alert(respostaTexto)
     })
 }
