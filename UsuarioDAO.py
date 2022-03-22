@@ -12,7 +12,7 @@ def closeConnection():
 def insertUser(user):
 	try:
 		sql_query = """INSERT INTO `usuarios`(nome , sobreNome, email , senha, tipo ) VALUES (%s,%s,%s,%s,%s)"""
-		tuple = (user.getName(), user.getSobreNome(), user.getEmail(), user.getSenha(), user.getTipo())
+		tuple = (user.getNome(), user.getSobreNome(), user.getEmail(), user.getSenha(), user.getTipo())
 		cursor.execute(sql_query, tuple)
 		connection.commit()
 		print("Registro foi inserido com sucesso na Base de Dados!")

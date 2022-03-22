@@ -1,4 +1,4 @@
-const rota = 'http://localhost:5000'
+const rota = 'https://easylub.herokuapp.com'
 
 function getArquivos(){
     

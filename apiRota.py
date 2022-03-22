@@ -48,9 +48,9 @@ def visualizar_Usuarios_Get_1():
 
 	for arquivos in UsuarioDAO.listAllUsers():
 		id_Usuario = arquivos.id
-		nome_Usuario = arquivos.name
+		nome_Usuario = arquivos.nome
 		email_Usuario = arquivos.email
-		sobreNome_Usuario = arquivos.sobrenome
+		sobreNome_Usuario = arquivos.sobreNome
 		senha_Usuario = arquivos.senha
 		tipo_Usuario = arquivos.tipo
 

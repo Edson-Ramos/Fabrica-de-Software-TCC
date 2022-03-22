@@ -1,8 +1,8 @@
 class User:
-	def __init__(self, id, name, sobrenome, email, senha, tipo):
+	def __init__(self, id, nome, sobreNome, email, senha, tipo):
 		self.id = id
-		self.name = name
-		self.sobrenome = sobrenome
+		self.name = nome
+		self.sobrenome = sobreNome
 		self.email = email	
 		self.senha = senha
 		self.tipo = tipo
@@ -14,15 +14,15 @@ class User:
 	def setId(self, id):
 		self.id = id
 
-	def getName(self):
-		return self.name
-	def setName(self, name):
-		self.name = name
+	def getNome(self):
+		return self.nome
+	def setNome(self, nome):
+		self.nome = nome
 
 	def getSobreNome(self):
-		return self.sobrenome
-	def setSobreNome(self, sobrenome):
-		self.sobrenome = sobrenome
+		return self.sobreNome
+	def setSobreNome(self, sobreNome):
+		self.sobreNome = sobreNome
 
 	def getEmail(self):
 		return self.email
