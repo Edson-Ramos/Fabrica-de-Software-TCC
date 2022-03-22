@@ -23,7 +23,7 @@ def insertUser(user):
 def updateUser(user):
     try:
         sql_query = """UPDATE `usuarios` SET nome=%s, sobreNome=%s,email=%s, senha=%s, tipo=%s WHERE id = %s;"""
-        tuple = (user.getName(), user.getSobreNome(), user.getEmail(), user.getSenha(), user.getTipo(), user.getId())
+        tuple = (user.getNome(), user.getSobreNome(), user.getEmail(), user.getSenha(), user.getTipo(), user.getId())
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
