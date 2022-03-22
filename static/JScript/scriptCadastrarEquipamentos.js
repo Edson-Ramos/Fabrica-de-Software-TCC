@@ -32,6 +32,7 @@ function cadastrar_equipamento() {
             return "Erro Ao Cadastrar o Equipamento"          
     })
     .then((respostaTexto) => {
+        document.location.reload(true)
         alert(respostaTexto)
     })
     }
