@@ -90,8 +90,10 @@
                             <tbody class="lista" id="tbody"></tbody>   
                     </div>  
                 </table>
-               
             </div>
+               <div>
+                    <button onclick="getEquipamentos()" type="submit" id="btn" class="btn btn-primary">listar</button>
+                </div> 
         </section>
 
     </div>
@@ -100,9 +102,7 @@
 </body>
 <footer class="text-center">
 
-    <div>
-        <button onclick="getEquipamentos()" type="submit" id="btn" class="btn btn-primary">listar</button>
-    </div>
+    
 
     
     <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
