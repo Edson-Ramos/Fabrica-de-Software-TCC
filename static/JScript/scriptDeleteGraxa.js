@@ -27,8 +27,8 @@ function delete_graxa() {
                 else
                     return alert("Erro Ao Deletar Graxa")
             })
-            .then((repostaTexto) => {
-                alert(repostaTexto)
+            .then((respostaTexto) => {
+                alert(respostaTexto)
                 document.location.reload(true);
             })          
         }
