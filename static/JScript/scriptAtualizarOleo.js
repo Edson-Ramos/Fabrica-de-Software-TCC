@@ -31,8 +31,8 @@ function atualizar_oleo() {
             return "Erro Ao Atualizar Óleo"
     })
     .then((respostaTexto) => {
-        document.location.reload(true)
         alert(respostaTexto)
+        document.location.reload(true)
     })
        
     }
