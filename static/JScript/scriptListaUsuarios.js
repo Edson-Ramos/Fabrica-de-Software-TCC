@@ -67,6 +67,15 @@ function createFile(file){
     }
         
     
+        if (resposta.status == 200)
+            return resposta.text()
+        else
+            return alert("Erro Ao Deletar Usuário")
+    
+    .then((respostaTexto) => {
+        alert(respostaTexto)
+        document.location.reload(true);
+    })          
 
     
 }
