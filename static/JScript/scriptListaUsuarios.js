@@ -3,14 +3,13 @@ const rota = 'https://easylub.herokuapp.com'
 function getArquivos() {
 
     fetch(`${rota}/listar`)
-
-        .then(data => {
+    .then(data => {
             return data.json();
         })
-        .then(data => {
-            for (file of data.files)
-                createFile(file);
-        })
+    .then(data => {
+        for (file of data.files)
+            createFile(file);
+    })
 }
 var tbody = document.getElementById("tbody")
 
