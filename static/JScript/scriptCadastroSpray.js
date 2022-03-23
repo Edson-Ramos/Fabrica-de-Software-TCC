@@ -2,9 +2,7 @@ function cadastro_spray(){
     id = document.getElementById("id").value
     tipo = document.getElementById("tipo").value
     visco = document.getElementById("visco").value
-    
-    console.log(id,tipo,visco)
-
+   
 // precisa verificar o campo visco e id vai ser do tipo int ou string
     if (id == "" || tipo == "" || visco == ""){
         return alert("Todos os Campos São Obrigatorios!")
