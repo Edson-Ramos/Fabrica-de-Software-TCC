@@ -12,61 +12,58 @@ function getArquivos() {
                 createFile(file);
         })
 }
-if (resposta.status == 200){
-   var tbody = document.getElementById("tbody")
+var tbody = document.getElementById("tbody")
 
-    function createFile(file) {
-
-
-        let tr = document.createElement("tr")
+function createFile(file) {
 
 
-        let tdId = document.createElement("td")
-        tdId.className = "lista"
-        tdId.innerText = `${file.id}`
-
-        let tdNome = document.createElement("td")
-        tdNome.className = "lista"
-        tdNome.innerText = `${file.nome}`
-
-        let tdSobreN = document.createElement("td")
-        tdSobreN.className = "lista"
-        tdSobreN.innerText = `${file.sobreNome}`
-
-        let tdEmail = document.createElement("td")
-        tdEmail.className = "lista"
-        tdEmail.innerText = `${file.email}`
-
-        let tdSenha = document.createElement("td")
-        tdSenha.className = "lista"
-        tdSenha.innerText = `${file.senha}`
+    let tr = document.createElement("tr")
 
 
-        let tdTipo = document.createElement("td")
-        tdTipo.className = "lista"
+    let tdId = document.createElement("td")
+    tdId.className = "lista"
+    tdId.innerText = `${file.id}`
+
+    let tdNome = document.createElement("td")
+    tdNome.className = "lista"
+    tdNome.innerText = `${file.nome}`
+
+    let tdSobreN = document.createElement("td")
+    tdSobreN.className = "lista"
+    tdSobreN.innerText = `${file.sobreNome}`
+
+    let tdEmail = document.createElement("td")
+    tdEmail.className = "lista"
+    tdEmail.innerText = `${file.email}`
+
+    let tdSenha = document.createElement("td")
+    tdSenha.className = "lista"
+    tdSenha.innerText = `${file.senha}`
 
 
-        if (file.tipo == 1) {
-            tdTipo.innerText = `Administrador`
-            tbody.appendChild(tr)
-            tr.appendChild(tdId);
-            tr.appendChild(tdNome);
-            tr.appendChild(tdSobreN);
-            tr.appendChild(tdEmail);
-            tr.appendChild(tdSenha);
-            tr.appendChild(tdTipo);
-        } else {
-            tdTipo.innerText = `Funcionário`
-            tbody.appendChild(tr)
-            tr.appendChild(tdId);
-            tr.appendChild(tdNome);
-            tr.appendChild(tdSobreN);
-            tr.appendChild(tdEmail);
-            tr.appendChild(tdSenha);
-            tr.appendChild(tdTipo);
-        }
+    let tdTipo = document.createElement("td")
+    tdTipo.className = "lista"
+
+
+    if (file.tipo == 1) {
+        tdTipo.innerText = `Administrador`
+        tbody.appendChild(tr)
+        tr.appendChild(tdId);
+        tr.appendChild(tdNome);
+        tr.appendChild(tdSobreN);
+        tr.appendChild(tdEmail);
+        tr.appendChild(tdSenha);
+        tr.appendChild(tdTipo);
+    } else {
+        tdTipo.innerText = `Funcionário`
+        tbody.appendChild(tr)
+        tr.appendChild(tdId);
+        tr.appendChild(tdNome);
+        tr.appendChild(tdSobreN);
+        tr.appendChild(tdEmail);
+        tr.appendChild(tdSenha);
+        tr.appendChild(tdTipo);
     }
-}else
-     alert("Error ao Listar")
-     document.location.reload(true);
+}
+
 
