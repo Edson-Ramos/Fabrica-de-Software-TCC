@@ -3,24 +3,23 @@ const rota = 'https://easylub.herokuapp.com'
 function getArquivos() {
 
     fetch(`${rota}/listar`)
+        .then((resposta) => {
+                if (resposta.status != 200)
+                    return alert("Erro Ao Deletar Óleo")
+                .then((repostaTexto) => {
+                    alert(repostaTexto)
+                    document.location.reload(true);
+                    })
+            })
         .then(data => {
             return data.json();
         })
         .then(data => {
             for (file of data.files)
                 createFile(file);
-
         })
-        .then((resposta) => {
-            if (resposta.status == 200)
-                return
-            else
-                return alert("Erro Ao Deletar Usuário")
-        })
-        .then((respostaTexto) => {
-            alert(respostaTexto)
-            document.location.reload(true);
-        })
+        
+      
 }
 
 var tbody = document.getElementById("tbody")
@@ -75,5 +74,5 @@ function createFile(file) {
         tr.appendChild(tdSenha);
         tr.appendChild(tdTipo);
     }
-
+    
 }
