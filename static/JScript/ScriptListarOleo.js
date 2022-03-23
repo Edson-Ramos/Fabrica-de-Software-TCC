@@ -1,8 +1,6 @@
-const rota = 'https://easylub.herokuapp.com'
-
 function getOleo(){
 
-    fetch(`${rota}/listar_oleo`)
+fetch(`https://easylub.herokuapp.com/listar_oleo`)
     .then(data => {
         return data.json();
     })
