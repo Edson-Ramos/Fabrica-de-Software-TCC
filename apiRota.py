@@ -5,7 +5,7 @@ import UsuarioDAO
 import EquipamentosDAO
 import LubrificantesDAO
 from equipamento import Equipamento
-from user import User 
+from user import User
 from lubrificantes import Oleo, Graxa, Spray
 
 
@@ -13,21 +13,22 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
 
- 
 
-@app.route('/cadastrar_usuarios', methods = ['GET'])
+@app.route('/cadastrar_usuarios', methods=['GET'])
 def cadastrar_usuario_Get():
 	return render_template('cadastrar_usuario.html')
+
+
 @app.route('/cadastrar_usuarios', methods=['POST'])
 def cadastrar_usuarios_Post():
-	try:	
+	try:
 		dados = request.get_json()
 		nome = dados['nome']
 		sobreNome = dados['sobreNome']
 		email = dados['email']
 		senha = dados['senha']
 		tipo = dados['tipo']
-				
+
 		usuario = User(None, nome, sobreNome, email, senha, tipo)
 		UsuarioDAO.insertUser(usuario)
 		return "Usuário Cadastrado Com Sucesso!"
@@ -39,29 +40,29 @@ def cadastrar_usuarios_Post():
 @app.route("/visualizar_usuarios", methods=['GET'])
 def visualizar_usuarios_Get():
 	return render_template('visualizar_usuarios.html')
+
+
 @app.route("/listar", methods=['GET'])
 def visualizar_Usuarios_Get_1():
-	resposta = {'files' : []}
-
-	for arquivos in UsuarioDAO.listAllUsers():
-		id_Usuario = arquivos.id
-		nome_Usuario = arquivos.nome
-		email_Usuario = arquivos.email
-		sobreNome_Usuario = arquivos.sobreNome
-		senha_Usuario = arquivos.senha
-		tipo_Usuario = arquivos.tipo
-
-		file = {'id': id_Usuario,
-				 'nome': nome_Usuario,
-				 'sobreNome': sobreNome_Usuario,
-				 'email': email_Usuario,				 
-				 'senha': senha_Usuario,
-     			 'tipo': tipo_Usuario}
-
-		resposta ['files'].append(file)
-
-	return(resposta)
-
+	try:
+		resposta = {'files': []}
+		for arquivos in UsuarioDAO.listAllUsers():
+			id_Usuario = arquivos.id
+			nome_Usuario = arquivos.nome
+			email_Usuario = arquivos.email
+			sobreNome_Usuario = arquivos.sobreNome
+			senha_Usuario = arquivos.senha
+			tipo_Usuario = arquivos.tipo
+			file = {'id': id_Usuario,
+					'nome': nome_Usuario,
+					'sobreNome': sobreNome_Usuario,
+					'email': email_Usuario,
+					'senha': senha_Usuario,
+					'tipo': tipo_Usuario}
+			resposta['files'].append(file)
+			return(resposta)
+	except:
+		return flask.Response("Erro Ao Lista Usuarios")
 
 @app.route('/atualizar_usuarios', methods=['GET'])
 def atualizar_usuarios_Get():

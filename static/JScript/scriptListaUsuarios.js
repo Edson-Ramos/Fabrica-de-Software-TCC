@@ -1,35 +1,35 @@
 const rota = 'https://easylub.herokuapp.com'
 
-function getArquivos(){
-    
+function getArquivos() {
+
     fetch(`${rota}/listar`)
-    .then(data => {        
-        return data.json();
-    })
-.then(data => {    
-    for(file of data.files)        
-        createFile(file);
-    
-    })
-    .then((resposta) => {
-        if (resposta.status == 200)
-            return resposta.text()
-        else
-            return alert("Erro Ao Deletar Usuário")
-    })
-    .then((respostaTexto) => {
-        alert(respostaTexto)
-        document.location.reload(true);
-    })
+        .then(data => {
+            return data.json();
+        })
+        .then(data => {
+            for (file of data.files)
+                createFile(file);
+
+        })
+        .then((resposta) => {
+            if (resposta.status == 200)
+                return
+            else
+                return alert("Erro Ao Deletar Usuário")
+        })
+        .then((respostaTexto) => {
+            alert(respostaTexto)
+            document.location.reload(true);
+        })
 }
 
 var tbody = document.getElementById("tbody")
 
-function createFile(file){
-   
+function createFile(file) {
+
 
     let tr = document.createElement("tr")
-    
+
 
     let tdId = document.createElement("td")
     tdId.className = "lista"
@@ -50,30 +50,30 @@ function createFile(file){
     let tdSenha = document.createElement("td")
     tdSenha.className = "lista"
     tdSenha.innerText = `${file.senha}`
-    
+
 
     let tdTipo = document.createElement("td")
     tdTipo.className = "lista"
-    
 
-    if (file.tipo == 1){
+
+    if (file.tipo == 1) {
         tdTipo.innerText = `Administrador`
         tbody.appendChild(tr)
         tr.appendChild(tdId);
         tr.appendChild(tdNome);
         tr.appendChild(tdSobreN);
-        tr.appendChild(tdEmail);  
+        tr.appendChild(tdEmail);
         tr.appendChild(tdSenha);
         tr.appendChild(tdTipo);
-    }else{
+    } else {
         tdTipo.innerText = `Funcionário`
         tbody.appendChild(tr)
         tr.appendChild(tdId);
         tr.appendChild(tdNome);
         tr.appendChild(tdSobreN);
-        tr.appendChild(tdEmail);  
+        tr.appendChild(tdEmail);
         tr.appendChild(tdSenha);
         tr.appendChild(tdTipo);
     }
-     
+
 }

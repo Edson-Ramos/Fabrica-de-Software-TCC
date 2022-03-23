@@ -1,24 +1,20 @@
-
-
 function delete_usuario() {
-    
+
     let idUsuario = document.getElementById("del").value
-   
+
     let dados_usuario = {
-        idUsuario: idUsuario 
-     }
-    
-    if (idUsuario == "")
-    {
+        idUsuario: idUsuario
+    }
+
+    if (idUsuario == "") {
         return alert("Campo Id é Obrigatorio!")
-        
-    }else{
-        fetch("/deletar_usuarios",
-            {
+
+    } else {
+        fetch("/deletar_usuarios", {
                 method: "POST",
-                body:JSON.stringify(dados_usuario),
-                headers:{
-                    "Content-Type" : "application/json"
+                body: JSON.stringify(dados_usuario),
+                headers: {
+                    "Content-Type": "application/json"
                 }
             })
             .then((resposta) => {
@@ -30,6 +26,6 @@ function delete_usuario() {
             .then((respostaTexto) => {
                 alert(respostaTexto)
                 document.location.reload(true);
-            })          
-        }
+            })
+    }
 }
