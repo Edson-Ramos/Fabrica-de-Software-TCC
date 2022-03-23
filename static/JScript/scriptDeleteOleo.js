@@ -27,8 +27,8 @@ function delete_oleo() {
                 else
                     return alert("Erro Ao Deletar Óleo")
             })
-            .then((repostaTexto) => {
-                alert(repostaTexto)
+            .then((respostaTexto) => {
+                alert(respostaTexto)
                 document.location.reload(true);
             })          
         }
