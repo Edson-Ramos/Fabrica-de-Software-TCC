@@ -398,10 +398,10 @@ def cadastro_spray_Get():
 def cadastro_spray_Post():
     try:
         infor = request.get_json()
-        id = infor['id']
+        idSpray = infor['id']
         tipo = infor['tipo']
         visco = infor['visco']
-        spray = Spray(id, tipo, visco)
+        spray = Spray(idSpray, tipo, visco)
         LubrificantesDAO.insertSpray(spray)
         return "Spray Cadastrar Com Sucesso!"
     except:
