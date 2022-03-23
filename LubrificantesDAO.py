@@ -86,6 +86,7 @@ def updateOleo(lubrificantes):
     except mysql.connector.Error as error:
         connection.rollback()
         print("Falha ao atualizar registro no banco de dados!")
+        raise error
 
 def listOleo():
     try:
