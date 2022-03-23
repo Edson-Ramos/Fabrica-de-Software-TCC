@@ -11,6 +11,16 @@ function getArquivos(){
         createFile(file);
     
     })
+    .then((resposta) => {
+        if (resposta.status == 200)
+            return resposta.text()
+        else
+            return alert("Erro Ao Deletar Usuário")
+    })
+    .then((respostaTexto) => {
+        alert(respostaTexto)
+        document.location.reload(true);
+    })
 }
 
 var tbody = document.getElementById("tbody")
@@ -65,17 +75,5 @@ function createFile(file){
         tr.appendChild(tdSenha);
         tr.appendChild(tdTipo);
     }
-        
-    
-        if (resposta.status == 200)
-            return resposta.text()
-        else
-            return alert("Erro Ao Deletar Usuário")
-    
-    .then((respostaTexto) => {
-        alert(respostaTexto)
-        document.location.reload(true);
-    })          
-
-    
+     
 }
