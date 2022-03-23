@@ -1,8 +1,8 @@
-const rota = 'http://localhost:5000/'
+
 
 function getGraxa(){
 
-    fetch(`${rota}/listar_graxa`)
+    fetch(`https://easylub.herokuapp.com/listar_graxa`)
     .then(data => {
         return data.json();
     })
