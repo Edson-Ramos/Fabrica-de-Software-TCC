@@ -45,7 +45,7 @@ def visualizar_usuarios_Get():
 @app.route("/listar", methods=['GET'])
 def visualizar_Usuarios_Get_1():
 	try:
-		resposta = {'files': []}
+		lista = {'files': []}
 		for arquivos in UsuarioDAO.listAllUsers():
 			id_Usuario = arquivos.id
 			nome_Usuario = arquivos.nome
@@ -59,8 +59,8 @@ def visualizar_Usuarios_Get_1():
 					'email': email_Usuario,
 					'senha': senha_Usuario,
 					'tipo': tipo_Usuario}
-			resposta['files'].append(file)
-			return(resposta)
+			lista['files'].append(file)
+			return(lista)
 	except:
 		return flask.Response("Erro Ao Lista Usuarios")
 
