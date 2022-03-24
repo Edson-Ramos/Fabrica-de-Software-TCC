@@ -4,9 +4,11 @@ from flask.templating import render_template
 import UsuarioDAO
 import EquipamentosDAO
 import LubrificantesDAO
+import ServicosDAO
 from equipamento import Equipamento
 from user import User
 from lubrificantes import Oleo, Graxa, Spray
+from servicos import Servicos
 
 
 app = flask.Flask(__name__)
@@ -504,6 +506,64 @@ def deletar_spray_Post():
 
     except:
         return flask.Response("Erro ao Deletar Spray!", status=500)
+
+
+@app.route('/cadastrar_servico', methods=['GET'])
+def cadastrar_servico_Get():
+    return render_template('cadastrar_servico.html')
+
+@app.route('/cadastrar_servico', methods=['POST'])
+def cadastrar_servico_Post():
+    try:
+        dados_servico = request.get_json()
+        idServico = dados_servico["idServico"]
+        maquina = dados_servico["maquina"]
+        linhaMaq = dados_servico["linhaMaq"]
+        trecho = dados_servico["trecho"]
+        tipLub = dados_servico["tipLub"]
+        dataAplic = dados_servico["dataAplic"]
+        obs = dados_servico["obs"]
+        freqAplic = dados_servico["freqAplic"]
+        print(dados_servico)
+        servicos = Servicos(idServico, maquina, linhaMaq, trecho,
+                            tipLub, dataAplic, freqAplic, obs)
+        ServicosDAO.insertServico(servicos)
+        return "Serviço cadatsrado com sucesso!"
+
+    except:
+        return flask.Response("Erro ao cadastrar serviço!", status=500)
+
+
+
+@app.route("/visualizar_servicos", methods=['GET'])
+def visualizar_servicos_Get():
+    return render_template('visualizar_servico.html')
+
+@app.route("/listar_servicos", methods=['GET'])
+def visualizar_servicos_Get_1():
+    resposta = {'files': []}
+
+    for servicos in ServicosDAO.listAllServicos():
+        idServico = servicos.idServico
+        maquina = servicos.maquina
+        linhaMaq = servicos.linhaMaq
+        trecho = servicos.trecho
+        tipLub = servicos.tipLub
+        dataAplic = servicos.dataAplic
+        freqAplic = servicos.freqAplic
+        obs = servicos.obs
+
+        file = {'idServico': idServico,
+                'maquina': maquina,
+                'linhaMaq': linhaMaq,
+                'trecho': trecho,
+                'tipLub': tipLub,
+                'dataAplic': dataAplic,
+                'freqAplic': freqAplic,
+                'obs': obs
+                }
+        resposta['files'].append(file)
+    return(resposta)
 
 
 if __name__ == "__main__":

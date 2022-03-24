@@ -30,6 +30,7 @@ def updateUser(user):
     except mysql.connector.Error as error:
         connection.rollback()
         print("Falha ao atualizar registro de usuário no banco de dados!")
+        raise error
 
 def listAllUsers():
     try:

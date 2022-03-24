@@ -11,29 +11,28 @@ def closeConnection():
 
 
 def insertServicos(servicos):
-	try:
-		sql_query = """INSERT INTO `servico`(idServ , maq, trecho , linha, tipLub, dataApli, dataProxApli, freq, obs) VALUES (%s,%s,%s,%s, %s,%s,%s,%s)"""
-		tuple = (servicos.getIdServico(), servicos.getMaquina(), servicos.getLinhaMaq(), servicos.getTrecho(
-		), servicos.getTipLub(), servicos.getDataAplic(), servicos.getFreqAplic(), servicos.getObs())
-        
-
-		print("Registro foi inserido com sucesso na Base de Dados!")
-	except mysql.connector.Error as error:
-		connection.rollback()
-		print("Falha ao Tentar Inserir um Registro no Banco de Dados!")
-		raise error
+    try:
+        sql_query = """INSERT INTO `servicos`(idServ , maq, trecho , linha, tipLub, dataApli, dataProxApli, freq, obs) VALUES (%s,%s,%s,%s, %s,%s,%s,%s)"""
+        tuple = (servicos.getIdServico(), servicos.getMaquina(), servicos.getLinhaMaq(), servicos.getTrecho(), servicos.getTipLub(), servicos.getDataAplic(), servicos.getFreqAplic(), servicos.getObs())
+        cursor.execute(sql_query, tuple)
+        connection.commit()
+        print("Registro foi inserido com sucesso na Base de Dados!")
+    except mysql.connector.Error as error:
+        connection.rollback()
+        print("Falha ao Tentar Inserir um Registro no Banco de Dados!")
+        raise error
 
 def updateServicos(servicos):
     try:
         sql_query = """UPDATE `servicos` SET idServ=%s, maq=%s, trecho=%s, linha=%s, tipLub=%s, dataApli=%s, dataProxApli=%s, freq=%s, obs=%s WHERE idServ=%s;"""
         tuple = (servicos.getIdServico(), servicos.getMaquina(), servicos.getLinhaMaq(), servicos.getTrecho(), servicos.getTipLub(), servicos.getDataAplic(), servicos.getFreqAplic(), servicos.getObs())
-
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
     except mysql.connector.Error as error:
         connection.rollback()
         print("Falha ao atualizar registro de usuário no banco de dados!")
+        raise error
 
 def listAllServicos():
     try:
@@ -41,8 +40,8 @@ def listAllServicos():
         cursor.execute(sql_query)
         result = cursor.fetchall()
         retorno = []
-        for us in result:
-            servicos = Servicos(us[0], us[1], us[2], us[3], us[4])
+        for serv in result:
+            servicos = Servicos(serv[0], serv[1], serv[2], serv[3], serv[4], serv[5], serv[6], serv[7], serv[8])
             retorno.append(servicos)
         return retorno
     except mysql.connector.Error as error:
@@ -52,12 +51,11 @@ def listAllServicos():
 	
 def deleteServicos(servicos):
 	try:
-		sql_query = """DELETE FROM `servicos` WHERE id = %s;"""%user.getId()
+		sql_query = """DELETE FROM `servicos` WHERE id = %s;"""%servicos.getId()
 		id_get = servicos.getId()		
 		cursor.execute(sql_query)		
 		connection.commit()
 		print("Id: ", id_get, " Excluido com Sucesso!")
-		
 	except mysql.connector.Error as error:
 		connection.rollback()
 		print("Falha ao deletar registro da base de dados!")
