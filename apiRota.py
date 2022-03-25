@@ -4,7 +4,7 @@ from flask.templating import render_template
 import UsuarioDAO
 import EquipamentosDAO
 import LubrificantesDAO
-import ServicosDAO
+import ServDAO
 from equipamento import Equipamento
 from user import User
 from lubrificantes import Oleo, Graxa, Spray
@@ -499,7 +499,7 @@ def cadastrar_servico_Post():
         
         servicos = Servicos(idServ, Maq, trecho, linha, 
                             tipoLub, dataApli, dataProxAplic, freq, status, obs)
-        ServicosDAO.insertServicos(servicos)
+        ServDAO.insertServicos(servicos)
         return "Serviço Cadastrado Com Sucesso!"
 
     except:
@@ -515,7 +515,7 @@ def visualizar_servicos_Get():
 def visualizar_servicos_Get_1():
     resposta = {'files': []}
 
-    for servicos in ServicosDAO.listAllServicos():
+    for servicos in ServDAO.listAllServicos():
         idServ = servicos.idServ
         maq = servicos.maq
         trecho = servicos.trecho
