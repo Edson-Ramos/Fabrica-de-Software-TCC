@@ -4,7 +4,7 @@ from flask.templating import render_template
 import UsuarioDAO
 import EquipamentosDAO
 import LubrificantesDAO
-import ServicosDAO
+
 from equipamento import Equipamento
 from user import User
 from lubrificantes import Oleo, Graxa, Spray
