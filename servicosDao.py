@@ -5,7 +5,6 @@ from connection import getConnection, closeConnection
 connection = getConnection()[0]
 cursor = getConnection()[1]
 
-
 def closeConnection():
 	closeConnection()
 
