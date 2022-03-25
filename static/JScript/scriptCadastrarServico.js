@@ -8,7 +8,7 @@ function cadastrar_servico() {
     let linha = document.getElementById("linha").value    
     let tipoLub = document.getElementById("tipLub").value
     let dataApli = document.getElementById("dataAplic").value
-    let dataProxAplic = document.getElementById("dataProAplic").value
+    let dataProxApli = document.getElementById("dataProAplic").value
     let freq = document.getElementById("freqAplic").value
     let status = document.getElementById("status").value
     let obs = document.getElementById("obs").value
