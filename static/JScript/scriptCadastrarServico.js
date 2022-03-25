@@ -15,7 +15,7 @@ function cadastrar_servico() {
     
     if (freqAplic == "Frequencia de aplicação"){
         freqAplic = ""
-    }else if (idServ == "" || nomeMaq == "" || linha == "" || trecho == "" || tipoLub == "" || dataAplic == "" || dataProxAplic == ""|| freqAplic == "" || status == "" ){
+    }else if (idServ == "" || nomeMaq == "" || linha == "" || trecho == "" || tipoLub == "" || dataAplic == "" || dataProxApli == ""|| freqAplic == "" || status == "" ){
         alert("Campos São Obrigatorios!")
         document.location.reload(true)
     }else{
