@@ -23,7 +23,7 @@ def insertServicos(servicos):
 
 def updateServicos(servicos):
     try:
-        sql_query = """UPDATE `servicos` SET idServ=%s, maq=%s, trecho=%s, linha=%s, tipLub=%s, dataApli=%s, dataProxApli=%s, freq=%s, obs=%s WHERE idServ=%s;"""
+        sql_query = """UPDATE `servicos` SET idServ=%s, maq=%s, trecho=%s, linha=%s, tipoLub=%s, dataApli=%s, dataProxApli=%s, freq=%s, status=%s, obs=%s WHERE idServ=%s;"""
         tuple = (servicos.getMaq(), servicos.getTrecho(), servicos.getLinha(), servicos.LocLub(), servicos.getTipoLub(), servicos.getDataApli(), servicos.getDataProxApli(), servicos.getFreq(), servicos.getStatus(), servicos.getObs(), servicos.getIdServ())
         cursor.execute(sql_query,tuple)
         connection.commit()
