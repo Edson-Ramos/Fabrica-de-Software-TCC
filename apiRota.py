@@ -487,19 +487,20 @@ def cadastrar_servico_Post():
     try:
         dados = request.get_json()
         idServ = dados["idServ"]
-        Maq = dados["nomeMaq"]        
+        maq = dados["nomeMaq"]        
         trecho = dados["trecho"]
         linha = dados["linha"]
         tipoLub = dados["tipoLub"]
         dataApli = dados["dataApli"]
-        dataProxAplic = dados["dataProxAplic"]
+        dataProxApli = dados["dataProxAplic"]
         freq = dados["freq"]
         status = dados["status"]
         obs = dados["obs"]
         
-        servicos = Servicos(idServ, Maq, trecho, linha, 
-                            tipoLub, dataApli, dataProxAplic, freq, status, obs)
+        servicos = Servicos(idServ, maq, trecho, linha, 
+                            tipoLub, dataApli, dataProxApli, freq, status, obs)
         ServDAO.insertServicos(servicos)
+        print(servicos)
         return "Serviço Cadastrado Com Sucesso!"
 
     except:

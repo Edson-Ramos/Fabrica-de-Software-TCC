@@ -26,7 +26,7 @@ function cadastrar_servico() {
             linha : linha,            
             tipoLub : tipoLub,
             dataApli : dataApli,
-            dataProxAplic : dataProxAplic,
+            dataProxApli : dataProxApli,
             freq : freq,
             status : status,
             obs : obs,
