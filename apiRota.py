@@ -492,7 +492,7 @@ def cadastrar_servico_Post():
         linha = dados["linha"]
         tipoLub = dados["tipoLub"]
         dataApli = dados["dataApli"]
-        dataProxApli = dados["dataProxAplic"]
+        dataProxApli = dados["dataProxApli"]
         freq = dados["freq"]
         status = dados["status"]
         obs = dados["obs"]
