@@ -16,7 +16,7 @@ app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-#Área Usuários
+#Área Usuários 
 
 @app.route('/cadastrar_usuarios', methods=['GET'])
 def cadastrar_usuario_Get():
