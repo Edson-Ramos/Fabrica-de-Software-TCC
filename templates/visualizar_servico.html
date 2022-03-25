@@ -93,12 +93,13 @@
                         <tr>
                             <th class="lista" scope="col">ID</th>
                             <th class="lista" scope="col">Maquina</th>
-                            <th class="lista" scope="col">Linha</th>
                             <th class="lista" scope="col">Trecho</th>
+                            <th class="lista" scope="col">Linha</th>
                             <th class="lista" scope="col">Tipo de lubrificante</th>
                             <th class="lista" scope="col">Aplicação</th>
-                            <th class="lista" scope="col">Frequência de aplicação</th>
                             <th class="lista" scope="col">Próx. aplicação</th>
+                            <th class="lista" scope="col">Frequência de aplicação</th>
+                            <th class="lista" scope="col">Status</th>
                             <th class="lista" scope="col">Observação</th>
 
                         </tr>
@@ -108,7 +109,7 @@
                     </div>
                 </table>
                 <div>
-                    <button onclick="getEquipamentos()" type="submit" id="btn" class="btn btn-primary">listar</button>
+                    <button onclick="getServicos()" type="submit" id="btn" class="btn btn-primary">listar</button>
                 </div>
             </div>
         </section>
@@ -130,7 +131,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <script src="{{url_for('static', filename='JScript/scriptVisualizarServico.js')}}"></script>
+    <script src="{{url_for('static', filename='JScript/scriptListaServicos.js')}}"></script>
 </footer>
 
 </html>

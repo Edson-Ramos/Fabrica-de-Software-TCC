@@ -45,3 +45,16 @@ body{
     background-color: rgb(115, 255, 255);
 }
 
+.checkBox{
+    
+    background: white;
+    
+    }
+.form-check-label{
+    font-size: 13px;
+    
+} 
+.obs{
+    color: white
+}
+

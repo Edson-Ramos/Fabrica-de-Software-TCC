@@ -1,48 +1,60 @@
 class Servicos:
-	def __init__(self, idServico, maquina, linhaMaq, trecho, tipLub, dataAplic, freqAplic, obs):
-		self.idServico = idServico
-		self.maquina = maquina
-		self.linhaMaq = linhaMaq
+	def __init__(self, idServ, maq, trecho, linha, tipoLub, dataApli, dataProxApli, freq, status, obs):
+		self.idServ = idServ
+		self.maq = maq
 		self.trecho = trecho
-		self.tipLub = tipLub
-		self.dataAplic = dataAplic
-		self.freqAplic = freqAplic
+		self.linha = linha
+		self.tipoLub = tipoLub
+		self.dataApli = dataApli
+		self.dataProxApli = dataProxApli
+		self.freq = freq
+		self.status = status
 		self.obs = obs
 
-	def getIdServico(self):
-		return self.idServico
-	def setIdServico(self, idServico):
-		self.idServico = idServico
+	def getIdServ(self):
+		return self.idServ
+	def setIdServ(self, idServ):
+		self.idServ = idServ
 
-	def getMaquina(self):
-		return self.maquina
-	def setMaquina(self, maquina):
-		self.maquina = maquina
-
-	def getLinhaMaq(self):
-		return self.linhaMaq
-	def setLinhaMaq(self, linhaMaq):
-		self.linhaMaq = linhaMaq
-
+	def getMaq(self):
+		return self.maq
+	def setMaq(self, maq):
+		self.maq = maq
+  
 	def getTrecho(self):
 		return self.trecho
 	def setTrecho(self, trecho):
 		self.trecho = trecho
 
-	def getTipLub(self):
-		return self.tipLub
-	def setTipLub(self, tipLub):
-		self.tipLub = tipLub
+	def getLinha(self):
+		return self.linha
+	def setLinha(self, linha):
+		self.linha = linha
+  
+	def getTipoLub(self):
+		return self.tipoLub
+	def setTipoLub(self, tipoLub):
+		self.tipoLub = tipoLub
 
-	def getDataAplic(self):
-		return self.dataAplic
-	def setDataAplic(self, dataAplic):
-		self.dataAplic = dataAplic
+	def getDataApli(self):
+		return self.dataApli
+	def setDataApli(self, dataApli):
+		self.dataApli = dataApli
+  
+	def getDataProxApli(self):
+		return self.dataProxApli
+	def setDataProxApli(self, dataProxApli):
+		self.dataProxApli = dataProxApli
 
-	def getFreqAplic(self):
-		return self.freqAplic
-	def setFreqAplic(self, freqAplic):
-		self.freqAplic = freqAplic
+	def getFreq(self):
+		return self.freq
+	def setFreq(self, freq):
+		self.freq = freq
+  
+	def getStatus(self):
+		return self.status
+	def setStatus(self, status):
+		self.status = status
 
 	def getObs(self):
 		return self.obs

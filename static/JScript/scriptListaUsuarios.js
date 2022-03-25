@@ -1,5 +1,6 @@
 const rota = 'https://easylub.herokuapp.com'
 
+
 function getArquivos() {
 
     fetch(`${rota}/listar`)
@@ -27,10 +28,6 @@ function createFile(file) {
     tdNome.className = "lista"
     tdNome.innerText = `${file.nome}`
 
-    let tdSobreN = document.createElement("td")
-    tdSobreN.className = "lista"
-    tdSobreN.innerText = `${file.sobreNome}`
-
     let tdEmail = document.createElement("td")
     tdEmail.className = "lista"
     tdEmail.innerText = `${file.email}`
@@ -49,7 +46,6 @@ function createFile(file) {
         tbody.appendChild(tr)
         tr.appendChild(tdId);
         tr.appendChild(tdNome);
-        tr.appendChild(tdSobreN);
         tr.appendChild(tdEmail);
         tr.appendChild(tdSenha);
         tr.appendChild(tdTipo);
@@ -57,8 +53,7 @@ function createFile(file) {
         tdTipo.innerText = `Funcionário`
         tbody.appendChild(tr)
         tr.appendChild(tdId);
-        tr.appendChild(tdNome);
-        tr.appendChild(tdSobreN);
+        tr.appendChild(tdNome);;
         tr.appendChild(tdEmail);
         tr.appendChild(tdSenha);
         tr.appendChild(tdTipo);

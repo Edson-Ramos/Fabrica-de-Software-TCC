@@ -2,8 +2,7 @@
 
 function atualizar_equipamento() {    
     let nome = document.getElementById("nome").value
-    let id = document.getElementById("id").value
-    let sNome= document.getElementById("sNome").value
+    let id = document.getElementById("id").value   
     let email = document.getElementById("email").value
     let senha = document.getElementById("senha").value
     let cSenha = document.getElementById("cSenha").value
@@ -14,10 +13,8 @@ function atualizar_equipamento() {
     let dados_usuario = {
         nome : nome,
         id : id,
-        sNome: sNome,
         email : email,
         senha : senha,
-        cSenha : cSenha,
         tipo : tipo
     }    
 

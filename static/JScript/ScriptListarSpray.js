@@ -1,6 +1,9 @@
+const rota = 'https://easylub.herokuapp.com'
+
+
 function getSpray(){
 
-    fetch(`https://easylub.herokuapp.com/listar_spray`)
+    fetch(`${rota}/listar_spray`)
     .then(data => {
         return data.json();
     })
