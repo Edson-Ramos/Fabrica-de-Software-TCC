@@ -1,4 +1,4 @@
-from servicos import Servicos
+from servico import Servicos
 import mysql.connector
 from connection import getConnection, closeConnection
 

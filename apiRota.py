@@ -8,7 +8,7 @@ import ServicosDAO
 from equipamento import Equipamento
 from user import User
 from lubrificantes import Oleo, Graxa, Spray
-from servicos import Servicos
+from servico import Servicos
 
 
 app = flask.Flask(__name__)
