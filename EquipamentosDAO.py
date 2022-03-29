@@ -61,3 +61,19 @@ def deleteEquipamento(equipamento):
         connection.rollback()
         print("Falha ao Deletar Registro da Base de Dados")
         raise error
+    
+    
+def listMaqId(equipamento):
+    try:
+        sql_query = """ SELECT * FROM maquina WHERE idMaq = %s;"""%equipamento.getIdMaq()
+        cursor.execute(sql_query)
+        result = cursor.fetchall() 
+        retorno = []
+        for eq in result:
+            maq = Equipamento(eq[0], eq[1], eq[2], eq[3])
+            retorno.append(maq)
+            return retorno
+    except mysql.connector.Error as error:
+        connection.rollback()
+        print("Falha ao Carregar Registro")
+        raise error

@@ -1,6 +1,7 @@
 const rota = 'https://easylub.herokuapp.com'
 
 
+
 function getServicos() {
 
     fetch(`${rota}/listar_servico`)
@@ -24,17 +25,25 @@ function createFile(file) {
     tdId.className = "lista"
     tdId.innerText = `${file.idServ}`
 
+    let tdIdMaq = document.createElement("td")
+    tdIdMaq.className = "lista"
+    tdIdMaq.innerText = `${file.idMaq}`
+
     let tdMaq = document.createElement("td")
     tdMaq.className = "lista"
     tdMaq.innerText = `${file.maq}`
+
+    let tdLinha = document.createElement("td")
+    tdLinha.className = "lista"
+    tdLinha.innerText = `${file.linha}`
 
     let tdTrecho = document.createElement("td")
     tdTrecho.className = "lista"
     tdTrecho.innerText = `${file.trecho}`
 
-    let tdLinha = document.createElement("td")
-    tdLinha.className = "lista"
-    tdLinha.innerText = `${file.linha}`
+    let tdEquip = document.createElement("td")
+    tdEquip.className = "lista"
+    tdEquip.innerText = `${file.equip}`
 
     let tdTipo = document.createElement("td")
     tdTipo.className = "lista"
@@ -49,9 +58,6 @@ function createFile(file) {
     tdDataProxApli.className = "lista"
     tdDataProxApli.innerText = `${file.dataProxApli}`
 
-    let tdFreq = document.createElement("td")
-    tdFreq.className = "lista"
-    tdFreq.innerText = `${file.freq}`
 
     let tdStatus = document.createElement("td")
     tdStatus.className = "lista"
@@ -66,12 +72,12 @@ function createFile(file) {
         tbody.appendChild(tr)
         tr.appendChild(tdId)
         tr.appendChild(tdMaq)
-        tr.appendChild(tdTrecho)
         tr.appendChild(tdLinha)
+        tr.appendChild(tdTrecho)
+        tr.appendChild(tdEquip)
         tr.appendChild(tdTipo)
         tr.appendChild(tdDataApli)
         tr.appendChild(tdDataProxApli)
-        tr.appendChild(tdFreq)
         tr.appendChild(tdStatus)
         tr.appendChild(tdObs)
     

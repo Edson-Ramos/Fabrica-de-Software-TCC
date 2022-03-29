@@ -1,35 +1,46 @@
 class Servicos:
-	def __init__(self, idServ, maq, trecho, linha, tipoLub, dataApli, dataProxApli, freq, status, obs):
+	def __init__(self, idServ, idMaq, maq, linha, trecho, equip, tipoLub, dataApli, dataProxApli, status, obs):
 		self.idServ = idServ
+		self.idMaq = idMaq
 		self.maq = maq
-		self.trecho = trecho
 		self.linha = linha
+		self.trecho = trecho
+		self.equip = equip
 		self.tipoLub = tipoLub
 		self.dataApli = dataApli
 		self.dataProxApli = dataProxApli
-		self.freq = freq
 		self.status = status
 		self.obs = obs
-
+  
 	def getIdServ(self):
 		return self.idServ
 	def setIdServ(self, idServ):
 		self.idServ = idServ
 
+	def getIdMaq(self):
+		return self.idMaq
+	def setIdMaq(self, idMaq):
+		self.idMaq = idMaq
+
 	def getMaq(self):
 		return self.maq
 	def setMaq(self, maq):
 		self.maq = maq
+
+	def getLinha(self):
+		return self.linha
+	def setLinha(self, linha):
+		self.linha = linha
   
 	def getTrecho(self):
 		return self.trecho
 	def setTrecho(self, trecho):
 		self.trecho = trecho
 
-	def getLinha(self):
-		return self.linha
-	def setLinha(self, linha):
-		self.linha = linha
+	def getEquip(self):
+		return self.equip
+	def setEquip(self, equip):
+		self.freq = equip
   
 	def getTipoLub(self):
 		return self.tipoLub
@@ -45,11 +56,6 @@ class Servicos:
 		return self.dataProxApli
 	def setDataProxApli(self, dataProxApli):
 		self.dataProxApli = dataProxApli
-
-	def getFreq(self):
-		return self.freq
-	def setFreq(self, freq):
-		self.freq = freq
   
 	def getStatus(self):
 		return self.status

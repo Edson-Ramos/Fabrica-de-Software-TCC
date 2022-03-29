@@ -1,10 +1,8 @@
 function cadastro_graxa() {
     let id = document.getElementById("id").value
-    let selectTipo = document.getElementById("tipos")
-    let selectConsis = document.getElementById("consistencia")
-    let tipo = selectTipo.options[selectTipo.selectedIndex].value
-    let consis = selectConsis.options[selectConsis.selectedIndex].value
-
+    let tipo = document.getElementById("tipo")
+    let consis = document.getElementById("consis")
+  
     if (id == "" || tipo == "" || consis == ""){
         alert("Todos os Campos São Obrigatorios !")
     }else{

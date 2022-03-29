@@ -18,6 +18,7 @@ body{
     max-width: fit-content;
     max-height: fit-content;
     margin-top: 60px;
+    margin-bottom: 60px;
     text-align: center;
     border-radius: 20px; 
 
@@ -56,5 +57,14 @@ body{
 } 
 .obs{
     color: white
+}
+#inpId{
+    width: 65%;   
+}
+#btn{
+    left: 60px;
+}
+.form-control{
+    border-radius: 50
 }
 

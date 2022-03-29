@@ -173,6 +173,31 @@ def listar_equipamentos_Post():
 
     return(resposta)
 
+@app.route('/lista_equipamento_id', methods=['POST', 'GET'])
+def lista_equipamento_id_Get():
+    resposta = {'arquivos': []}
+    
+    id = request.get_json()
+    idMaq = id["idMaq"]
+    idMaq = int(idMaq)
+    equipamento = Equipamento(idMaq, None, None, None)
+    
+    
+    for dados in EquipamentosDAO.listMaqId(equipamento):
+        idMaq = dados.idMaq,
+        nome = dados.nome,
+        linha = dados.linha,
+        trecho = dados.trecho
+        
+        file = {'id': idMaq,
+                 'nome' : nome,
+                 'linha' : linha,
+                 'trecho' : trecho}
+        resposta['arquivos'].append(file)
+        print(resposta)
+    return(resposta)
+    
+
 
 
 @app.route('/atualizar_equipamentos', methods=['GET'])
@@ -486,19 +511,19 @@ def cadastrar_servico_Get():
 def cadastrar_servico_Post():
     try:
         dados = request.get_json()
-        idServ = dados["idServ"]
-        maq = dados["nomeMaq"]        
+        idMaq = dados["idMaq"]
+        maq = dados["nomeMaq"]
+        linha = dados["linha"]        
         trecho = dados["trecho"]
-        linha = dados["linha"]
+        equip = dados["equip"]
         tipoLub = dados["tipoLub"]
         dataApli = dados["dataApli"]
         dataProxApli = dados["dataProxApli"]
-        freq = dados["freq"]
         status = dados["status"]
         obs = dados["obs"]
         
-        servicos = Servicos(idServ, maq, trecho, linha, 
-                            tipoLub, dataApli, dataProxApli, freq, status, obs)
+        servicos = Servicos(None, idMaq, maq, linha, trecho, equip,
+                            tipoLub, dataApli, dataProxApli, status, obs)
         ServDAO.insertServicos(servicos)
         print(servicos)
         return "Serviço Cadastrado Com Sucesso!"
@@ -518,24 +543,26 @@ def visualizar_servicos_Get_1():
 
     for servicos in ServDAO.listAllServicos():
         idServ = servicos.idServ
+        idMaq = servicos.idMaq
         maq = servicos.maq
-        trecho = servicos.trecho
         linha = servicos.linha
+        trecho = servicos.trecho
+        equip = servicos.equip
         tipoLub = servicos.tipoLub
         dataApli = servicos.dataApli
         dataProxApli = servicos.dataProxApli
-        freq = servicos.freq
         status = servicos.status
         obs = servicos.obs
 
         file = {'idServ': idServ,
+                'idMaq' : idMaq,
                 'maq': maq,
-                'trecho': trecho,
                 'linha': linha,
+                'trecho': trecho,
+                'equip' : equip,
                 'tipoLub': tipoLub,
                 'dataApli': dataApli,
                 'dataProxApli' : dataProxApli,
-                'freq': freq,
                 'status' : status,
                 'obs': obs
                 }
