@@ -1,5 +1,5 @@
 
-const rota = "http://localhost:5000"
+const rota = "https://easylub.herokuapp.com"
 const idMaq = document.querySelector("#idMaq")
 
 idMaq.addEventListener("blur", (e) => {
