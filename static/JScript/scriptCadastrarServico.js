@@ -3,7 +3,7 @@ const rota = "https://easylub.herokuapp.com"
 const idMaq = document.querySelector("#idMaq")
 
 idMaq.addEventListener("blur", (e) => {
-        console.log(idMaq.value)
+        
         let id_maq ={
                 idMaq : idMaq.value
             }
