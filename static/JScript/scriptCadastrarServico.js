@@ -1,5 +1,6 @@
 
-const rota = "https://easylub.herokuapp.com"
+//const rota = "https://easylub.herokuapp.com"
+const rota = "https://localhost:5000"
 const idMaq = document.querySelector("#idMaq")
 
 idMaq.addEventListener("blur", (e) => {
