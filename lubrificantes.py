@@ -1,8 +1,36 @@
+
+class Oleo:
+    def __init__(self, idOleo, tipo, visco):
+        self.idOleo = idOleo
+        self.tipo = tipo
+        self.visco = visco
+
+    def getIdOleo(self):
+        return self.idOleo
+
+    def setIdOleo(self, idOleo):
+        self.idOleo = idOleo
+
+    def getTipo(self):
+        return self.tipo
+
+    def setTipo(self, tipo):
+        self.tipo = tipo
+
+    def getVisco(self):
+        return self.visco
+
+    def setVisco(self, visco):
+        self.visco = visco
+
+
+
 class Graxa:
     def __init__(self, idGra, tipo, consis):
         self.idGra = idGra
         self.tipo = tipo
         self.consis = consis
+        
 
     def getIdGra(self):
         return self.idGra
@@ -48,26 +76,3 @@ class Spray:
         self.visco = visco
 
 
-class Oleo:
-    def __init__(self, idOleo, tipo, visco):
-        self.idOleo = idOleo
-        self.tipo = tipo
-        self.visco = visco
-
-    def getIdOleo(self):
-        return self.idOleo
-
-    def setIdOleo(self, idOleo):
-        self.idOleo = idOleo
-
-    def getTipo(self):
-        return self.tipo
-
-    def setTipo(self, tipo):
-        self.tipo = tipo
-
-    def getVisco(self):
-        return self.visco
-
-    def setVisco(self, visco):
-        self.visco = visco

@@ -11,8 +11,9 @@ def closeConnection():
 
 def insertServicos(servicos):
     try:
-        sql_query = """INSERT INTO `servicos`(idServ, idMaq, maq, linha, trecho, equip, tipoLub, dataApli, dataProxApli, status, obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        tuple = (servicos.getIdServ(), servicos.getIdMaq(), servicos.getMaq(), servicos.getLinha(), servicos.getTrecho(), servicos.getEquip(), servicos.getTipoLub(), servicos.getDataApli(), servicos.getDataProxApli(), servicos.getStatus(), servicos.getObs())
+        sql_query = """INSERT INTO `servicos`(idServ, idMaq, maq, linha, trecho, equip, tipoLub, tipo, prop, dataApli, dataProxApli, status, obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        tuple = (servicos.getIdServ(), servicos.getIdMaq(), servicos.getMaq(), servicos.getLinha(), servicos.getTrecho(), servicos.getEquip(), servicos.getTipoLub(), servicos.getTipo(), servicos.getProp(),
+                 servicos.getDataApli(), servicos.getDataProxApli(), servicos.getStatus(), servicos.getObs())
         cursor.execute(sql_query, tuple)
         connection.commit()
         print("Registro foi inserido com sucesso na Base de Dados!")
@@ -40,7 +41,7 @@ def listAllServicos():
         result = cursor.fetchall()
         retorno = []
         for serv in result:
-            servicos = Servicos(serv[0], serv[1], serv[2], serv[3], serv[4], serv[5], serv[6], serv[7], serv[8], serv[9], serv[10])
+            servicos = Servicos(serv[0], serv[1], serv[2], serv[3], serv[4], serv[5], serv[6], serv[7], serv[8], serv[9], serv[10], serv[11], serv[12])
             retorno.append(servicos)
         return retorno
     except mysql.connector.Error as error:

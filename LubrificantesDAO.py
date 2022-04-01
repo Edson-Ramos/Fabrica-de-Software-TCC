@@ -60,7 +60,20 @@ def deleteGraxa(lubrificantes):
         print("Falha ao deletar registro da base de dados!")
         raise error
     
-    
+def listGraxaId(lubrificantes):
+    try:
+        sql_query = """ SELECT * FROM graxa WHERE idGra = %s;"""%lubrificantes.getIdGra()
+        cursor.execute(sql_query)
+        result = cursor.fetchall() 
+        retorno = []
+        for eq in result:
+            lub = Graxa(eq[0], eq[1], eq[2])
+            retorno.append(lub)
+            return retorno
+    except mysql.connector.Error as error:
+        connection.rollback()
+        print("Falha ao Carregar Registro")
+        raise error   
     
     
     
@@ -102,6 +115,22 @@ def listOleo():
         connection.rollback()
         print("Falha ao carregar os Lubrificantes")
         raise error
+
+def listOleoId(lubrificantes):
+    try:
+        sql_query = """ SELECT * FROM oleo WHERE idOleo = %s;"""%lubrificantes.getIdOleo()
+        cursor.execute(sql_query)
+        result = cursor.fetchall() 
+        retorno = []
+        for eq in result:
+            lub = Oleo(eq[0], eq[1], eq[2])
+            retorno.append(lub)
+            return retorno
+    except mysql.connector.Error as error:
+        connection.rollback()
+        print("Falha ao Carregar Registro")
+        raise error   
+    
 	
 def deleteOleo(lubrificantes):
     try:
@@ -158,6 +187,22 @@ def listSpray():
         connection.rollback()
         print("Falha ao carregar os Lubrificantes")
         raise error
+
+def listSprayId(lubrificantes):
+    try:
+        sql_query = """ SELECT * FROM spray WHERE idSpray = %s;"""%lubrificantes.getIdSpray()
+        cursor.execute(sql_query)
+        result = cursor.fetchall() 
+        retorno = []
+        for eq in result:
+            lub = Spray(eq[0], eq[1], eq[2])
+            retorno.append(lub)
+            return retorno
+    except mysql.connector.Error as error:
+        connection.rollback()
+        print("Falha ao Carregar Registro")
+        raise error   
+    
 
 def deleteSpray(lubrificantes):
     try:

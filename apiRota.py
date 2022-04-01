@@ -301,6 +301,29 @@ def listar_graxa_Post():
     return(resposta)
 
 
+@app.route('/listar_graxa_id', methods=['POST', 'GET'])
+def lista_graxa_id_Get():
+    resposta = {'arquivos': []}
+    
+    id = request.get_json()
+    idGra = id["idGra"]
+    idGra = int(idGra)
+    lubrificantes = Graxa(idGra, None, None)
+    
+    
+    for dados in LubrificantesDAO.listGraxaId(lubrificantes):
+        idGra = dados.idGra,
+        tipo = dados.tipo,
+        consis = dados.consis
+       
+        
+        file = {'id': idGra,
+                'tipo' : tipo,
+                'consis' : consis
+                }   
+        resposta['arquivos'].append(file)
+        print(resposta)
+    return(resposta)
 
 @app.route('/atualizar_graxa', methods=['GET'])
 def atualizar_graxa_Get():
@@ -320,9 +343,6 @@ def atualizar_graxa_Post():
         return "Graxa Atualizada com Sucesso!"
     except:
         return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500)
-
-
-
 
 @app.route("/deletar_graxa", methods=["GET"])
 def deletar_graxa_Get():
@@ -358,9 +378,6 @@ def cadastrar_oleo_Post():
     except:
         return flask.Response("Erro ao Cadastrar Oleo", status=500)
 
-
-
-
 @app.route('/visualizar_oleo', methods=['GET'])
 def visualizar_oleo_Get():
     return render_template('visualizar_oleo.html')
@@ -381,8 +398,29 @@ def visualizar_oleo_Post():
 
     return(resposta)
 
-
-
+@app.route('/lista_oleo_id', methods=['POST', 'GET'])
+def lista_oleo_id_Get():
+    resposta = {'arquivos': []}
+    
+    id = request.get_json()
+    idOleo = id["idOleo"]
+    idOleo = int(idOleo)
+    lubrificantes = Oleo(idOleo, None, None)
+    
+    
+    for dados in LubrificantesDAO.listOleoId(lubrificantes):
+        idOleo = dados.idOleo,
+        tipo = dados.tipo,
+        visco = dados.visco
+       
+        
+        file = {'id': idOleo,
+                'tipo' : tipo,
+                'visco' : visco
+                }   
+        resposta['arquivos'].append(file)
+        
+    return(resposta)
 
 @app.route('/atualizar_oleo', methods=['GET'])
 def atualizar_oleo_Get():
@@ -401,8 +439,6 @@ def atualizar_oleo_Post():
         return "Óleo Atualizado com Sucesso!"
     except:
         return flask.Response("Erro Ao Atualizar o Óleo!", status=500)
-
-
 
 @app.route('/deletar_oleo', methods=['GET'])
 def deletar_oleo_Get():
@@ -438,9 +474,6 @@ def cadastro_spray_Post():
     except:
         return flask.Response("Erro ao Cadastrar Spray", status=500)
 
-
-
-
 @app.route('/visualizar_spray', methods=['GET'])
 def visualizar_spray_Get():
     return render_template('visualizar_spray.html')
@@ -459,8 +492,29 @@ def visualizar_spray_Post():
         resposta['arquivos'].append(file)
         return(resposta)
 
-
-
+@app.route('/lista_spray_id', methods=['POST', 'GET'])
+def lista_spray_id_Get():
+    resposta = {'arquivos': []}
+    
+    id = request.get_json()
+    idSpray = id["idSpray"]
+    idSpray = int(idSpray)
+    lubrificantes = Spray(idSpray, None, None)
+    
+    
+    for dados in LubrificantesDAO.listSprayId(lubrificantes):
+        idSpray = dados.idSpray,
+        tipo = dados.tipo,
+        visco = dados.visco
+       
+        
+        file = {'id': idSpray,
+                'tipo' : tipo,
+                'visco' : visco
+                }   
+        resposta['arquivos'].append(file)
+        
+    return(resposta)
 
 @app.route('/atualizar_spray', methods=['GET'])
 def atualizar_spray_Get():
@@ -512,18 +566,20 @@ def cadastrar_servico_Post():
     try:
         dados = request.get_json()
         idMaq = dados["idMaq"]
-        maq = dados["nomeMaq"]
+        maq = dados["maq"]
         linha = dados["linha"]        
         trecho = dados["trecho"]
         equip = dados["equip"]
         tipoLub = dados["tipoLub"]
+        tipo = dados["tipo"]
+        prop = dados["prop"]
         dataApli = dados["dataApli"]
         dataProxApli = dados["dataProxApli"]
         status = dados["status"]
         obs = dados["obs"]
         
         servicos = Servicos(None, idMaq, maq, linha, trecho, equip,
-                            tipoLub, dataApli, dataProxApli, status, obs)
+                            tipoLub, tipo, prop, dataApli, dataProxApli, status, obs)
         ServDAO.insertServicos(servicos)
         print(servicos)
         return "Serviço Cadastrado Com Sucesso!"
@@ -549,6 +605,8 @@ def visualizar_servicos_Get_1():
         trecho = servicos.trecho
         equip = servicos.equip
         tipoLub = servicos.tipoLub
+        tipo = servicos.tipo
+        prop = servicos.prop
         dataApli = servicos.dataApli
         dataProxApli = servicos.dataProxApli
         status = servicos.status
@@ -561,6 +619,8 @@ def visualizar_servicos_Get_1():
                 'trecho': trecho,
                 'equip' : equip,
                 'tipoLub': tipoLub,
+                'tipo' : tipo,
+                'prop' : prop,
                 'dataApli': dataApli,
                 'dataProxApli' : dataProxApli,
                 'status' : status,
