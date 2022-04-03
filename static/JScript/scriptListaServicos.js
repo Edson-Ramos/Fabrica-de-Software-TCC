@@ -77,7 +77,7 @@ function createFile(file) {
     tdObs.innerText = `${file.obs}`
 
     var btDel = document.createElement("button")
-    btDel.className = "btn btn-default"
+    btDel.className = "btn btn-default btnDel"
     btDel.id = `${file.idServ}`
     let btIcon = document.createElement("img")
     btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
@@ -115,14 +115,13 @@ function createFile(file) {
         tr.appendChild(btAtt)
         tr.appendChild(btVisul)
 
-     document.querySelectorAll(".btn").forEach(function(button){
+     document.querySelectorAll(".btnDel").forEach(function(button){
     
         button.addEventListener("click",(e) =>{
             const idServ = button.id
-            console.log(idServ)
             
            var confirm = window.confirm("Tem Certeza Que Deseja Excluir Este Registro?")
-           confirm = true
+           
             if(confirm){
                 
                 let dado_servico = {
