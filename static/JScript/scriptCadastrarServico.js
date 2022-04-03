@@ -1,5 +1,5 @@
-//const rota = "https://easylub.herokuapp.com"
-const rota = "http://localhost:5000"
+const rota = "https://easylub.herokuapp.com"
+//const rota = "http://localhost:5000"
 const idMaq = document.querySelector("#idMaq")
 const oleo = document.querySelector("#oleo")
 const graxa = document.querySelector("#graxa")
