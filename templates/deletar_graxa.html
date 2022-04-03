@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-expand navbar-light">
+   <nav class="navbar fixed-top navbar-expand navbar-light">
         <a class="navbar-brand">
             <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
             <button class="btn btn-outline-success me-2" type="button" href="index.html">Easylub</button>
@@ -22,49 +22,56 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <div class="dropdown show">
-                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Usuários
-                          </a>
+                        </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/cadastrar_usuarios">Cadastrar usuários</a></li>
                             <li><a class="dropdown-item" href="/visualizar_usuarios">Listar usuários</a></li>
                             <li><a class="dropdown-item" href="/atualizar_usuarios">Atualizar Usuarios</a></li>
-                            <li><a class="dropdown-item" href="/deletar_usuarios">Deletar Usuários</a></li>                   
+                            <li><a class="dropdown-item" href="/deletar_usuarios">Deletar Usuários</a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown show">
-                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Equipamentos
-                          </a>
+                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Máquinas
+                        </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/cadastrar_equipamentos">Cadastrar Equipamentos</a></li>
-                            <li><a class="dropdown-item"  href="/visualizar_equipamentos">Listar Equipamentos</a></li>
-                            <li><a class="dropdown-item" href="/atualizar_equipamentos">Atualizar Equipamentos</a></li>
-                            <li><a class="dropdown-item"  href="/deletar_equipamentos">Deletar Equipamentos</a></li>
-                                                      
+                            <li><a class="dropdown-item" href="/cadastrar_maquinas">Cadastrar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/visualizar_maquinas">Visualizar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/atualizar_maquinas">Atualizar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/deletar_maquinas">Deletar Máquinas</a></li>
+
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown show">
-                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Lubrificantes
-                          </a>
-                        <ul class="dropdown-menu">                            
-                            <li><a class="dropdown-item" href="/cadastrar_lubrificantes">Cadastrar Lubrificantes</a></li>
-                            <li><a class="dropdown-item"  href="/visualizar_lubrificantes">Listar Lubrificantes</a></li>
-                            <li><a class="dropdown-item"  href="/atualizar_lubrificantes">Atualizar Lubrificantes</a></li>
-                            <li><a class="dropdown-item"  href="deletar_lubrificantes">Deletar Lubrificantes</a></li>                          
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/cadastrar_lubrificantes">Cadastrar Lubrificantes</a>
+                            </li>
+                            <li><a class="dropdown-item" href="/visualizar_lubrificantes">Visualizar Lubrificantes</a>
+                            </li>
+                            <li><a class="dropdown-item" href="/atualizar_lubrificantes">Atualizar Lubrificantes</a>
+                            </li>
+                            <li><a class="dropdown-item" href="deletar_lubrificantes">Deletar Lubrificantes</a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown show">
-                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Serviços
-                          </a>
+                        </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/cadastrar_servico">Cadastrar Serviços</a></li>
                             <li><a class="dropdown-item" href="/visualizar_servico">Visualizar Serviços</a></li>
@@ -85,11 +92,11 @@
                         <span class="input-group-text" id="basic-addon1">ID: </span>
                         <input type="text" class="form-control" name="del" id="del" placeholder="Digite Um ID" data-required>
                     </div>
+                </form>
+            </div>
                     <div class="full-box">
                         <button type="submit" onclick="delete_graxa()" class="btn btn-primary">Delete</button>                        
                     </div>
-                </form>
-            </div>
         </section>
     </div>
 

@@ -16,11 +16,13 @@ app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-#Área Usuários 
+# Área Usuários
 
 @app.route('/cadastrar_usuarios', methods=['GET'])
 def cadastrar_usuario_Get():
     return render_template('cadastrar_usuario.html')
+
+
 @app.route('/cadastrar_usuarios', methods=['POST'])
 def cadastrar_usuarios_Post():
     try:
@@ -38,11 +40,11 @@ def cadastrar_usuarios_Post():
         return flask.Response("Erro Ao Cadastrar o usuário!", status=500)
 
 
-
-
 @app.route("/visualizar_usuarios", methods=['GET'])
 def visualizar_usuarios_Get():
     return render_template('visualizar_usuarios.html')
+
+
 @app.route("/listar", methods=['GET'])
 def visualizar_Usuarios_Get_1():
 
@@ -66,11 +68,11 @@ def visualizar_Usuarios_Get_1():
     return(resposta)
 
 
-
-
 @app.route('/atualizar_usuarios', methods=['GET'])
 def atualizar_usuarios_Get():
     return render_template('atualizar_usuario.html')
+
+
 @app.route('/atualizar_usuarios', methods=['POST'])
 def atualizar_usuarios_Post():
     try:
@@ -88,11 +90,11 @@ def atualizar_usuarios_Post():
         return flask.Response("Erro Ao Atualizar o Usuário", status=500)
 
 
-
-
 @app.route('/deletar_usuarios', methods=['GET'])
 def deletar_usuaros_Get():
     return render_template('deletar_usuarios.html')
+
+
 @app.route('/deletar_usuarios', methods=['POST'])
 def deletar_usuarios_Post():
     try:
@@ -109,11 +111,11 @@ def deletar_usuarios_Post():
         return flask.Response("Erro ao Deletar Usuário!", status=500)
 
 
-
-
 @app.route("/", methods=['GET'])
 def login():
     return render_template('login.html')
+
+
 @app.route('/login', methods=['POST'])
 def login_post():
     email = request.form['email']
@@ -128,143 +130,152 @@ def login_post():
                 return "<h1>Senha Não Confere!</h1>"
 
 
-#Área Equipamentos
+# Área Equipamentos
 
-@app.route('/cadastrar_equipamentos', methods=['GET'])
-def cadastrar_equipamentos_Get():
-    return render_template('cadastrar_equipamentos.html')
-@app.route('/cadastrar_equipamentos', methods=['POST'])
-def cadastrar_equipamentos_Post():
+@app.route('/cadastrar_maquinas', methods=['GET'])
+def cadastrar_maquina_Get():
+    return render_template('cadastrar_maquina.html')
+
+
+@app.route('/cadastrar_maquinas', methods=['POST'])
+def cadastrar_maquina_Post():
     try:
         dados = request.get_json()
-        idMaq = dados["id"]
-        nome = dados["nome"]
+        codMaq = dados["cod"]
         linha = dados["linha"]
         trecho = dados["trecho"]
+        nome = dados["nome"]
 
-        equipamento = Equipamento(idMaq, nome, linha, trecho)
-        EquipamentosDAO.insertEquipamentos(equipamento)
-        return "Equipamento Cadastrado com Sucesso!"
+        maquina = Equipamento(None, codMaq, linha, trecho, nome)
+        EquipamentosDAO.insertMaquinas(maquina)
+        return "Máquina Cadastrado com Sucesso!"
 
     except:
-        return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500)
+        return flask.Response("Erro Ao Cadastrar a Máquina!", status=500)
 
 
+@app.route("/visualizar_maquinas", methods=['GET'])
+def listar_maquinas_Get():
+    return render_template('visualizar_maquina.html')
 
-@app.route("/visualizar_equipamentos", methods=['GET'])
-def listar_equipamentos_Get():
-    return render_template('visualizar_equipamentos.html')
-@app.route("/listar_equipamentos", methods=['GET'])
-def listar_equipamentos_Post():
+
+@app.route("/listar_maquinas", methods=['GET'])
+def listar_maquinas_Post():
     resposta = {'arquivos': []}
 
-    for dados in EquipamentosDAO.listarEquipamentos():
+    for dados in EquipamentosDAO.listarMaquinas():
         id_maquina = dados.idMaq
-        nome_maquina = dados.nome
+        cod_maquina = dados.codMaq
         linha_maquina = dados.linha
         trecho_maquina = dados.trecho
+        nome_maquina = dados.nome
 
-        file = {'id': id_maquina,
-                'nome': nome_maquina,
+        file = {'idMaq': id_maquina,
+                'codMaq': cod_maquina,
                 'linha': linha_maquina,
-                'trecho': trecho_maquina}
+                'trecho': trecho_maquina,
+                'nome': nome_maquina, }
 
         resposta['arquivos'].append(file)
 
     return(resposta)
+
 
 @app.route('/lista_equipamento_id', methods=['POST', 'GET'])
 def lista_equipamento_id_Get():
     resposta = {'arquivos': []}
-    
+
     id = request.get_json()
     idMaq = id["idMaq"]
     idMaq = int(idMaq)
-    equipamento = Equipamento(idMaq, None, None, None)
-    
-    
+    equipamento = Equipamento(idMaq, None, None, None, None)
+
     for dados in EquipamentosDAO.listMaqId(equipamento):
-        idMaq = dados.idMaq,
-        nome = dados.nome,
+        idMaq = dados.idMaq
+        codMaq = dados.codMaq
         linha = dados.linha,
-        trecho = dados.trecho
-        
+        trecho = dados.trecho,
+        nome = dados.nome
+
         file = {'id': idMaq,
-                 'nome' : nome,
-                 'linha' : linha,
-                 'trecho' : trecho}
+                'codMaq': codMaq,
+                'linha': linha,
+                'trecho': trecho,
+                'nome': nome}
         resposta['arquivos'].append(file)
         print(resposta)
     return(resposta)
-    
 
 
+@app.route('/atualizar_maquinas', methods=['GET'])
+def atualizar_maquinas_Get():
+    return render_template('atualizar_maquina.html')
 
-@app.route('/atualizar_equipamentos', methods=['GET'])
-def atualizar_equipamentos_Get():
-    return render_template('atualizar_equipamentos.html')
-@app.route('/atualizar_equipamentos', methods=['POST'])
-def atualizar_equipamentos_Post():
+
+@app.route('/atualizar_maquinas', methods=['POST'])
+def atualizar_maquinas_Post():
     try:
         dados = request.get_json()
         idMaq = dados["idMaq"]
         idMaq = int(idMaq)
-        nome = dados["nome"]
+        codMaq = dados["codMaq"]
         linha = dados["linha"]
         trecho = dados["trecho"]
+        nomeMaq = dados["nomeMaq"]
 
-        equipamento = Equipamento(idMaq, nome, linha, trecho)
-        EquipamentosDAO.atualizarEquipamentos(equipamento)
-        return "Equipamento Atualizar com Sucesso!"
+        maquina = Equipamento(idMaq, codMaq, linha, trecho, nomeMaq)
+        EquipamentosDAO.atualizarMaquinas(maquina)
+        return "Máquina Atualizada com Sucesso!"
     except:
-        return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500)
+        return flask.Response("Erro Ao Atualizar Máquina!", status=500)
 
 
+@app.route('/deletar_maquinas', methods=['GET'])
+def deletar_maquinas_Get():
+    return render_template('deletar_maquinas.html')
 
-@app.route('/deletar_equipamentos', methods=['GET'])
-def deletar_equipamentos_Get():
-    return render_template('deletar_equipamentos.html')
-@app.route('/deletar_equipamentos', methods=['POST'])
-def deletar_equipamentos_Post():
+
+@app.route('/deletar_maquinas', methods=['POST'])
+def deletar_maquinas_Post():
     try:
         id = request.get_json()
-        idMaq = id["idEquipamento"]
+        idMaq = id["idMaq"]
         idMaq = int(idMaq)
-        equipamento = Equipamento(idMaq, None, None, None)
-
-        if idMaq != True:
-            EquipamentosDAO.deleteEquipamento(equipamento)
-        return "Equipamento Excluido!"
+        maquina = Equipamento(idMaq, None, None, None, None)
+        EquipamentosDAO.deleteMaquinas(maquina)
+        return "Máquina Excluida Com Sucesso!"
 
     except:
-        return flask.Response("Erro ao Deletar o Equipamento", status=500)
+        return flask.Response("Erro ao Deletar a Máquina", status=500)
 
 
-
-
-#Área Lubrificantes
+# Área Lubrificantes
 
 @app.route('/cadastrar_lubrificantes', methods=['GET'])
 def cadastrar_lubrificantes_Get():
     return render_template('cadastar_lubrificantes.html')
+
+
 @app.route('/visualizar_lubrificantes', methods=['GET'])
 def visualizar_lubrificantes_Get():
     return render_template('visualizar_lubrificantes.html')
 
 
-
 @app.route('/atualizar_lubrificantes', methods=['GET'])
 def atualizar_lubrificantes_Get():
     return render_template('atualizar_lubrificantes.html')
+
+
 @app.route('/deletar_lubrificantes', methods=['GET'])
 def deletar_lubrificantes_Get():
     return render_template('deletar_lubrificantes.html')
 
 
-
 @app.route('/cadastrar_graxa', methods=['GET'])
 def cadastrar_graxa_Get():
     return render_template('cadastrar_graxa.html')
+
+
 @app.route('/cadastrar_graxa', methods=['POST'])
 def cadastrar_graxa_Post():
     try:
@@ -279,10 +290,11 @@ def cadastrar_graxa_Post():
         return flask.Response("Erro ao Cadastrar Graxa", status=500)
 
 
-
 @app.route('/visualizar_graxa', methods=['GET'])
 def visualizar_graxa_Get():
     return render_template('visualizar_graxa.html')
+
+
 @app.route("/listar_graxa", methods=['GET'])
 def listar_graxa_Post():
     resposta = {'arquivos': []}
@@ -304,30 +316,31 @@ def listar_graxa_Post():
 @app.route('/listar_graxa_id', methods=['POST', 'GET'])
 def lista_graxa_id_Get():
     resposta = {'arquivos': []}
-    
+
     id = request.get_json()
     idGra = id["idGra"]
     idGra = int(idGra)
     lubrificantes = Graxa(idGra, None, None)
-    
-    
+
     for dados in LubrificantesDAO.listGraxaId(lubrificantes):
         idGra = dados.idGra,
         tipo = dados.tipo,
         consis = dados.consis
-       
-        
+
         file = {'id': idGra,
-                'tipo' : tipo,
-                'consis' : consis
-                }   
+                'tipo': tipo,
+                'consis': consis
+                }
         resposta['arquivos'].append(file)
         print(resposta)
     return(resposta)
 
+
 @app.route('/atualizar_graxa', methods=['GET'])
 def atualizar_graxa_Get():
     return render_template('atualizar_graxa.html')
+
+
 @app.route('/atualizar_graxa', methods=['POST'])
 def atualizar_graxa_Post():
     try:
@@ -344,9 +357,12 @@ def atualizar_graxa_Post():
     except:
         return flask.Response("Erro Ao Cadastrar o Equipamento!", status=500)
 
+
 @app.route("/deletar_graxa", methods=["GET"])
 def deletar_graxa_Get():
     return render_template("deletar_graxa.html")
+
+
 @app.route('/deletar_graxa', methods=['POST'])
 def deletar_graxa_Post():
     try:
@@ -360,11 +376,11 @@ def deletar_graxa_Post():
         return flask.Response("Erro ao Deletar Graxa", status=500)
 
 
-
-
 @app.route('/cadastrar_oleo', methods=['GET'])
 def cadastrar_oleo_Get():
     return render_template('cadastrar_oleo.html')
+
+
 @app.route('/cadastrar_oleo', methods=['POST'])
 def cadastrar_oleo_Post():
     try:
@@ -378,9 +394,12 @@ def cadastrar_oleo_Post():
     except:
         return flask.Response("Erro ao Cadastrar Oleo", status=500)
 
+
 @app.route('/visualizar_oleo', methods=['GET'])
 def visualizar_oleo_Get():
     return render_template('visualizar_oleo.html')
+
+
 @app.route("/listar_oleo", methods=['GET'])
 def visualizar_oleo_Post():
     resposta = {'arquivos': []}
@@ -398,33 +417,35 @@ def visualizar_oleo_Post():
 
     return(resposta)
 
+
 @app.route('/lista_oleo_id', methods=['POST', 'GET'])
 def lista_oleo_id_Get():
     resposta = {'arquivos': []}
-    
+
     id = request.get_json()
     idOleo = id["idOleo"]
     idOleo = int(idOleo)
     lubrificantes = Oleo(idOleo, None, None)
-    
-    
+
     for dados in LubrificantesDAO.listOleoId(lubrificantes):
         idOleo = dados.idOleo,
         tipo = dados.tipo,
         visco = dados.visco
-       
-        
+
         file = {'id': idOleo,
-                'tipo' : tipo,
-                'visco' : visco
-                }   
+                'tipo': tipo,
+                'visco': visco
+                }
         resposta['arquivos'].append(file)
-        
+
     return(resposta)
+
 
 @app.route('/atualizar_oleo', methods=['GET'])
 def atualizar_oleo_Get():
     return render_template('atualizar_oleo.html')
+
+
 @app.route('/atualizar_oleo', methods=['POST'])
 def atualizar_oleo_Post():
     try:
@@ -440,9 +461,12 @@ def atualizar_oleo_Post():
     except:
         return flask.Response("Erro Ao Atualizar o Óleo!", status=500)
 
+
 @app.route('/deletar_oleo', methods=['GET'])
 def deletar_oleo_Get():
     return render_template('deletar_oleo.html')
+
+
 @app.route('/deletar_oleo', methods=['POST'])
 def deletar_oleo_Post():
     try:
@@ -461,6 +485,8 @@ def deletar_oleo_Post():
 @app.route('/cadastrar_spray', methods=['GET'])
 def cadastro_spray_Get():
     return render_template('cadastrar_spray.html')
+
+
 @app.route('/cadastrar_spray', methods=['POST'])
 def cadastro_spray_Post():
     try:
@@ -474,9 +500,12 @@ def cadastro_spray_Post():
     except:
         return flask.Response("Erro ao Cadastrar Spray", status=500)
 
+
 @app.route('/visualizar_spray', methods=['GET'])
 def visualizar_spray_Get():
     return render_template('visualizar_spray.html')
+
+
 @app.route('/listar_spray', methods=['GET'])
 def visualizar_spray_Post():
     resposta = {'arquivos': []}
@@ -492,33 +521,35 @@ def visualizar_spray_Post():
         resposta['arquivos'].append(file)
         return(resposta)
 
+
 @app.route('/lista_spray_id', methods=['POST', 'GET'])
 def lista_spray_id_Get():
     resposta = {'arquivos': []}
-    
+
     id = request.get_json()
     idSpray = id["idSpray"]
     idSpray = int(idSpray)
     lubrificantes = Spray(idSpray, None, None)
-    
-    
+
     for dados in LubrificantesDAO.listSprayId(lubrificantes):
         idSpray = dados.idSpray,
         tipo = dados.tipo,
         visco = dados.visco
-       
-        
+
         file = {'id': idSpray,
-                'tipo' : tipo,
-                'visco' : visco
-                }   
+                'tipo': tipo,
+                'visco': visco
+                }
         resposta['arquivos'].append(file)
-        
+
     return(resposta)
+
 
 @app.route('/atualizar_spray', methods=['GET'])
 def atualizar_spray_Get():
     return render_template('atualizar_spray.html')
+
+
 @app.route('/atualizar_spray', methods=['POST'])
 def atualizar_spray_Post():
     try:
@@ -535,11 +566,11 @@ def atualizar_spray_Post():
         return flask.Response("Erro Ao Atualizar Spray!", status=500)
 
 
-
-
 @app.route('/deletar_spray', methods=['GET'])
 def deletar_spray_Get():
     return render_template("deletar_spray.html")
+
+
 @app.route('/deletar_spray', methods=['POST'])
 def deletar_spray_Post():
     try:
@@ -555,8 +586,7 @@ def deletar_spray_Post():
         return flask.Response("Erro ao Deletar Spray!", status=500)
 
 
-
-#Área de Servicos
+# Área de Servicos
 
 @app.route('/cadastrar_servico', methods=['GET'])
 def cadastrar_servico_Get():
@@ -567,7 +597,7 @@ def cadastrar_servico_Post():
         dados = request.get_json()
         idMaq = dados["idMaq"]
         maq = dados["maq"]
-        linha = dados["linha"]        
+        linha = dados["linha"]
         trecho = dados["trecho"]
         equip = dados["equip"]
         tipoLub = dados["tipoLub"]
@@ -577,18 +607,15 @@ def cadastrar_servico_Post():
         dataProxApli = dados["dataProxApli"]
         status = dados["status"]
         obs = dados["obs"]
-        
+
         servicos = Servicos(None, idMaq, maq, linha, trecho, equip,
                             tipoLub, tipo, prop, dataApli, dataProxApli, status, obs)
         ServDAO.insertServicos(servicos)
-        print(servicos)
+       
         return "Serviço Cadastrado Com Sucesso!"
 
     except:
         return flask.Response("Erro ao cadastrar serviço!", status=500)
-
-
-
 
 @app.route("/visualizar_servico", methods=['GET'])
 def visualizar_servicos_Get():
@@ -613,21 +640,36 @@ def visualizar_servicos_Get_1():
         obs = servicos.obs
 
         file = {'idServ': idServ,
-                'idMaq' : idMaq,
+                'idMaq': idMaq,
                 'maq': maq,
                 'linha': linha,
                 'trecho': trecho,
-                'equip' : equip,
+                'equip': equip,
                 'tipoLub': tipoLub,
-                'tipo' : tipo,
-                'prop' : prop,
+                'tipo': tipo,
+                'prop': prop,
                 'dataApli': dataApli,
-                'dataProxApli' : dataProxApli,
-                'status' : status,
+                'dataProxApli': dataProxApli,
+                'status': status,
                 'obs': obs
                 }
         resposta['files'].append(file)
     return(resposta)
+
+@app.route('/deletar_servico', methods=['POST'])
+def deletar_servico_Post():
+    try:
+        dados = request.get_json()
+        idServ = dados["idServ"]
+        idServ = int(idServ)
+        
+        servico = Servicos(idServ, None, None, None, None, None,
+                        None, None, None, None, None, None, None)
+        ServDAO.deleteServicos(servico)
+        return "Serviço Excluido Com Sucesso!"
+    except:
+        return flask.Response("Erro ao Deletar Serviço!", status=500)
+
 
 
 if __name__ == "__main__":

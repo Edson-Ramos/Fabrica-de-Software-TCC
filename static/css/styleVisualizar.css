@@ -1,6 +1,6 @@
 body{
     padding-top: 5vh;
-    background-image: url(../img/background.jpg);
+    background-color: rgb(43, 42, 42);
     background-size: cover;
     width: 100%;
 }

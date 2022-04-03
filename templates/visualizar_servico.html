@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleVisualizar.css')}}">
-   
+
 
     <title>Easylub</title>
 </head>
 
-<body>
+<body onload="getServicos()">
     <nav class="navbar fixed-top navbar-expand navbar-light">
         <a class="navbar-brand">
             <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
@@ -41,10 +41,10 @@
                             Máquinas
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/cadastrar_equipamentos">Cadastrar Máquinas</a></li>
-                            <li><a class="dropdown-item" href="/visualizar_equipamentos">Visualizar Máquinas</a></li>
-                            <li><a class="dropdown-item" href="/atualizar_equipamentos">Atualizar Máquinas</a></li>
-                            <li><a class="dropdown-item" href="/deletar_equipamentos">Deletar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/cadastrar_maquinas">Cadastrar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/visualizar_maquinas">Visualizar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/atualizar_maquinas">Atualizar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/deletar_maquinas">Deletar Máquinas</a></li>
 
                         </ul>
                     </div>
@@ -109,15 +109,10 @@
                     </thead>
                     <div>
                         <tbody id="tbody"></tbody>
-
                     </div>
                 </table>
-                <div>
-                    <button onclick="getServicos()" type="submit" id="btn" class="btn btn-primary">listar</button>
-                </div>
             </div>
         </section>
-
     </div>
 
 

@@ -3,6 +3,7 @@ const rota = 'https://easylub.herokuapp.com'
 
 
 
+
 function getServicos() {
 
     fetch(`${rota}/listar_servico`)
@@ -14,11 +15,11 @@ function getServicos() {
             createFile(file);
     })
 }
-var tbody = document.getElementById("tbody")
+
 
 function createFile(file) {
 
-
+    var tbody = document.getElementById("tbody")
     let tr = document.createElement("tr")
 
 
@@ -75,25 +76,26 @@ function createFile(file) {
     tdObs.className = "lista"
     tdObs.innerText = `${file.obs}`
 
-    let btExc = document.createElement("button")
-    btExc.className = "btn btn-danger"
+    var btDel = document.createElement("button")
+    btDel.className = "btn btn-default"
+    btDel.id = `${file.idServ}`
     let btIcon = document.createElement("img")
     btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
 
     let btAtt = document.createElement("button")
-    btAtt.className = "btn btn-danger"
+    btAtt.className = "btn btn-default"
     let btAttIcon = document.createElement("img")
     btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/arrow-repeat.svg"
 
     let btVisul = document.createElement("button")
-    btVisul.className = "btn btn-danger"
+    btVisul.className = "btn btn-default"
     let btVisulIcon = document.createElement("img")
     btVisulIcon.src = "/static/bootstrap/icons-1.8.1/icons/eye.svg"
 
     
 
 
-        btExc.appendChild(btIcon)
+        btDel.appendChild(btIcon)
         btAtt.appendChild(btAttIcon)
         btVisul.appendChild(btVisulIcon)
         tbody.appendChild(tr)
@@ -109,9 +111,61 @@ function createFile(file) {
         tr.appendChild(tdDataProxApli)
         tr.appendChild(tdStatus)
         tr.appendChild(tdObs)
-        tr.appendChild(btExc)
+        tr.appendChild(btDel)
         tr.appendChild(btAtt)
         tr.appendChild(btVisul)
-    
-}
 
+     document.querySelectorAll(".btn").forEach(function(button){
+    
+        button.addEventListener("click",(e) =>{
+            const idServ = button.id
+            console.log(idServ)
+            
+           var confirm = window.confirm("Tem Certeza Que Deseja Excluir Este Registro?")
+           confirm = true
+            if(confirm){
+                
+                let dado_servico = {
+                    idServ : idServ
+                }
+                
+                fetch("/deletar_servico",
+                {
+                    method : "POST",
+                    body:JSON.stringify(dado_servico),
+                    headers: 
+                    {
+                        "Content-Type" : "application/json"
+                    }
+                })
+                .then((resposta) => {
+                if (resposta.status == 200)
+                    return resposta.text()
+                else
+                    return alert("Erro Ao Deletar Serviço")
+                })
+                .then((respostaTexto) => {
+                    alert(respostaTexto)
+                    
+                })            
+            }else
+                alert("Operação Cancelada")
+                document.location.reload(true);
+            
+        })
+    })
+}
+    
+   
+    
+        
+
+
+
+
+
+    
+    
+
+
+ 
