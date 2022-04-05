@@ -12,7 +12,7 @@
     <title>Easylub</title>
 </head>
 
-<body>
+<body onload="createTable()">
     <nav class="navbar fixed-top navbar-expand navbar-light">
         <a class="navbar-brand">
             <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
@@ -85,7 +85,7 @@
         <section id="equipamentos">
             <div class="container-fluid agenda text-center margin">
                 <div class="titulo">
-                    <h1>Cadastrar serviços</h1>
+                    <h1>Atualizar Serviços</h1>
                 </div>
                 <form action="" class="form">
                     <div class="input-group input-group-sm mb-3" id="inpId">
@@ -106,7 +106,7 @@
                     </div>
 
                     <div class="input-group input-group-sm mb-3">
-                        <select class="form-select" aria-label="equip" id="equip">
+                        <select class="form-select" aria-label="equip" classa="equip" id="equip">
                             <option selected>Selecione o Equipamento</option>
                             <option value="Redutor">Redutor</option>
                             <option value="Mancal">Mancal</option>
@@ -115,15 +115,15 @@
                     </div>
                     <div class="checkBox mb-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipoLub" id="oleo" value="oleo" checked>
+                            <input class="form-check-input tipoLub" type="radio" name="tipoLub" id="oleo" value="oleo" checked>
                             <label class="form-check-label" for="oleo">Óleo</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipoLub" id="graxa" value="graxa">
+                            <input class="form-check-input tipoLub" type="radio" name="tipoLub" id="graxa" value="graxa">
                             <label class="form-check-label" for="graxa">Graxa</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipoLub" id="spray" value="spray">
+                            <input class="form-check-input tipoLub" type="radio" name="tipoLub" id="spray" value="spray">
                             <label class="form-check-label" for="spray">Spray</label>
                         </div>
                     </div>
@@ -142,8 +142,8 @@
                     </div>
                     <div class="checkBox mb-3">
                         <div class="">
-                            <input class="form-check-input" type="radio" name="status" id="Aguardando"
-                                value="Aguardando">
+                            <input class="form-check-input" type="radio" name="status" id="aguardando"
+                                value="aguardando">
                             <label class="form-check-label" for="Aguardando">Aguardando</label>
                             <input class="form-check-input" type="radio" name="status" id="Em execução"
                                 value="Em execução">
@@ -166,7 +166,7 @@
                 </form>
             </div>
             <div class="row-d">
-                <button onclick="cadastrar_servico()" type="submit" id="btn" class="btn btn-primary">Cadastrar</button>
+                <button onclick="atualizar_servico()" type="submit" id="btn" class="btn btn-primary">Atualizar</button>
             </div>
 
         </section>
@@ -184,7 +184,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <script src="{{url_for('static', filename='JScript/scriptCadastrarServico.js')}}"></script>
+    <script src="{{url_for('static', filename='JScript/scriptListaServicos.js')}}"></script>
 </footer>
 
 </html>

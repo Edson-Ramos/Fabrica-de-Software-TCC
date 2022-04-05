@@ -1,5 +1,5 @@
-const rota = "https://easylub.herokuapp.com"
-//const rota = "http://localhost:5000"
+//const rota = "https://easylub.herokuapp.com"
+const rota = "http://localhost:5000"
 const idMaq = document.querySelector("#idMaq")
 const oleo = document.querySelector("#oleo")
 const graxa = document.querySelector("#graxa")
@@ -74,7 +74,7 @@ graxa.addEventListener("click", (e) => {
         })
         .then(data => {
             for (arquivo of data.arquivos)
-                select.options[select.options.length] = new Option(`Tipo: ${arquivo.tipo} - Consistência: ${arquivo.consis}`, `${arquivo.id}`)
+                select.options[select.options.length ++] = new Option(`Tipo: ${arquivo.tipo} - Consistência: ${arquivo.consis}`, `${arquivo.id}`)
         }) 
     select.addEventListener("blur", (e) => {
 
@@ -240,7 +240,7 @@ function cadastrar_servico() {
         alert("Campos São Obrigatorios!")
         document.location.reload(true)
     }else{
-;
+
          const dados_servicos = {
             idMaq : idMaq.value,
             maq : maq.value,
@@ -248,7 +248,7 @@ function cadastrar_servico() {
             trecho : trecho.value,
             equip : equip.value,
             tipoLub : tipoLub,
-            tipo : "tipo",
+            tipo : tipo,
             prop : prop,
             dataApli : dataApli.value,
             dataProxApli : dataProxApli.value,
