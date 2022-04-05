@@ -280,10 +280,10 @@ def cadastrar_graxa_Get():
 def cadastrar_graxa_Post():
     try:
         infor = request.get_json()
-        id = infor['id']
+        idGra = infor['id']
         tipo = infor['tipo']
         consis = infor['consis']
-        graxa = Graxa(id, tipo, consis)
+        graxa = Graxa(idGra, tipo, consis)
         LubrificantesDAO.insertGraxa(graxa)
         return "Graxa Cadastrada Com Sucesso!"
     except:
@@ -378,10 +378,10 @@ def cadastrar_oleo_Get():
 def cadastrar_oleo_Post():
     try:
         infor = request.get_json()
-        id = infor['id']
+        idOleo = infor['id']
         tipo = infor['tipo']
         visco = infor["visco"]
-        oleo = Oleo(id, tipo, visco)
+        oleo = Oleo(idOleo, tipo, visco)
         LubrificantesDAO.insertOleo(oleo)
         return "Oleo Cadastrado Com Sucesso!"
     except:

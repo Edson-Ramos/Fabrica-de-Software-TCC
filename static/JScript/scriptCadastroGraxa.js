@@ -1,7 +1,7 @@
 function cadastro_graxa() {
     let id = document.getElementById("id").value
-    let tipo = document.getElementById("tipo")
-    let consis = document.getElementById("consis")
+    let tipo = document.getElementById("tipo").value
+    let consis = document.getElementById("consis").value
   
     if (id == "" || tipo == "" || consis == ""){
         alert("Todos os Campos São Obrigatorios !")
@@ -11,6 +11,7 @@ function cadastro_graxa() {
             tipo : tipo,
             consis : consis
         }
+        console.log(infor)
         fetch("/cadastrar_graxa", 
         {
             method: "POST",
