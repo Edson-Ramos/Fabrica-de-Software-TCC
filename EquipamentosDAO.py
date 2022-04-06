@@ -63,9 +63,9 @@ def deleteMaquinas(maquina):
         raise error
     
     
-def listMaqId(maquina):
+def listMaqCod(maquina):
     try:
-        sql_query = """ SELECT * FROM maquina WHERE idMaq = %s;"""%maquina.getIdMaq()
+        sql_query = """ SELECT * FROM maquina WHERE codMaq = "%s" """%maquina.getCodMaq()
         cursor.execute(sql_query)
         result = cursor.fetchall() 
         retorno = []

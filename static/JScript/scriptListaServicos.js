@@ -1,5 +1,5 @@
-//const rota = 'https://easylub.herokuapp.com'
-const rota = 'http://localhost:5000'
+const rota = 'https://easylub.herokuapp.com'
+//const rota = 'http://localhost:5000'
 var ids;
 var tipo;
 var prop;
@@ -26,13 +26,11 @@ function createFile(file) {
     let tr = document.createElement("tr")
 
 
-    let tdId = document.createElement("td")
-    tdId.className = "lista"
-    tdId.innerText = `${file.idServ}`
-
-    let tdIdMaq = document.createElement("td")
-    tdIdMaq.className = "lista"
-    tdIdMaq.innerText = `${file.idMaq}`
+    let tdIdSer = `${file.idServ}`
+   
+    let tdCodMaq = document.createElement("td")
+    tdCodMaq.className = "lista"
+    tdCodMaq.innerText = `${file.codMaq}`
 
     let tdMaq = document.createElement("td")
     tdMaq.className = "lista"
@@ -99,7 +97,7 @@ function createFile(file) {
     btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)
     tbody.appendChild(tr)
-    tr.appendChild(tdId)
+    tr.appendChild(tdCodMaq)
     tr.appendChild(tdMaq)
     tr.appendChild(tdLinha)
     tr.appendChild(tdTrecho)
@@ -192,8 +190,8 @@ function createTable() {
                         console.log(arquivo)
                 
                     
-                    let idMaq = document.getElementById("idMaq")
-                    idMaq.value = `${arquivo.idMaq}`
+                    let codMaq = document.getElementById("codMaq")
+                    codMaq.value = `${arquivo.codMaq}`
 
 
                     let maq = document.getElementById("maq")
@@ -228,9 +226,10 @@ function createTable() {
                     let select = document.querySelector("#sel")
                     prop = arquivo.prop
                     let tipo = arquivo.tipo
-                       if (prop != "" && tipo != ""){
+                    let codLub = arquivo.codLub
+                       if (prop != "" && tipo != "" && codLub !=""){
                         select.options.length = 0
-                        select.options[select.options.length] = new Option(`Tipo: ${tipo} - Viscosidade: ${prop}`, `${arquivo.id}`)
+                        select.options[select.options.length] = new Option(`Cód: ${codLub} - Tipo: ${tipo} - Viscosidade: ${prop}`, `${arquivo.id}`)
                     }
                     let dataApli = document.getElementById("dataAplic")
                     dataApli.value = `${arquivo.dataApli}`
@@ -253,25 +252,25 @@ function createTable() {
                      })
         })
 }
+var codMaq = document.getElementById("codMaq").value
+codMaq.addEventListener("blur", (e) => {
 
-idMaq.addEventListener("blur", (e) => {
-
-    let id_maq = {
-        idMaq: idMaq.value
+    let cod_maq = {
+        codMaq: codMaq.value
     }
     if (idMaq == "") {
-        return alert("Preencha Campo ID Máquina")
+        return alert("Preencha Campo Código da Máquina")
     } else {
-        const id_Maquina = {
+        const cod_Maquina = {
             method: "POST",
-            body: JSON.stringify(id_maq),
+            body: JSON.stringify(cod_maq),
             headers: {
                 "Content-Type": "application/json"
             }
         }
 
 
-        fetch(`${rota}/lista_equipamento_id`, id_Maquina)
+        fetch(`${rota}/lista_equipamento_id`, cod_Maquina)
             .then(function (response) {
                 response.json()
                     .then(function (data) {

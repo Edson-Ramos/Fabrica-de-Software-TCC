@@ -11,7 +11,7 @@
     <title>Easylub</title>
 </head>
 
-<body>
+<body onload="getSpray()">
    <nav class="navbar fixed-top navbar-expand navbar-light">
         <a class="navbar-brand">
             <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
@@ -87,7 +87,7 @@
                 <table class="table">
                     <thead>
                         <tr>      
-                        <th class="lista" scope="col">ID</th>
+                        <th class="lista" scope="col">Cód Spray</th>
                         <th class="lista" scope="col">Tipo</th>
                         <th class="lista" scope="col">Viscosidade</th>           
                         </tr>
@@ -96,9 +96,6 @@
                         <tbody class="lista" id="tbody"></tbody>   
                 </div> 
                 </table>
-               <div>
-                    <button onclick="getSpray()" type="submit" id="btn" class="btn btn-primary">listar</button>        
-                </div>
             </div>
         </section>
 

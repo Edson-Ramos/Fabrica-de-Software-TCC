@@ -10,8 +10,8 @@ def closeConnection():
 
 def insertGraxa(lubrificantes):
 	try:
-		sql_query = """INSERT INTO `graxa`(idGra , tipo, consis) VALUES (%s,%s,%s)"""
-		tuple = (lubrificantes.getIdGra(), lubrificantes.getTipo(), lubrificantes.getConsis())
+		sql_query = """INSERT INTO `graxa`(idGra, codGra, tipo, consis) VALUES (%s,%s,%s,%s)"""
+		tuple = (lubrificantes.getIdGra(), lubrificantes.getCodGra(), lubrificantes.getTipo(), lubrificantes.getConsis())
 		cursor.execute(sql_query, tuple)
 		connection.commit()
 		print("Registro foi inserido com sucesso na Base de Dados!")
@@ -22,8 +22,8 @@ def insertGraxa(lubrificantes):
 
 def updateGraxa(lubrificantes):
     try:
-        sql_query = """UPDATE `graxa` SET tipo=%s, consis=%s WHERE idGra = %s;"""
-        tuple = (lubrificantes.getTipo(), lubrificantes.getConsis(), lubrificantes.getIdGra())
+        sql_query = """UPDATE `graxa` SET codGra=%s, tipo=%s, consis=%s WHERE idGra = %s;"""
+        tuple = (lubrificantes.getCodGra(), lubrificantes.getTipo(), lubrificantes.getConsis(), lubrificantes.getIdGra())
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
@@ -39,7 +39,7 @@ def listGraxa():
         result = cursor.fetchall()
         retorno = []
         for us in result:
-            graxa = Graxa(us[0], us[1], us[2])
+            graxa = Graxa(us[0], us[1], us[2], us[3])
             retorno.append(graxa)
         return retorno
     except mysql.connector.Error as error:
@@ -67,7 +67,7 @@ def listGraxaId(lubrificantes):
         result = cursor.fetchall() 
         retorno = []
         for eq in result:
-            lub = Graxa(eq[0], eq[1], eq[2])
+            lub = Graxa(eq[0], eq[1], eq[2], eq[3])
             retorno.append(lub)
             return retorno
     except mysql.connector.Error as error:
@@ -79,8 +79,8 @@ def listGraxaId(lubrificantes):
     
 def insertOleo(lubrificantes):
     try:
-        sql_query = """INSERT INTO `oleo`(idOleo , tipo, visco) VALUES (%s,%s,%s)"""
-        tuple = (lubrificantes.getIdOleo(), lubrificantes.getTipo(), lubrificantes.getVisco())
+        sql_query = """INSERT INTO `oleo`(idOleo ,codoleo, tipo, visco) VALUES (%s,%s,%s,%s)"""
+        tuple = (lubrificantes.getIdOleo(), lubrificantes.getCodOleo(), lubrificantes.getTipo(), lubrificantes.getVisco())
         cursor.execute(sql_query, tuple)
         connection.commit()
         print("Registro foi inserido com sucesso na Base de Dados!")
@@ -91,8 +91,8 @@ def insertOleo(lubrificantes):
 
 def updateOleo(lubrificantes):
     try:
-        sql_query = """UPDATE `oleo` SET  tipo=%s, visco=%s WHERE idOleo = %s;"""
-        tuple = (lubrificantes.getTipo(), lubrificantes.getVisco(), lubrificantes.getIdOleo())
+        sql_query = """UPDATE `oleo` SET codOleo=%s, tipo=%s, visco=%s WHERE idOleo = %s;"""
+        tuple = (lubrificantes.getTipo(), lubrificantes.getCodOleo(), lubrificantes.getVisco(), lubrificantes.getIdOleo())
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
@@ -108,7 +108,7 @@ def listOleo():
         result = cursor.fetchall()
         retorno = []
         for us in result:
-            oleo = Oleo(us[0], us[1], us[2])
+            oleo = Oleo(us[0], us[1], us[2], us[3])
             retorno.append(oleo)
         return retorno
     except mysql.connector.Error as error:
@@ -118,12 +118,12 @@ def listOleo():
 
 def listOleoId(lubrificantes):
     try:
-        sql_query = """ SELECT * FROM oleo WHERE idOleo = %s;"""%lubrificantes.getIdOleo()
+        sql_query = """ SELECT * FROM oleo WHERE idOleo = "%s";"""%lubrificantes.getIdOleo()
         cursor.execute(sql_query)
         result = cursor.fetchall() 
         retorno = []
         for eq in result:
-            lub = Oleo(eq[0], eq[1], eq[2])
+            lub = Oleo(eq[0], eq[1], eq[2], eq[3])
             retorno.append(lub)
             return retorno
     except mysql.connector.Error as error:
@@ -151,8 +151,8 @@ def deleteOleo(lubrificantes):
     
 def insertSpray(lubrificantes):
     try:
-        sql_query = """INSERT INTO `spray`(idSpray , tipo, visco) VALUES (%s,%s,%s)"""
-        tuple = (lubrificantes.getIdSpray(), lubrificantes.getTipo(), lubrificantes.getVisco())
+        sql_query = """INSERT INTO `spray`(idSpray, codSpray, tipo, visco) VALUES (%s,%s,%s,%s)"""
+        tuple = (lubrificantes.getIdSpray(), lubrificantes.getCodSpray(), lubrificantes.getTipo(), lubrificantes.getVisco())
         cursor.execute(sql_query, tuple)
         connection.commit()
         print("Registro foi inserido com sucesso na Base de Dados!")
@@ -180,7 +180,7 @@ def listSpray():
         result = cursor.fetchall()
         retorno = []
         for us in result:
-            spray = Spray(us[0], us[1], us[2])
+            spray = Spray(us[0], us[1], us[2], us[3])
             retorno.append(spray)
         return retorno
     except mysql.connector.Error as error:
@@ -195,7 +195,7 @@ def listSprayId(lubrificantes):
         result = cursor.fetchall() 
         retorno = []
         for eq in result:
-            lub = Spray(eq[0], eq[1], eq[2])
+            lub = Spray(eq[0], eq[1], eq[2], eq[3])
             retorno.append(lub)
             return retorno
     except mysql.connector.Error as error:

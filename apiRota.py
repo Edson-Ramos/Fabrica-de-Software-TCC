@@ -185,19 +185,18 @@ def listar_maquinas_Post():
 def lista_equipamento_id_Get():
     resposta = {'arquivos': []}
 
-    id = request.get_json()
-    idMaq = id["idMaq"]
-    idMaq = int(idMaq)
-    equipamento = Equipamento(idMaq, None, None, None, None)
+    codMaq = request.get_json()
+    codMaq = codMaq["codMaq"]
+    equipamento = Equipamento(None, codMaq, None, None, None)      
 
-    for dados in EquipamentosDAO.listMaqId(equipamento):
+    for dados in EquipamentosDAO.listMaqCod(equipamento):
         idMaq = dados.idMaq
         codMaq = dados.codMaq
         linha = dados.linha,
         trecho = dados.trecho,
         nome = dados.nome
 
-        file = {'id': idMaq,
+        file = {'idMaq': idMaq,
                 'codMaq': codMaq,
                 'linha': linha,
                 'trecho': trecho,
@@ -274,16 +273,14 @@ def deletar_lubrificantes_Get():
 @app.route('/cadastrar_graxa', methods=['GET'])
 def cadastrar_graxa_Get():
     return render_template('cadastrar_graxa.html')
-
-
 @app.route('/cadastrar_graxa', methods=['POST'])
 def cadastrar_graxa_Post():
     try:
         infor = request.get_json()
-        idGra = infor['id']
+        codGra = infor['codGra']
         tipo = infor['tipo']
         consis = infor['consis']
-        graxa = Graxa(idGra, tipo, consis)
+        graxa = Graxa(None, codGra, tipo, consis)
         LubrificantesDAO.insertGraxa(graxa)
         return "Graxa Cadastrada Com Sucesso!"
     except:
@@ -293,18 +290,18 @@ def cadastrar_graxa_Post():
 @app.route('/visualizar_graxa', methods=['GET'])
 def visualizar_graxa_Get():
     return render_template('visualizar_graxa.html')
-
-
 @app.route("/listar_graxa", methods=['GET'])
 def listar_graxa_Post():
     resposta = {'arquivos': []}
 
     for dados in LubrificantesDAO.listGraxa():
-        idGRa = dados.idGra
+        idGra = dados.idGra
+        codGra = dados.codGra
         tipo = dados.tipo
         consis = dados.consis
 
-        file = {'id': idGRa,
+        file = {'idGra' : idGra,
+                'codGra': codGra,
                 'tipo': tipo,
                 'consis': consis}
 
@@ -316,17 +313,18 @@ def listar_graxa_Post():
 def lista_graxa_id_Get():
     resposta = {'arquivos': []}
 
-    id = request.get_json()
-    idGra = id["idGra"]
-    idGra = int(idGra)
-    lubrificantes = Graxa(idGra, None, None)
+    idGra = request.get_json()
+    idGra = idGra["idGra"]
+    lubrificantes = Graxa(idGra, None, None, None)
 
     for dados in LubrificantesDAO.listGraxaId(lubrificantes):
         idGra = dados.idGra,
+        codGra = dados.codGra,
         tipo = dados.tipo,
         consis = dados.consis
 
-        file = {'id': idGra,
+        file = {'idGra': idGra,
+                'codGra' : codGra,
                 'tipo': tipo,
                 'consis': consis
                 }
@@ -343,11 +341,11 @@ def atualizar_graxa_Post():
         dados = request.get_json()
         idGra = dados["idGra"]
         idGra = int(idGra)
+        codGra = dados["codGra"]
         tipo = dados["tipo"]
         consis = dados["consis"]
 
-        graxa = Graxa(idGra, tipo, consis)
-        print(graxa)
+        graxa = Graxa(None, codGra, tipo, consis)
         LubrificantesDAO.updateGraxa(graxa)
         return "Graxa Atualizada com Sucesso!"
     except:
@@ -363,7 +361,7 @@ def deletar_graxa_Post():
         dado = request.get_json()
         idGra = dado["idGra"]
         idGra = int(idGra)
-        graxa = Graxa(idGra, None, None)
+        graxa = Graxa(idGra, None, None, None)
         LubrificantesDAO.deleteGraxa(graxa)
         return "Graxa Excluida com Sucesso!"
     except:
@@ -378,10 +376,10 @@ def cadastrar_oleo_Get():
 def cadastrar_oleo_Post():
     try:
         infor = request.get_json()
-        idOleo = infor['id']
+        codOleo = infor['codOleo']
         tipo = infor['tipo']
         visco = infor["visco"]
-        oleo = Oleo(idOleo, tipo, visco)
+        oleo = Oleo(None, codOleo, tipo, visco)
         LubrificantesDAO.insertOleo(oleo)
         return "Oleo Cadastrado Com Sucesso!"
     except:
@@ -397,10 +395,12 @@ def visualizar_oleo_Post():
 
     for dados in LubrificantesDAO.listOleo():
         idOleo = dados.idOleo
+        codOleo = dados.codOleo
         tipo = dados.tipo
         visco = dados.visco
 
-        file = {'id': idOleo,
+        file = {'idOleo' : idOleo,
+                'codOleo': codOleo,
                 'tipo': tipo,
                 'visco': visco}
 
@@ -415,14 +415,16 @@ def lista_oleo_id_Get():
     id = request.get_json()
     idOleo = id["idOleo"]
     idOleo = int(idOleo)
-    lubrificantes = Oleo(idOleo, None, None)
+    lubrificantes = Oleo(idOleo,None, None, None)
 
     for dados in LubrificantesDAO.listOleoId(lubrificantes):
         idOleo = dados.idOleo,
+        codOleo = dados.codOleo,
         tipo = dados.tipo,
         visco = dados.visco
 
-        file = {'id': idOleo,
+        file = {'idOleo': idOleo,
+                'codOleo' : codOleo,
                 'tipo': tipo,
                 'visco': visco
                 }
@@ -439,10 +441,11 @@ def atualizar_oleo_Post():
         dados = request.get_json()
         idOleo = dados["idOleo"]
         idOleo = int(idOleo)
+        codOleo = dados["codOleo"]
         tipo = dados["tipo"]
         visco = dados["visco"]
 
-        oleo = Oleo(idOleo, tipo, visco)
+        oleo = Oleo(idOleo, codOleo, tipo, visco)
         LubrificantesDAO.updateOleo(oleo)
         return "Óleo Atualizado com Sucesso!"
     except:
@@ -457,7 +460,7 @@ def deletar_oleo_Post():
         dado = request.get_json()
         idOleo = dado["idOleo"]
         idOleo = int(idOleo)
-        oleo = Oleo(idOleo, None, None)
+        oleo = Oleo(idOleo,None, None, None)
         LubrificantesDAO.deleteOleo(oleo)
         return "Oleo Excluido Com Sucesso!"
     except:
@@ -472,10 +475,10 @@ def cadastro_spray_Get():
 def cadastro_spray_Post():
     try:
         infor = request.get_json()
-        idSpray = infor['id']
+        codSpray = infor['codSpray']
         tipo = infor['tipo']
         visco = infor['visco']
-        spray = Spray(idSpray, tipo, visco)
+        spray = Spray(None, codSpray, tipo, visco)
         LubrificantesDAO.insertSpray(spray)
         return "Spray Cadastrar Com Sucesso!"
     except:
@@ -490,30 +493,35 @@ def visualizar_spray_Post():
 
     for dados in LubrificantesDAO.listSpray():
         idSpray = dados.idSpray
+        codSpray = dados.codSpray
         tipo = dados.tipo
         visco = dados.visco
 
-        file = {'id': idSpray,
+        file = {'idSpray': idSpray,
+                'codSpray': codSpray,
                 'tipo': tipo,
                 'visco': visco}
         resposta['arquivos'].append(file)
+        print(resposta)
         return(resposta)
 
 @app.route('/lista_spray_id', methods=['POST', 'GET'])
 def lista_spray_id_Get():
     resposta = {'arquivos': []}
 
-    id = request.get_json()
-    idSpray = id["idSpray"]
+    idSpray = request.get_json()
+    idSpray = idSpray["idSpray"]
     idSpray = int(idSpray)
-    lubrificantes = Spray(idSpray, None, None)
+    lubrificantes = Spray(idSpray, None, None, None)
 
     for dados in LubrificantesDAO.listSprayId(lubrificantes):
         idSpray = dados.idSpray,
+        codSpray = dados.codSpray,
         tipo = dados.tipo,
         visco = dados.visco
 
-        file = {'id': idSpray,
+        file = {'idSpray': idSpray,
+                'codSpray': codSpray,
                 'tipo': tipo,
                 'visco': visco
                 }
@@ -566,12 +574,13 @@ def cadastrar_servico_Get():
 def cadastrar_servico_Post():
     try:
         dados = request.get_json()
-        idMaq = dados["idMaq"]
+        codMaq = dados["codMaq"]
         maq = dados["maq"]
         linha = dados["linha"]
         trecho = dados["trecho"]
         equip = dados["equip"]
         tipoLub = dados["tipoLub"]
+        codLub = dados["codLub"]
         tipo = dados["tipo"]
         prop = dados["prop"]
         dataApli = dados["dataApli"]
@@ -579,8 +588,8 @@ def cadastrar_servico_Post():
         status = dados["status"]
         obs = dados["obs"]
 
-        servicos = Servicos(None, idMaq, maq, linha, trecho, equip,
-                            tipoLub, tipo, prop, dataApli, dataProxApli, status, obs)
+        servicos = Servicos(None, codMaq, maq, linha, trecho, equip,
+                            tipoLub, codLub, tipo, prop, dataApli, dataProxApli, status, obs)       
         ServDAO.insertServicos(servicos)
        
         return "Serviço Cadastrado Com Sucesso!"
@@ -597,7 +606,7 @@ def visualizar_servicos_Get_1():
 
     for servicos in ServDAO.listAllServicos():
         idServ = servicos.idServ
-        idMaq = servicos.idMaq
+        codMaq = servicos.codMaq
         maq = servicos.maq
         linha = servicos.linha
         trecho = servicos.trecho
@@ -611,7 +620,7 @@ def visualizar_servicos_Get_1():
         obs = servicos.obs
 
         file = {'idServ': idServ,
-                'idMaq': idMaq,
+                'codMaq': codMaq,
                 'maq': maq,
                 'linha': linha,
                 'trecho': trecho,
@@ -636,17 +645,18 @@ def listar_servico_id():
     idServ = id["idServ"]
     idServ = int(idServ)
     servicos = Servicos(idServ, None, None, None, None,
-                        None, None, None, None, None, None, None, None)
+                        None, None, None, None, None, None, None, None, None)
     
 
     for servicos in ServDAO.listServId(servicos):
         idServ = servicos.idServ
-        idMaq = servicos.idMaq
+        codMaq = servicos.codMaq
         maq = servicos.maq
         linha = servicos.linha
         trecho = servicos.trecho
         equip = servicos.equip
         tipoLub = servicos.tipoLub
+        codLub = servicos.codLub
         tipo = servicos.tipo
         prop = servicos.prop
         dataApli = servicos.dataApli
@@ -658,12 +668,13 @@ def listar_servico_id():
         dataP = dataProxApli.strftime("%Y-%m-%d")
 
         file = {'idServ': idServ,
-                'idMaq': idMaq,
+                'codMaq': codMaq,
                 'maq': maq,
                 'linha': linha,
                 'trecho': trecho,
                 'equip': equip,
                 'tipoLub': tipoLub,
+                'codLub' : codLub,
                 'tipo': tipo,
                 'prop': prop,
                 'dataApli': dataA,
@@ -682,12 +693,13 @@ def atualizar_servico_Post():
     try:
         dados = request.get_json()
         idServ = dados["idServ"]
-        idMaq = dados["idMaq"]
+        codMaq = dados["codMaq"]
         maq = dados["maq"]
         linha = dados["linha"]
         trecho = dados["trecho"]
         equip = dados["equip"]
         tipoLub = dados["tipoLub"]
+        codLub = dados["codLub"]
         tipo = dados["tipo"]
         prop = dados["prop"]
         dataApli = dados["dataApli"]
@@ -695,8 +707,8 @@ def atualizar_servico_Post():
         status = dados["status"]
         obs = dados["obs"]
 
-        servicos = Servicos(idServ, idMaq, maq, linha, trecho, equip,
-                            tipoLub, tipo, prop, dataApli, dataProxApli, status, obs)
+        servicos = Servicos(idServ, codMaq, maq, linha, trecho, equip,
+                            tipoLub, codLub, tipo, prop, dataApli, dataProxApli, status, obs)
         ServDAO.updateServicos(servicos)
        
         return "Serviço Atualizado Com Sucesso!"
@@ -712,7 +724,7 @@ def deletar_servico_Post():
         idServ = int(idServ)
         
         servico = Servicos(idServ, None, None, None, None, None,
-                        None, None, None, None, None, None, None)
+                        None, None, None, None, None, None, None, None)
         ServDAO.deleteServicos(servico)
         return "Serviço Excluido Com Sucesso!"
     except:

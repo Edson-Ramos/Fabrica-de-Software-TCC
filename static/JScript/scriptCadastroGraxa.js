@@ -1,13 +1,13 @@
 function cadastro_graxa() {
-    let id = document.getElementById("id").value
+    let codGra = document.getElementById("codGra").value
     let tipo = document.getElementById("tipo").value
     let consis = document.getElementById("consis").value
   
-    if (id == "" || tipo == "" || consis == ""){
+    if (codGra == "" || tipo == "" || consis == ""){
         alert("Todos os Campos São Obrigatorios !")
     }else{
         let infor = {
-            id : id,
+            codGra : codGra,
             tipo : tipo,
             consis : consis
         }
