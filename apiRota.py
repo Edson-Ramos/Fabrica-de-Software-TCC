@@ -36,7 +36,7 @@ def cadastrar_usuarios_Post():
         UsuarioDAO.insertUser(usuario)
         return "Usuário Cadastrado Com Sucesso!"
 
-    except:
+    except User.Does:
         return flask.Response("Erro Ao Cadastrar o usuário!", status=500)
 
 
@@ -480,8 +480,6 @@ def deletar_oleo_Post():
         return flask.Response("Erro ao Excluir Óleo", status=500)
 
 
-
-
 @app.route('/cadastrar_spray', methods=['GET'])
 def cadastro_spray_Get():
     return render_template('cadastrar_spray.html')
@@ -591,6 +589,8 @@ def deletar_spray_Post():
 @app.route('/cadastrar_servico', methods=['GET'])
 def cadastrar_servico_Get():
     return render_template('cadastrar_servico.html')
+
+
 @app.route('/cadastrar_servico', methods=['POST'])
 def cadastrar_servico_Post():
     try:
@@ -611,15 +611,18 @@ def cadastrar_servico_Post():
         servicos = Servicos(None, idMaq, maq, linha, trecho, equip,
                             tipoLub, tipo, prop, dataApli, dataProxApli, status, obs)
         ServDAO.insertServicos(servicos)
-       
+
         return "Serviço Cadastrado Com Sucesso!"
 
     except:
         return flask.Response("Erro ao cadastrar serviço!", status=500)
 
+
 @app.route("/visualizar_servico", methods=['GET'])
 def visualizar_servicos_Get():
     return render_template('visualizar_servico.html')
+
+
 @app.route("/listar_servico", methods=['GET'])
 def visualizar_servicos_Get_1():
     resposta = {'files': []}
@@ -656,20 +659,20 @@ def visualizar_servicos_Get_1():
         resposta['files'].append(file)
     return(resposta)
 
+
 @app.route('/deletar_servico', methods=['POST'])
 def deletar_servico_Post():
     try:
         dados = request.get_json()
         idServ = dados["idServ"]
         idServ = int(idServ)
-        
+
         servico = Servicos(idServ, None, None, None, None, None,
-                        None, None, None, None, None, None, None)
+                           None, None, None, None, None, None, None)
         ServDAO.deleteServicos(servico)
         return "Serviço Excluido Com Sucesso!"
     except:
         return flask.Response("Erro ao Deletar Serviço!", status=500)
-
 
 
 if __name__ == "__main__":
