@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+//const rota = 'https://easylub.herokuapp.com'
+const rota = 'http://localhost:5000'
+
+
+=======
 const rota = 'https://easylub.herokuapp.com'
 //const rota = 'http://localhost:5000'
 var ids;
@@ -5,6 +11,7 @@ var tipo;
 var prop;
 const select = document.querySelector("#sel")
  
+>>>>>>> 38efb6db8f2abd5ce4a08bff47b6c23d102e65e5
 
 
 function getServicos() {
