@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleVisualizar.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleCadastro.css')}}">
 
 
     <title>Easylub</title>
 </head>
 
-<body onload="getServicos()">
+<body onload="createTable()">
     <nav class="navbar fixed-top navbar-expand navbar-light">
         <a class="navbar-brand">
             <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
@@ -34,7 +34,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
+               <li class="nav-item">
                     <div class="dropdown show">
                         <a class="btn btn-secundary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,42 +84,96 @@
     <div class="container">
         <section id="equipamentos">
             <div class="container-fluid agenda text-center margin">
-
-                <table class="table">
-                    <div class="titulo">
-                        <h1>Visualizar Serviços</h1>
+                <div class="titulo">
+                    <h1>Atualizar Serviços</h1>
+                </div>
+                <form action="" class="form">
+                    <div class="input-group input-group-sm mb-3" id="inpId">
+                        <span class="input-group-text" id="basic-addon1">Cód Máquina</span>
+                        <input id="codMaq" type="text" class="form-control">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="basic-addon1">Máquina:</span>
+                        <output id="maq" type="text" class="form-control">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="basic-addon1">linha: </span>
+                        <output id="linha" type="text" class="form-control" aria-label="Server">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="basic-addon1">Trecho: </span>
+                        <output id="trecho" type="text" class="form-control" aria-label="Server">
                     </div>
 
-                    <thead>
-                        <tr>
-                            <th class="lista" scope="col">Cód Máquina</th>
-                            <th class="lista" scope="col">Máquina</th>
-                            <th class="lista" scope="col">Linha</th>
-                            <th class="lista" scope="col">Trecho</th>
-                            <th class="lista" scope="col">Equipamentos</th>
-                            <th class="lista" scope="col">Lubrificante</th>
-                            <th class="lista" scope="col">Tipo de Lubrificante</th>
-                            <th class="lista" scope="col">Propriedade</th>
-                            <th class="lista" scope="col">Aplicação</th>
-                            <th class="lista" scope="col">Próx. aplicação</th>
-                            <th class="lista" scope="col">Status</th>
-                            <th class="lista" scope="col">Observação</th>
-
-                        </tr>
-                    </thead>
-                    <div>
-                        <tbody id="tbody"></tbody>
+                    <div class="input-group input-group-sm mb-3">
+                        <select class="form-select" aria-label="equip" classa="equip" id="equip">
+                            <option selected>Selecione o Equipamento</option>
+                            <option value="Redutor">Redutor</option>
+                            <option value="Mancal">Mancal</option>
+                            <option value="Correntes">Corrente</option>
+                        </select>
                     </div>
-                </table>
+                    <div class="checkBox mb-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input tipoLub" type="radio" name="tipoLub" id="oleo" value="oleo" checked>
+                            <label class="form-check-label" for="oleo">Óleo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input tipoLub" type="radio" name="tipoLub" id="graxa" value="graxa">
+                            <label class="form-check-label" for="graxa">Graxa</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input tipoLub" type="radio" name="tipoLub" id="spray" value="spray">
+                            <label class="form-check-label" for="spray">Spray</label>
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <select class="form-select" aria-label="Default select example" id = "sel">
+                            <option selected>Selecione o Lubrificante</option>
+                        </select>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="basic-addon1">Data de aplicação</span>
+                        <input id="dataAplic" type="date" class="form-control" aria-label="Server">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="basic-addon1">Próxima Aplicação</span>
+                        <input id="dataProAplic" type="date" class="form-control" aria-label="Server">
+                    </div>
+                    <div class="checkBox mb-3">
+                        <div class="">
+                            <input class="form-check-input" type="radio" name="status" id="aguardando"
+                                value="aguardando">
+                            <label class="form-check-label" for="Aguardando">Aguardando</label>
+                            <input class="form-check-input" type="radio" name="status" id="Em execução"
+                                value="Em execução">
+                            <label class="form-check-label" for="execução">Em execução</label>
+                            <input class="form-check-input" type="radio" name="status" id="Atrasado"
+                                value="Atrasado">
+                            <label class="form-check-label" for="inlineRadio1">Atrasado</label>
+                             <input class="form-check-input" type="radio" name="status" id="Concluido"
+                                value="Concluido">
+                            <label class="form-check-label" for="inlineRadio1">Concluido</label>
+                        </div>
+                    </div>
+                    <div class="obs mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">
+                            <h5>Observação</h5>
+                        </label>
+                        <textarea class="form-control" id="obs" rows="3"></textarea>
+                    </div>
+
+                </form>
             </div>
+            <div class="row-d">
+                <button onclick="atualizar_servico()" type="submit" id="btn" class="btn btn-primary">Atualizar</button>
+            </div>
+
         </section>
     </div>
 
-
 </body>
 <footer class="text-center">
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

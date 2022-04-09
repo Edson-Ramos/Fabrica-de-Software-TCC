@@ -2,15 +2,15 @@
 
 function atualizar_Graxa() {    
     
-    let idGra = document.getElementById("id").value
+    let codGra = document.getElementById("codGra").value
     let tipo= document.getElementById("tipo").value
     let consis = document.getElementById("consis").value 
    
-    if (idGra == "" || tipo == "" || consis == ""){
+    if (codGra == "" || tipo == "" || consis == ""){
         return alert("Todos os Campos São Obrigatorios!")
     }else{
      let dados_graxa = {
-        idGra : idGra,
+        codGra : codGra,
         tipo: tipo,
         consis: consis
     }    

@@ -1,12 +1,13 @@
 class Servicos:
-	def __init__(self, idServ, idMaq, maq, linha, trecho, equip, tipoLub, tipo, prop, dataApli, dataProxApli, status, obs):
+	def __init__(self, idServ, codMaq, maq, linha, trecho, equip, tipoLub, cod, tipo, prop, dataApli, dataProxApli, status, obs):
 		self.idServ = idServ
-		self.idMaq = idMaq
+		self.codMaq = codMaq
 		self.maq = maq
 		self.linha = linha
 		self.trecho = trecho
 		self.equip = equip
 		self.tipoLub = tipoLub
+		self.codLub = cod
 		self.tipo = tipo
 		self.prop = prop
 		self.dataApli = dataApli
@@ -19,10 +20,10 @@ class Servicos:
 	def setIdServ(self, idServ):
 		self.idServ = idServ
 
-	def getIdMaq(self):
-		return self.idMaq
-	def setIdMaq(self, idMaq):
-		self.idMaq = idMaq
+	def getCodMaq(self):
+		return self.codMaq
+	def setCodMaq(self, codMaq):
+		self.codMaq = codMaq
 
 	def getMaq(self):
 		return self.maq
@@ -48,6 +49,11 @@ class Servicos:
 		return self.tipoLub
 	def setTipoLub(self, tipoLub):
 		self.tipoLub = tipoLub
+  
+	def getCodLub(self):
+		return self.codLub
+	def setCodLub(self, codLub):
+		self.codLub = codLub
   
 	def getTipo(self):
 		return self.tipo

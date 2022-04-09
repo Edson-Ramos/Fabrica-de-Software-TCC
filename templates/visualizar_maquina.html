@@ -11,7 +11,7 @@
     <title>Easylub</title>
 </head>
 
-<body>
+<body onload="getMaquinas()">
     <nav class="navbar fixed-top navbar-expand navbar-light ">
         <a class="navbar-brand">
             <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
@@ -99,9 +99,6 @@
                         <tbody class="lista" id="tbody"></tbody>
                     </div>
                 </table>
-            </div>
-            <div>
-                <button onclick="getMaquinas()" type="submit" id="btn" class="btn btn-primary">listar</button>
             </div>
         </section>
 

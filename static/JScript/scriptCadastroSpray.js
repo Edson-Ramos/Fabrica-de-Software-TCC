@@ -1,14 +1,14 @@
 function cadastro_spray(){
-    id = document.getElementById("id").value
+    codSpray = document.getElementById("codSpray").value
     tipo = document.getElementById("tipo").value
     visco = document.getElementById("visco").value
    
 // precisa verificar o campo visco e id vai ser do tipo int ou string
-    if (id == "" || tipo == "" || visco == ""){
+    if (codSpray == "" || tipo == "" || visco == ""){
         return alert("Todos os Campos São Obrigatorios!")
     }else{
         let infor = {
-            id: id,
+            codSpray: codSpray,
             tipo: tipo,
             visco: visco
         }

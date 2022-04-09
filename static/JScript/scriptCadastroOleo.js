@@ -1,14 +1,14 @@
 function cadastro_oleo(){
-    id = document.getElementById("id").value
+    codOleo = document.getElementById("codOleo").value
     tipo = document.getElementById("tipo").value
     visco = document.getElementById("visco").value
     
 // precisa verificar o campo visco e id vai ser do tipo int ou string
-    if (id == "" || tipo == "" || visco == ""){
+    if (codOleo == "" || tipo == "" || visco == ""){
         return alert("Todos os Campos São Obrigatorios!")
     }else{
         let infor = {
-            id: id,
+            codOleo: codOleo,
             tipo: tipo,
             visco: visco
         }
