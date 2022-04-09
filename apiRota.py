@@ -380,7 +380,7 @@ def deletar_graxa_Post():
 
 @app.route('/cadastrar_oleo', methods=['GET'])
 def cadastrar_oleo_Get():
-   return render_template('cadastrar_oleo.html')
+    return render_template('cadastrar_oleo.html')
 
 
 @app.route('/cadastrar_oleo', methods=['POST'])
@@ -673,10 +673,6 @@ def visualizar_servicos_Get_1():
     return(resposta)
 
 
-<< << << < HEAD
-== == == =
-
-
 @app.route('/listar_servico_id', methods=["GET", "POST"])
 def listar_servico_id():
     resposta = {'files': []}
@@ -759,9 +755,6 @@ def atualizar_servico_Post():
         return flask.Response("Erro ao Atualizar Serviço!", status=500)
 
 
->>>>>> > 38efb6db8f2abd5ce4a08bff47b6c23d102e65e5
-
-
 @app.route('/deletar_servico', methods=['POST'])
 def deletar_servico_Post():
     try:
@@ -769,18 +762,13 @@ def deletar_servico_Post():
         idServ = dados["idServ"]
         idServ = int(idServ)
 
-        servico = Servicos(idServ, None, None, None, None, None,
-<< << << < HEAD
-                           None, None, None, None, None, None, None)
+        servico = Servicos(idServ, None, None, None, None,
+                           None, None, None, None, None, None, None, None)
 
-
-== == == =
-                        None, None, None, None, None, None, None, None)
->> >>>> > 38efb6db8f2abd5ce4a08bff47b6c23d102e65e5
         ServDAO.deleteServicos(servico)
         return "Serviço Excluido Com Sucesso!"
     except:
-        return flask.Response("Erro ao Deletar Serviço!", status = 500)
+        return flask.Response("Erro ao Deletar Serviço!", status=500)
 
 
 if __name__ == "__main__":
