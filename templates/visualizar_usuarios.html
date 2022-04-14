@@ -29,7 +29,6 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/cadastrar_usuarios">Cadastrar usuários</a></li>
                             <li><a class="dropdown-item" href="/visualizar_usuarios">Listar usuários</a></li>
-                            <li><a class="dropdown-item" href="/atualizar_usuarios">Atualizar Usuarios</a></li>
                             <li><a class="dropdown-item" href="/deletar_usuarios">Deletar Usuários</a></li>
                         </ul>
                     </div>
@@ -83,12 +82,11 @@
     </nav>
     <div class="container">
         <section id="funcionarios">
-
             <div class="container-fluid agenda text-center margin">
-                <br>
-                <h1 class="titulo">Visualizar Usuários</h1>
-                <br>
-                <table class="table">
+                 <table class="table">
+                     <div class="titulo">
+                         <h1 >Visualizar Usuários</h1>
+                     </div>
                     <thead>
                       <tr>                        
                         <th class="lista" scope="col">ID</th>
@@ -99,9 +97,10 @@
                       </tr>
                     </thead>
                     <div>
-                        <tbody class="lista" id="tbody"></tbody>   
+                        <tbody id="tbody"></tbody>   
                     </div>
                 </table>
+            </div>
         </section>
     </div>
  

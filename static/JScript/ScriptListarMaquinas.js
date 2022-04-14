@@ -39,13 +39,32 @@ function listaMaquinas(arquivo){
     tdNome.className = "lista"
     tdNome.innerText = `${arquivo.nome}`
 
+    
+    // Botões de Excluir
+    var btDel = document.createElement("button")
+    btDel.className = "btn btn-default btnDel"
+    btDel.id = `${arquivo.idMaq}`
+    let btIcon = document.createElement("img")
+    btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
 
+    //Botões de Atualizar
+    let btAtt = document.createElement("button")
+    btAtt.className = "btn btn-default btnAtt"
+    btAtt.id = `${arquivo.idMaq}`
+    btAtt.onclick = "teste()"
+    let btAttIcon = document.createElement("img")
+    btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/arrow-repeat.svg"
+
+    btDel.appendChild(btIcon)
+    btAtt.appendChild(btAttIcon)
     tbody.appendChild(tr)
-    tr.appendChild(tdId);
+    tr.appendChild(tdId)
     tr.appendChild(tdCod)
-    tr.appendChild(tdLinha);
-    tr.appendChild(tdTrecho);
-    tr.appendChild(tdNome);
+    tr.appendChild(tdLinha)
+    tr.appendChild(tdTrecho)
+    tr.appendChild(tdNome)
+    tr.appendChild(btDel)
+    tr.appendChild(btAtt)
     
 
 }

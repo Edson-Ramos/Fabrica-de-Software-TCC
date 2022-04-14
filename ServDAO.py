@@ -2,6 +2,7 @@ from servico import Servicos
 import mysql.connector
 from connection import getConnection, closeConnection
 
+
 connection = getConnection()[0]
 cursor = getConnection()[1]
 
@@ -12,7 +13,7 @@ def closeConnection():
 
 def insertServicos(servicos):
     try:
-        sql_query = """INSERT INTO `servicos`(idServ, codMaq, maq, linha, trecho, equip, tipoLub, cod, tipo, prop, dataApli, dataProxApli, status, obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        sql_query = """INSERT INTO `servicos`(idServ, codMaq, maq, linha, trecho, equip, tipoLub, codLub, tipo, prop, dataApli, dataProxApli, status, obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
         tuple = (servicos.getIdServ(), servicos.getCodMaq(), servicos.getMaq(), servicos.getLinha(), servicos.getTrecho(), servicos.getEquip(), servicos.getTipoLub(),servicos.getCodLub(), servicos.getTipo(), servicos.getProp(),
                  servicos.getDataApli(), servicos.getDataProxApli(), servicos.getStatus(), servicos.getObs())
         cursor.execute(sql_query, tuple)
@@ -26,7 +27,7 @@ def insertServicos(servicos):
 
 def updateServicos(servicos):
     try:
-        sql_query = """UPDATE `servicos` SET codMaq=%s, maq=%s, linha=%s, trecho=%s, equip =%s, tipoLub=%s, cod = %s, tipo=%s, prop=%s, dataApli=%s, dataProxApli=%s, status=%s, obs=%s WHERE idServ=%s;"""
+        sql_query = """UPDATE `servicos` SET codMaq=%s, maq=%s, linha=%s, trecho=%s, equip =%s, tipoLub=%s, codLub = %s, tipo=%s, prop=%s, dataApli=%s, dataProxApli=%s, status=%s, obs=%s WHERE idServ=%s;"""
         tuple = (servicos.getCodMaq(), servicos.getMaq(), servicos.getLinha(), servicos.getTrecho(), servicos.getEquip(), servicos.getTipoLub(),servicos.getCodLub(), servicos.getTipo(), servicos.getProp(),
                  servicos.getDataApli(), servicos.getDataProxApli(), servicos.getStatus(), servicos.getObs(), servicos.getIdServ())
         cursor.execute(sql_query, tuple)
@@ -37,10 +38,9 @@ def updateServicos(servicos):
         print("Falha ao atualizar registro de usuário no banco de dados!")
         raise error
 
-
 def listAllServicos():
     try:
-        sql_query = "SELECT idServ, codMaq, maq, linha, trecho ,equip ,tipoLub, cod,tipo ,prop, DATE_FORMAT(dataApli, '%d/%m/%Y' ), DATE_FORMAT(dataProxApli, '%d/%m/%Y'),status ,obs from servicos"
+        sql_query = "SELECT idServ, codMaq, maq, linha, trecho ,equip ,tipoLub, codLub ,tipo ,prop, DATE_FORMAT(dataApli, '%d/%m/%Y' ), DATE_FORMAT(dataProxApli, '%d/%m/%Y'),status ,obs from servicos"
         cursor.execute(sql_query)
         result = cursor.fetchall()
         retorno = []
@@ -73,11 +73,10 @@ def listServId(servicos):
 def deleteServicos(servicos):
     try:
         sql_query = """DELETE FROM `servicos` WHERE idServ = %s;""" % servicos.getIdServ()
-        id_get = servicos.getIdServ()
         cursor.execute(sql_query)
         connection.commit()
-        return "Id: ", id_get, " Excluido com Sucesso!"
+        print(" Excluido com Sucesso!")
     except mysql.connector.Error as error:
         connection.rollback()
         print("Falha ao deletar registro da base de dados!")
-    raise error
+        raise error

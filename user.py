@@ -1,4 +1,5 @@
 class User:
+         
 	def __init__(self, id, nome, email, senha, tipo):
 		self.id = id
 		self.nome = nome
@@ -7,6 +8,18 @@ class User:
 		self.tipo = tipo
 		
 		
+	@property
+	def is_authenticated(self):
+			return True
+
+	@property
+	def is_active(self):
+		return True
+
+	@property
+	def is_anonymous(self):
+		return False
+  
 
 	def getId(self):
 		return self.id
@@ -33,4 +46,4 @@ class User:
 	def setTipo(self, tipo):
 		self.tipo = tipo
 
-	
+

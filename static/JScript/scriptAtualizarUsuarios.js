@@ -1,5 +1,5 @@
 
-
+/*
 function atualizar_equipamento() {    
     let nome = document.getElementById("nome").value
     let id = document.getElementById("id").value   
@@ -37,4 +37,41 @@ function atualizar_equipamento() {
         alert(respostaTexto)
     })
     
+}*/
+
+function createTable(){
+    var idUser = JSON.parse(sessionStorage.getItem('chave'))
+    console.log(idUser)
+
+    const id_user={
+        idUser : idUser
+    }
+    const dado_usuario = {
+        method: "POST",
+        body: JSON.stringify(id_user),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    fetch(`${rota}/lista_usuario_id`, dado_usuario)
+        .then(function(response){
+            response.json()
+                .then(function(data){
+                    for (dados of data.files)
+
+                    var id = dados.idUser;
+                    var nome = document.getElementById("#nome")
+                    nome.value = `${data.nome}`
+                    var email = document.getElementById("#email")
+                    email.value = `${data.email}`
+                    var senha = document.getElementById("#senha")
+                    senha.value = `${data.senha}`
+                    var cSenha = document.getElementById("#cSenha")
+                    cSenha.value = `${data.senha}`
+                    var tipo = document.getElementById("#tipo")
+                    tipo.value = `${data.tipo}`
+
+
+                })
+        })
 }

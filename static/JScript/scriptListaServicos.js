@@ -1,17 +1,13 @@
-<<<<<<< HEAD
 //const rota = 'https://easylub.herokuapp.com'
 const rota = 'http://localhost:5000'
 
-
-=======
-const rota = 'https://easylub.herokuapp.com'
-//const rota = 'http://localhost:5000'
-var ids;
-var tipo;
-var prop;
+const codMaq = document.querySelector("#codMaq")
+const oleo = document.querySelector("#oleo")
+const graxa = document.querySelector("#graxa")
+const spray = document.querySelector("#spray")
 const select = document.querySelector("#sel")
- 
->>>>>>> 38efb6db8f2abd5ce4a08bff47b6c23d102e65e5
+var idLub =""
+
 
 
 function getServicos() {
@@ -122,9 +118,8 @@ function createFile(file) {
     //pesquisa de botão de delete e captura do evento de click
 
     document.querySelectorAll(".btnDel").forEach(function (btnDel) {
-
         btnDel.addEventListener("click", (e) => {
-            const idServ = btnDel.id
+            let idServ = btnDel.id
 
             var confirm = window.confirm("Tem Certeza Que Deseja Excluir Este Registro?")
 
@@ -134,31 +129,31 @@ function createFile(file) {
                     idServ: idServ
                 }
 
-                fetch("/deletar_servico", {
-                        method: "POST",
-                        body: JSON.stringify(dado_servico),
-                        headers: {
+            fetch("/deletar_servico", {
+                    method: "POST",
+                    body: JSON.stringify(dado_servico),
+                    headers: {
                             "Content-Type": "application/json"
-                        }
-                    })
-                    .then((resposta) => {
-                        if (resposta.status == 200)
-                            return resposta.text()
-                        else
-                            return alert("Erro Ao Deletar Serviço")
-                    })
-                    .then((respostaTexto) => {
-                        alert(respostaTexto)
+                    }
+                })
+                .then((resposta) => {
+                    if (resposta.status == 200)
+                        return resposta.text()
+                    else
+                        return alert("Erro Ao Deletar Serviço")
+                })
+                .then((respostaTexto) => {
+                    alert(respostaTexto)
 
-                    })
+                })
             } else
                 alert("Operação Cancelada")
-            document.location.reload(true);
+                 document.location.reload(true);
 
         })
     })
 
-    //esquisa de botão de atualizar e captura do evento de click
+    //Pesquisa de botão de atualizar e captura do evento de click
 
     document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
         btnAtt.addEventListener("click", (e) => {
@@ -194,10 +189,9 @@ function createTable() {
             response.json()
                 .then(function (data) {
                     for (arquivo of data.files)
-                        console.log(arquivo)
                 
                     
-                    let codMaq = document.getElementById("codMaq")
+                    var codMaq = document.getElementById("codMaq")
                     codMaq.value = `${arquivo.codMaq}`
 
 
@@ -258,14 +252,13 @@ function createTable() {
                     obs.value = `${arquivo.obs}`
                      })
         })
-}
-var codMaq = document.getElementById("codMaq").value
-codMaq.addEventListener("blur", (e) => {
+
+        codMaq.addEventListener("blur", (e) => {
 
     let cod_maq = {
         codMaq: codMaq.value
     }
-    if (idMaq == "") {
+    if (codMaq == "") {
         return alert("Preencha Campo Código da Máquina")
     } else {
         const cod_Maquina = {
@@ -288,6 +281,7 @@ codMaq.addEventListener("blur", (e) => {
     }
 
 })
+
 function createMaq(arquivo) {
 
     let maq = document.getElementById("maq")
@@ -312,13 +306,13 @@ oleo.addEventListener("click", (e) => {
         })
         .then(data => {
             for (arquivo of data.arquivos)
-                select.options[select.options.length] = new Option(`Tipo: ${arquivo.tipo} - Viscosidade: ${arquivo.visco}`, `${arquivo.id}`)
+                select.options[select.options.length] = new Option(`Tipo: ${arquivo.tipo} - Viscosidade: ${arquivo.visco}`, `${idLub = arquivo.idOleo}`)
         })
 
     select.addEventListener("blur", (e) => {
 
         let id_lub = {
-            idOleo: select.value
+            idOleo: idLub
         }
 
         const id_lubrificante = {
@@ -335,7 +329,8 @@ oleo.addEventListener("click", (e) => {
                 response.json()
                 .then(function (data){
                     for (arquivo of data.arquivos)
-                        tipo = String(arquivo.tipo) 
+                    codLub = `${arquivo.codOleo}`
+                        tipo = `${arquivo.tipo}` 
                         prop = arquivo.visco
                     
 
@@ -357,12 +352,12 @@ graxa.addEventListener("click", (e) => {
         })
         .then(data => {
             for (arquivo of data.arquivos)
-                select.options[select.options.length ++] = new Option(`Tipo: ${arquivo.tipo} - Consistência: ${arquivo.consis}`, `${arquivo.id}`)
+                select.options[select.options.length ++] = new Option(`Tipo: ${arquivo.tipo} - Consistência: ${arquivo.consis}`, `${idLub = arquivo.idGra}`)
         }) 
     select.addEventListener("blur", (e) => {
 
         let id_lub = {
-            idGra: select.value
+            idGra: idLub
         }
 
         const id_lubrificante = {
@@ -379,7 +374,8 @@ graxa.addEventListener("click", (e) => {
                 response.json()
                 .then(function (data){
                     for (arquivo of data.arquivos)
-                        tipo = String(arquivo.tipo) 
+                    codLub = `${arquivo.codGra}`
+                        tipo = `${arquivo.tipo}` 
                         prop = arquivo.consis
 
                 })
@@ -398,12 +394,12 @@ spray.addEventListener("click", (e) => {
         })
         .then(data => {
             for (arquivo of data.arquivos)
-                select.options[select.options.length] = new Option(`Tipo: ${arquivo.tipo} - Viscosidade: ${arquivo.visco}`, `${arquivo.id}`)
+                select.options[select.options.length] = new Option(`Tipo: ${arquivo.tipo} - Viscosidade: ${arquivo.visco}`, `${idLub = arquivo.idSpray}`)
         })
     select.addEventListener("blur", (e) => {
       
         let id_lub = {
-            idSpray: select.value
+            idSpray: idLub
         }
 
         const id_lubrificante = {
@@ -420,7 +416,8 @@ spray.addEventListener("click", (e) => {
                 response.json()
                 .then(function (data){
                     for (arquivo of data.arquivos)
-                        tipo = String(arquivo.tipo) 
+                        codLub = `${arquivo.codSpray}`
+                        tipo = `${arquivo.tipo}`
                         prop = arquivo.visco
 
                 })
@@ -428,10 +425,14 @@ spray.addEventListener("click", (e) => {
     })
     
 })
+}
+
+
 
 function atualizar_servico() {
 
     let idServ = JSON.parse(sessionStorage.getItem('chave'))
+    let codMaq = document.getElementById("codMaq")
     let maq = document.getElementById("maq")
     let linha = document.getElementById("linha")
     let trecho = document.getElementById("trecho")
@@ -465,19 +466,20 @@ function atualizar_servico() {
         equip = ""
     }
 
-    if (idMaq.value == "" || equip.value == "" || tipoLub == "" || dataApli.value == "" || dataProxApli.value == "" || status == "") {
+    if (codMaq.value == "" || equip.value == "" || tipoLub == "" || dataApli.value == "" || dataProxApli.value == "" || status == "") {
         alert("Campos São Obrigatorios!")
         document.location.reload(true)
     }else{
 
          const dados_servicos = {
             idServ : idServ,
-            idMaq : idMaq.value,
+            codMaq : codMaq.value,
             maq : maq.value,
             linha : linha.value,
             trecho : trecho.value,
             equip : equip.value,
             tipoLub : tipoLub,
+            codLub : codLub,
             tipo : tipo,
             prop : prop,
             dataApli : dataApli.value,

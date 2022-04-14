@@ -1,4 +1,4 @@
-import flask
+import flask 
 from flask.globals import request
 from flask.templating import render_template
 import UsuarioDAO
@@ -9,19 +9,45 @@ from equipamento import Equipamento
 from user import User
 from lubrificantes import Oleo, Graxa, Spray
 from servico import Servicos
+from flask_login import LoginManager, login_user
+
 
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
+login_manager = LoginManager()
+login_manager.init_app(app)
+app.secret_key = '_5#y2L"F4Q8z\n\xec]/'
 
-
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 # Área Usuários
+
+@app.route("/login")
+def login():
+    return render_template('login.html')
+
+
+@app.route('/login', methods=['POST'])
+def login_post():
+    email = request.form['email']
+    senha = request.form['password']
+    listUsuario = UsuarioDAO.listAllUsers()
+
+    for usuario in listUsuario:
+        if email == usuario.getEmail():
+            if senha == usuario.getSenha():
+                login_user(email)
+                return render_template('cadastrar_usuario')
+            else:
+                return "Email ou Senha Invalido"
+
 
 @app.route('/cadastrar_usuarios', methods=['GET'])
 def cadastrar_usuario_Get():
     return render_template('cadastrar_usuario.html')
-
 
 @app.route('/cadastrar_usuarios', methods=['POST'])
 def cadastrar_usuarios_Post():
@@ -39,11 +65,9 @@ def cadastrar_usuarios_Post():
     except User.Does:
         return flask.Response("Erro Ao Cadastrar o usuário!", status=500)
 
-
 @app.route("/visualizar_usuarios", methods=['GET'])
 def visualizar_usuarios_Get():
     return render_template('visualizar_usuarios.html')
-
 
 @app.route("/listar", methods=['GET'])
 def visualizar_Usuarios_Get_1():
@@ -67,6 +91,30 @@ def visualizar_Usuarios_Get_1():
 
     return(resposta)
 
+@app.route('/listar_usuario_id', methods=["GET", "POST"])
+def listar_usuario_id():
+    resposta = {'files': []}
+
+    idUser = request.get_json()
+    idUser = idUser["idUser"]
+    idUser = int(idUser)
+    usuario = User(idUser, None, None, None, None)
+
+    for user in UsuarioDAO.listUserIp(usuario):
+        nome = user.nome
+        email = user.email
+        senha = user.senha
+        tipo = user.tipo
+
+        file = {'idUser': idUser,
+                'nome': nome,
+                'email': email,
+                'senha': senha,
+                'tipo': tipo,
+                
+                }
+        resposta['files'].append(file)
+    return(resposta)
 
 @app.route('/atualizar_usuarios', methods=['GET'])
 def atualizar_usuarios_Get():
@@ -98,37 +146,16 @@ def deletar_usuaros_Get():
 @app.route('/deletar_usuarios', methods=['POST'])
 def deletar_usuarios_Post():
     try:
-        stringId = request.get_json()
-        id = stringId['idUsuario']
-        intId = int(id)
-        idusuario = User(intId, None, None, None, None)
-
-        if id != True:
-            UsuarioDAO.deleteUser(idusuario)
+        dado = request.get_json()
+        idUser = dado["idUser"]
+        idUser = int(idUser)
+        idusuario = User(idUser, None, None, None, None)
+        UsuarioDAO.deleteUser(idusuario)
+        
         return "Usuario Excluido!"
 
     except:
         return flask.Response("Erro ao Deletar Usuário!", status=500)
-
-
-@app.route("/", methods=['GET'])
-def login():
-    return render_template('login.html')
-
-
-@app.route('/login', methods=['POST'])
-def login_post():
-    email = request.form['email']
-    senha = request.form['password']
-    listUsuario = UsuarioDAO.listAllUsers()
-
-    for usuario in listUsuario:
-        if email == usuario.getEmail():
-            if senha == usuario.getSenha():
-                return render_template('cadastro_maquinas.html')
-            else:
-                return "<h1>Senha Não Confere!</h1>"
-
 
 # Área Equipamentos
 
@@ -525,9 +552,9 @@ def visualizar_spray_Post():
                 'codSpray': codSpray,
                 'tipo': tipo,
                 'visco': visco}
+        
         resposta['arquivos'].append(file)
-        print(resposta)
-        return(resposta)
+    return(resposta)
 
 
 @app.route('/lista_spray_id', methods=['POST', 'GET'])
@@ -648,6 +675,7 @@ def visualizar_servicos_Get_1():
         trecho = servicos.trecho
         equip = servicos.equip
         tipoLub = servicos.tipoLub
+        codLub = servicos.codLub
         tipo = servicos.tipo
         prop = servicos.prop
         dataApli = servicos.dataApli
@@ -662,6 +690,7 @@ def visualizar_servicos_Get_1():
                 'trecho': trecho,
                 'equip': equip,
                 'tipoLub': tipoLub,
+                'codLub' : codLub,
                 'tipo': tipo,
                 'prop': prop,
                 'dataApli': dataApli,
@@ -731,6 +760,7 @@ def atualizar_servico_Post():
     try:
         dados = request.get_json()
         idServ = dados["idServ"]
+        idServ = int(idServ)
         codMaq = dados["codMaq"]
         maq = dados["maq"]
         linha = dados["linha"]
@@ -761,9 +791,10 @@ def deletar_servico_Post():
         dados = request.get_json()
         idServ = dados["idServ"]
         idServ = int(idServ)
+        print(idServ)
 
         servico = Servicos(idServ, None, None, None, None,
-                           None, None, None, None, None, None, None, None)
+                           None, None, None, None, None, None, None, None, None)
 
         ServDAO.deleteServicos(servico)
         return "Serviço Excluido Com Sucesso!"

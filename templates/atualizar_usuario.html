@@ -12,7 +12,7 @@
     <title>Easylub</title>
 </head>
 
-<body>
+<body onload="createTable()" >
     <nav class="navbar fixed-top navbar-expand navbar-light " >
         <a class="navbar-brand">
             <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
@@ -28,7 +28,6 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/cadastrar_usuarios">Cadastrar usuários</a></li>
                             <li><a class="dropdown-item" href="/visualizar_usuarios">Listar usuários</a></li>
-                            <li><a class="dropdown-item" href="/atualizar_usuarios">Atualizar Usuarios</a></li>
                             <li><a class="dropdown-item" href="/deletar_usuarios">Deletar Usuários</a></li>                   
                         </ul>
                     </div>
@@ -84,9 +83,7 @@
                 <form action="">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Nome Completo:</span>
-                        <input id="nome" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
-                        <span class="input-group-text" id="basic-addon1">ID:</span>
-                        <input id="id" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+                        <input id="nome" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">                        
                       </div>
                       <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Email: </span>
@@ -123,7 +120,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="{{url_for('static', filename='JScript/scriptAtualizarUsuarios.js')}}"></script>
+    <script src="{{url_for('static', filename='JScript/scriptListaUsuarios.js')}}"></script>
 </footer>
 
 </html>

@@ -79,7 +79,7 @@ def listGraxaId(lubrificantes):
     
 def insertOleo(lubrificantes):
     try:
-        sql_query = """INSERT INTO `oleo`(idOleo ,codoleo, tipo, visco) VALUES (%s,%s,%s,%s)"""
+        sql_query = """INSERT INTO `oleo`(idOleo ,codOleo, tipo, visco) VALUES (%s,%s,%s,%s)"""
         tuple = (lubrificantes.getIdOleo(), lubrificantes.getCodOleo(), lubrificantes.getTipo(), lubrificantes.getVisco())
         cursor.execute(sql_query, tuple)
         connection.commit()
