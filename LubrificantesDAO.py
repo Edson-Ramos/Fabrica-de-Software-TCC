@@ -163,8 +163,8 @@ def insertSpray(lubrificantes):
 
 def updateSpray(lubrificantes):
     try:
-        sql_query = """UPDATE `spray` SET tipo=%s, visco=%s WHERE idSpray = %s;"""
-        tuple = (lubrificantes.getTipo(), lubrificantes.getVisco(), lubrificantes.getIdSpray())
+        sql_query = """UPDATE `spray` SET codSpray=%s, tipo=%s, visco=%s WHERE idSpray = %s;"""
+        tuple = (lubrificantes.getCodSpray(), lubrificantes.getTipo(), lubrificantes.getVisco(), lubrificantes.getIdSpray())
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")

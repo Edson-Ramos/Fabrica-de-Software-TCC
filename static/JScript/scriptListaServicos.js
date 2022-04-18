@@ -20,6 +20,10 @@ function getServicos() {
             for (file of data.files)
                 createFile(file);
         })
+        .then(data => {
+            del()
+            att()
+        })
 }
 
 
@@ -84,6 +88,7 @@ function createFile(file) {
     var btDel = document.createElement("button")
     btDel.className = "btn btn-default btnDel"
     btDel.id = `${file.idServ}`
+    btDel.title = "Excluir"
     let btIcon = document.createElement("img")
     btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
 
@@ -91,6 +96,7 @@ function createFile(file) {
     let btAtt = document.createElement("button")
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${file.idServ}`
+    btAtt.title = "Atualizar"
     let btAttIcon = document.createElement("img")
     btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/arrow-repeat.svg"
 
@@ -114,56 +120,6 @@ function createFile(file) {
     tr.appendChild(tdObs)
     tr.appendChild(btDel)
     tr.appendChild(btAtt)
-
-    //pesquisa de botão de delete e captura do evento de click
-
-    document.querySelectorAll(".btnDel").forEach(function (btnDel) {
-        btnDel.addEventListener("click", (e) => {
-            let idServ = btnDel.id
-
-            var confirm = window.confirm("Tem Certeza Que Deseja Excluir Este Registro?")
-
-            if (confirm) {
-
-                let dado_servico = {
-                    idServ: idServ
-                }
-
-            fetch("/deletar_servico", {
-                    method: "POST",
-                    body: JSON.stringify(dado_servico),
-                    headers: {
-                            "Content-Type": "application/json"
-                    }
-                })
-                .then((resposta) => {
-                    if (resposta.status == 200)
-                        return resposta.text()
-                    else
-                        return alert("Erro Ao Deletar Serviço")
-                })
-                .then((respostaTexto) => {
-                    alert(respostaTexto)
-
-                })
-            } else
-                alert("Operação Cancelada")
-                 document.location.reload(true);
-
-        })
-    })
-
-    //Pesquisa de botão de atualizar e captura do evento de click
-
-    document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
-        btnAtt.addEventListener("click", (e) => {
-            idServ = btnAtt.id
-            sessionStorage.setItem('chave', idServ );   
-            window.location.href = "atualizar_servico"
-           
-
-        })
-    })
 }
 
  
@@ -270,7 +226,7 @@ function createTable() {
         }
 
 
-        fetch(`${rota}/lista_equipamento_id`, cod_Maquina)
+        fetch(`${rota}/lista_equipamento_cod`, cod_Maquina)
             .then(function (response) {
                 response.json()
                     .then(function (data) {
@@ -510,4 +466,59 @@ function atualizar_servico() {
 
 
 
+}
+
+function del(){
+
+    //pesquisa de botão de delete e captura do evento de click
+
+    document.querySelectorAll(".btnDel").forEach(function (btnDel) {
+        btnDel.addEventListener("click", (e) => {
+            let idServ = btnDel.id
+
+            var confirm = window.confirm("Tem Certeza Que Deseja Excluir Este Registro?")
+
+            if (confirm) {
+
+                let dado_servico = {
+                    idServ: idServ
+                }
+
+            fetch("/deletar_servico", {
+                    method: "POST",
+                    body: JSON.stringify(dado_servico),
+                    headers: {
+                            "Content-Type": "application/json"
+                    }
+                })
+                .then((resposta) => {
+                    if (resposta.status == 200)
+                        return resposta.text()
+                    else
+                        return alert("Erro Ao Deletar Serviço")
+                })
+                .then((respostaTexto) => {
+                    alert(respostaTexto)
+                    document.location.reload(true);
+                })
+            } else
+                alert("Operação Cancelada")
+                 document.location.reload(true);
+
+        })
+    })
+}
+
+function att(){
+         //Pesquisa de botão de atualizar e captura do evento de click
+
+    document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
+        btnAtt.addEventListener("click", (e) => {
+            idServ = btnAtt.id
+            sessionStorage.setItem('chave', idServ );   
+            window.location.href = "atualizar_servico"
+           
+
+        })
+    })
 }

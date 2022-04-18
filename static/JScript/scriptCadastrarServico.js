@@ -28,7 +28,7 @@ codMaq.addEventListener("blur", (e) => {
         }
 
 
-        fetch(`${rota}/lista_equipamento_id`, cod_Maquina)
+        fetch(`${rota}/lista_equipamento_cod`, cod_Maquina)
             .then(function (response) {
                 response.json()
                     .then(function (data) {

@@ -8,7 +8,9 @@
         <meta name="generator" content="Edson Ramos  1.0">
         
         
-		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+		
+        <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleCadastro.css')}}">
        
 
 
@@ -18,20 +20,21 @@
         
         
                
-        <div id="login-container">
-            <h1>Login</h1>
-            <form action="" id="login-form" method="POST">
-                <div class="full-box">
-                    <label for="email">E-mail</label>
-                    <input type="email" name="email" id="email" placeholder="Digite Seu E-mail" autocomplete="off" data-min-length="3" data-required data-email-validate>
+        <div class="container" id="login-container">
+           <div class="titulo">
+                <h1>Login</h1>
+           </div>
+            <form class="form" id="login-form">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Email:</span>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Digite Seu E-mail" autocomplete="off" data-min-length="3" data-required data-email-validate>
                 </div>
-                <div class="full-box">
-                    <label for="password">Senha</label>
-                    <input type="password" name="password" id="password" placeholder="Digite Sua Senha" data-required data-password-validate>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Senha:</span>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Digite Sua Senha" data-required data-password-validate>
                 </div>
-                <div class="full-box">
-                    <a href="#" id="forgot-pass">Esqueceu a Senha?</a>
-                    <input type="submit" id="btn-login" value="Login">
+                 <div class="row-d">
+                    <button onclick="logar()" type="submit" id="btn" class="btn btn-primary">Login</button>
                 </div>
             </form>         
         </div>

@@ -7,15 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleVisualizar.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{{url_for('static', filename='JScript/checkAuth.js')}}"></script>
 
     <title>Easylub</title>
 </head>
 
-<body onload="getMaquinas()">
-    <nav class="navbar fixed-top navbar-expand navbar-light ">
-        <a class="navbar-brand">
-            <img class="logo" src="/static/img/engrenagem-verde.png" width="30px">
-            <button class="btn btn-outline-success me-2" type="button" href="index.html">Easylub</button>
+<body onload="getMaquinas(); validaction()">
+    <nav class="navbar fixed-top navbar-expand navbar-light">
+        <a class="navbar-brand">           
+            <button class="btn btn-outline-success me-2" type="button" href="">Easylub</button>
         </a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -28,7 +29,6 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/cadastrar_usuarios">Cadastrar usuários</a></li>
                             <li><a class="dropdown-item" href="/visualizar_usuarios">Listar usuários</a></li>
-                            <li><a class="dropdown-item" href="/deletar_usuarios">Deletar Usuários</a></li>
                         </ul>
                     </div>
                 </li>
@@ -40,9 +40,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/cadastrar_maquinas">Cadastrar Máquinas</a></li>
-                            <li><a class="dropdown-item" href="/visualizar_maquinas">Visualizar Máquinas</a></li>
-                            <li><a class="dropdown-item" href="/atualizar_maquinas">Atualizar Máquinas</a></li>
-                            <li><a class="dropdown-item" href="/deletar_maquinas">Deletar Máquinas</a></li>
+                            <li><a class="dropdown-item" href="/visualizar_maquinas">Listar Máquinas</a></li>
 
                         </ul>
                     </div>
@@ -56,10 +54,8 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/cadastrar_lubrificantes">Cadastrar Lubrificantes</a>
                             </li>
-                            <li><a class="dropdown-item" href="/visualizar_lubrificantes">Listar Lubrificantes</a></li>
-                            <li><a class="dropdown-item" href="/atualizar_lubrificantes">Atualizar Lubrificantes</a>
+                            <li><a class="dropdown-item" href="/visualizar_lubrificantes">Listar Lubrificantes</a>
                             </li>
-                            <li><a class="dropdown-item" href="deletar_lubrificantes">Deletar Lubrificantes</a></li>
                         </ul>
                     </div>
                 </li>
@@ -71,7 +67,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/cadastrar_servico">Cadastrar Serviços</a></li>
-                            <li><a class="dropdown-item" href="/visualizar_servico">Visualizar Serviços</a></li>
+                            <li><a class="dropdown-item" href="/visualizar_servico">Listar Serviços</a></li>
                         </ul>
                     </div>
                 </li>
@@ -81,21 +77,22 @@
     <div class="container">
         <section id="equipamentos">
             <div class="container-fluid agenda text-center margin">
-                <div class="titulo">
+                
+                <table class="table">
+                    <div class="titulo">
                     <h1>Visualizar Máquinas</h1>
                 </div>
-                <table class="table">
+
                     <thead>
                         <tr>
-                            <th class="lista" scope="col">ID</th>
-                            <th class="lista" scope="col">Código</th>
-                            <th class="lista" scope="col">Linha</th>
-                            <th class="lista" scope="col">Trecho</th>
-                            <th class="lista" scope="col">Nome</th>
+                            <th class="toplista" scope="col">Código</th>
+                            <th class="toplista" scope="col">Linha</th>
+                            <th class="toplista" scope="col">Trecho</th>
+                            <th class="toplista" scope="col">Nome</th>
                         </tr>
                     </thead>
                     <div>
-                        <tbody class="lista" id="tbody"></tbody>
+                        <tbody id="tbody"></tbody>
                     </div>
                 </table>
             </div>

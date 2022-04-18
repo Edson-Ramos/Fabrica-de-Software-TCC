@@ -1,6 +1,7 @@
 body{
+    
+    background-image: url(../img/lubrificante-1.jpg);
     padding-top: 5vh;
-    background-color: rgb(43, 42, 42);
     background-size: cover;
     width: 100%;
 }
@@ -13,7 +14,7 @@ body{
 }
 .container{
     
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(69, 136, 166, 0.239);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     max-width: fit-content;
@@ -31,10 +32,13 @@ body{
     left: 1px;
 }
 .titulo{
-    color: rgb(243, 243, 240)
+    color: rgb(8, 9, 10)
+}
+.navbar-brand{
+    margin-left: 20px;
 }
 .navbar{
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(69, 136, 166, 0.239);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -45,9 +49,15 @@ body{
     background-color: rgb(115, 255, 255);
 }
 .lista{
-    color: rgb(250, 248, 161)
+    color: rgb(253, 253, 253);
+    font-size: 11px;
+    font-style: oblique;
+    font-weight: bold;
 }
-
+.toplista{
+    color:rgb(13, 13, 14);
+    font-size: 18px;
+}
 .bnt-custom{
     padding: 1px, 15px, 3px, 2px;
     border-radius: 50px;
@@ -56,4 +66,3 @@ body{
     padding: 8px;
     background: white;
 }
-

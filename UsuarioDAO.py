@@ -47,6 +47,21 @@ def listAllUsers():
         print("Falha ao carregar a lista de usuários")
         raise error
 
+def listUserEmail(usuario):
+    try:
+        sql_query = """SELECT * FROM usuarios WHERE email = "%s" """%usuario.getEmail()
+        cursor.execute(sql_query)
+        result = cursor.fetchall()
+        retorno = []
+        for user in result:
+            usuario = User(user[0], user[1], user[2],user[3], user[4],)
+            retorno.append(usuario)            
+            return retorno
+    except mysql.connector.Error as error:
+        connection.rollback()
+        print("Falha ao Carregar Registro")
+        raise error
+
 def listUserIp(usuario):
     try:
         sql_query = " SELECT * from usuarios WHERE id = %s;"%usuario.getId()

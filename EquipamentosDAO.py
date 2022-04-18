@@ -34,6 +34,36 @@ def atualizarMaquinas(maquina):
         print("Falha ao Atualizar Máquina!")
         raise error
 
+def listMaqCod(maquina):
+    try:
+        sql_query = """ SELECT * FROM maquina WHERE codMaq = "%s" """%maquina.getCodMaq()
+        cursor.execute(sql_query)
+        result = cursor.fetchall() 
+        retorno = []
+        for eq in result:
+            maq = Equipamento(eq[0], eq[1], eq[2], eq[3], eq[4])
+            retorno.append(maq)
+            return retorno
+    except mysql.connector.Error as error:
+        connection.rollback()
+        print("Falha ao Carregar Registro")
+        raise error
+
+def listMaqId(maquina):
+    try:
+        sql_query = """ SELECT * FROM maquina WHERE idMaq = %s """%maquina.getIdMaq()
+        cursor.execute(sql_query)
+        result = cursor.fetchall() 
+        retorno = []
+        for eq in result:
+            maq = Equipamento(eq[0], eq[1], eq[2], eq[3], eq[4])
+            retorno.append(maq)
+            return retorno
+    except mysql.connector.Error as error:
+        connection.rollback()
+        print("Falha ao Carregar Registro")
+        raise error
+
 def listarMaquinas():
     try:
         sql_query = "SELECT * FROM maquina"
@@ -62,18 +92,3 @@ def deleteMaquinas(maquina):
         print("Falha ao Deletar Registro da Base de Dados")
         raise error
     
-    
-def listMaqCod(maquina):
-    try:
-        sql_query = """ SELECT * FROM maquina WHERE codMaq = "%s" """%maquina.getCodMaq()
-        cursor.execute(sql_query)
-        result = cursor.fetchall() 
-        retorno = []
-        for eq in result:
-            maq = Equipamento(eq[0], eq[1], eq[2], eq[3], eq[4])
-            retorno.append(maq)
-            return retorno
-    except mysql.connector.Error as error:
-        connection.rollback()
-        print("Falha ao Carregar Registro")
-        raise error

@@ -9,47 +9,70 @@ from equipamento import Equipamento
 from user import User
 from lubrificantes import Oleo, Graxa, Spray
 from servico import Servicos
-from flask_login import LoginManager, login_user
-
-
+from flask import Flask, jsonify, request
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
+from cryptography.hazmat.primitives import serialization
+import datetime
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
-login_manager = LoginManager()
-login_manager.init_app(app)
-app.secret_key = '_5#y2L"F4Q8z\n\xec]/'
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)
+private_key = open('.ssh/key', 'r').read()
+prkey = serialization.load_ssh_private_key(private_key.encode(), password = b'87361542')
+
+public_key = open('.ssh/key.pub', 'r').read()
+pubkey = serialization.load_ssh_public_key(public_key.encode())
+
+app.config["JWT_PRIVATE_KEY"] = prkey
+app.config["JWT_PUBLIC_KEY"] = public_key
+app.config['JWT_ALGORITHM'] = 'RS256'
+
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(minutes=60)
+
+jwt = JWTManager(app)
+
 # Área Usuários
 
-@app.route("/login")
+@app.route("/checkAuth")
+@jwt_required()
+def check():
+    return "OK"
+
+@app.route("/")
 def login():
     return render_template('login.html')
 
 
 @app.route('/login', methods=['POST'])
 def login_post():
-    email = request.form['email']
-    senha = request.form['password']
-    listUsuario = UsuarioDAO.listAllUsers()
-
-    for usuario in listUsuario:
-        if email == usuario.getEmail():
-            if senha == usuario.getSenha():
-                login_user(email)
-                return render_template('cadastrar_usuario')
-            else:
-                return "Email ou Senha Invalido"
+    dado = request.get_json()
+    email = dado['email']
+    senha = dado['password']
+    user = User(None, None, email, senha, None)
+    
+    for user in UsuarioDAO.listUserEmail(user):
+        idDB = user.id
+        nomeBD = user.nome
+        emailBD = user.email
+        senhaBD = user.senha
+        tipoBD = user.tipo
+        
+        if email == emailBD and senha == senhaBD:
+            access_token = create_access_token(identity = emailBD)
+            token = jsonify(access_token = access_token)
+            
+            return (token)
+        else:
+            return flask.Response("Email ou Senha Incorretos", status=500)
 
 
 @app.route('/cadastrar_usuarios', methods=['GET'])
 def cadastrar_usuario_Get():
     return render_template('cadastrar_usuario.html')
 
-@app.route('/cadastrar_usuarios', methods=['POST'])
+@app.route('/cadastrar_usuario', methods=['POST'])
+
 def cadastrar_usuarios_Post():
     try:
         dados = request.get_json()
@@ -57,12 +80,12 @@ def cadastrar_usuarios_Post():
         email = dados['email']
         senha = dados['senha']
         tipo = dados['tipo']
-
+        print(dados)
         usuario = User(None, nome, email, senha, tipo)
         UsuarioDAO.insertUser(usuario)
         return "Usuário Cadastrado Com Sucesso!"
 
-    except User.Does:
+    except:
         return flask.Response("Erro Ao Cadastrar o usuário!", status=500)
 
 @app.route("/visualizar_usuarios", methods=['GET'])
@@ -70,6 +93,7 @@ def visualizar_usuarios_Get():
     return render_template('visualizar_usuarios.html')
 
 @app.route("/listar", methods=['GET'])
+
 def visualizar_Usuarios_Get_1():
 
     resposta = {'files': []}
@@ -157,7 +181,7 @@ def deletar_usuarios_Post():
     except:
         return flask.Response("Erro ao Deletar Usuário!", status=500)
 
-# Área Equipamentos
+# Área Maquina
 
 @app.route('/cadastrar_maquinas', methods=['GET'])
 def cadastrar_maquina_Get():
@@ -208,8 +232,8 @@ def listar_maquinas_Post():
     return(resposta)
 
 
-@app.route('/lista_equipamento_id', methods=['POST', 'GET'])
-def lista_equipamento_id_Get():
+@app.route('/lista_equipamento_cod', methods=['POST', 'GET'])
+def lista_equipamento_cod_Get():
     resposta = {'arquivos': []}
 
     codMaq = request.get_json()
@@ -229,6 +253,30 @@ def lista_equipamento_id_Get():
                 'trecho': trecho,
                 'nome': nome}
         resposta['arquivos'].append(file)
+        print(resposta)
+    return(resposta)
+
+@app.route('/lista_equipamento_id', methods=['POST', 'GET'])
+def lista_equipamento_id_Get():
+    resposta = {'files': []}
+
+    idMaq = request.get_json()
+    idMaq = idMaq["idMaq"]
+    maquina = Equipamento(idMaq, None, None, None, None)
+
+    for dados in EquipamentosDAO.listMaqId(maquina):
+        idMaq = dados.idMaq
+        codMaq = dados.codMaq
+        linha = dados.linha,
+        trecho = dados.trecho,
+        nome = dados.nome
+
+        file = {'idMaq': idMaq,
+                'codMaq': codMaq,
+                'linha': linha,
+                'trecho': trecho,
+                'nome': nome}
+        resposta['files'].append(file)
         print(resposta)
     return(resposta)
 
@@ -269,7 +317,7 @@ def deletar_maquinas_Post():
         idMaq = int(idMaq)
         maquina = Equipamento(idMaq, None, None, None, None)
         EquipamentosDAO.deleteMaquinas(maquina)
-        return "Máquina Excluida Com Sucesso!"
+        return "Máquina Apagada Com Sucesso!"
 
     except:
         return flask.Response("Erro ao Deletar a Máquina", status=500)
@@ -380,7 +428,7 @@ def atualizar_graxa_Post():
         tipo = dados["tipo"]
         consis = dados["consis"]
 
-        graxa = Graxa(None, codGra, tipo, consis)
+        graxa = Graxa(idGra, codGra, tipo, consis)
         LubrificantesDAO.updateGraxa(graxa)
         return "Graxa Atualizada com Sucesso!"
     except:
@@ -395,8 +443,9 @@ def deletar_graxa_Get():
 @app.route('/deletar_graxa', methods=['POST'])
 def deletar_graxa_Post():
     try:
-        dado = request.get_json()
-        idGra = dado["idGra"]
+        dados = request.get_json()
+        print(dados)
+        idGra = dados["idGra"]
         idGra = int(idGra)
         graxa = Graxa(idGra, None, None, None)
         LubrificantesDAO.deleteGraxa(graxa)
@@ -593,10 +642,10 @@ def atualizar_spray_Post():
         dados = request.get_json()
         idSpray = dados["idSpray"]
         idSpray = int(idSpray)
+        codSpray = dados["codSpray"]
         tipo = dados["tipo"]
         visco = dados["visco"]
-
-        spray = Spray(idSpray, tipo, visco)
+        spray = Spray(idSpray, codSpray, tipo, visco)
         LubrificantesDAO.updateSpray(spray)
         return "Spray Atualizado Com Sucesso!"
     except:
@@ -615,7 +664,7 @@ def deletar_spray_Post():
         idSpray = dados["idSpray"]
         idSpray = int(idSpray)
 
-        spray = Spray(idSpray, None, None)
+        spray = Spray(idSpray, None, None, None)
         LubrificantesDAO.deleteSpray(spray)
         return "Spray Deletado Com Sucesso!"
 

@@ -1,12 +1,12 @@
 
-
-function cadastrar_usuario() {    
+function cadastrar_usuario() {   
     let nome = document.getElementById("nome").value;
     let email = document.getElementById("email").value;
     let senha = document.getElementById("password").value
     let cSenha = document.getElementById("confpassword").value;
     let select = document.getElementById("tipos")
     let tipo = select.options[select.selectedIndex].value
+    
 
     let dados_usuarios = {
        nome : nome,
@@ -17,11 +17,11 @@ function cadastrar_usuario() {
        
     }
     if(nome == "" || email == "" || senha == "" || cSenha == "" || tipo == ""){
+        
         return alert("Todos os Campos São Obrigatorios!")
-        document.location.reload(true);
     }else{
        if (senha == cSenha) {
-                fetch("/cadastrar_usuarios",
+                fetch("/cadastrar_usuario",
             {
                 method: "POST",
                 body:JSON.stringify(dados_usuarios),

@@ -1,6 +1,6 @@
 body{
     padding-top: 5vh;
-    background-image: url(../img/background.jpg);
+    background-image: url(../img/lubrificante-1.jpg);
     background-size: cover;
 }
 .input-group{
@@ -12,7 +12,7 @@ body{
 }
 .container{
     
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(69, 136, 166, 0.239);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     max-width: fit-content;
@@ -33,9 +33,12 @@ body{
     color: rgb(243, 243, 240)
 }
 .navbar{
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(69, 136, 166, 0.239);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+}
+.navbar-brand{
+    margin-left: 20px;
 }
 .btn{
     color: white;

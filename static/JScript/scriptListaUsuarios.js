@@ -12,6 +12,10 @@ function getArquivos() {
             for (file of data.files)
                 createFile(file);
         })
+        .then(data => {
+            del();
+            att();
+        })
 }
 
 
@@ -22,9 +26,7 @@ function createFile(file) {
     let tr = document.createElement("tr")
 
 
-    let tdId = document.createElement("td")
-    tdId.className = "lista"
-    tdId.innerText = `${file.id}`
+    
 
     let tdNome = document.createElement("td")
     tdNome.className = "lista"
@@ -34,15 +36,9 @@ function createFile(file) {
     tdEmail.className = "lista"
     tdEmail.innerText = `${file.email}`
 
-    let tdSenha = document.createElement("td")
-    tdSenha.className = "lista"
-    tdSenha.innerText = `${file.senha}`
-
-
-
     // Botões de Excluir
     var btDel = document.createElement("button")
-    btDel.className = "btn btn-default btn-Del"
+    btDel.className = "btn btn-default exc"
     btDel.id = `${file.id}`
     let btIcon = document.createElement("img")
     btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
@@ -68,68 +64,16 @@ function createFile(file) {
     btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)
     tbody.appendChild(tr)
-    tr.appendChild(tdId)
     tr.appendChild(tdNome)
     tr.appendChild(tdEmail)
-    tr.appendChild(tdSenha)
     tr.appendChild(tdTipo)
     tr.appendChild(btDel)
     tr.appendChild(btAtt)
-
-    //pesquisa de botão de delete e captura do evento de click
-
-    document.querySelectorAll(".btn-Del").forEach(function (btnDel) {
-        btnDel.addEventListener("click", (e) => {
-            let idUser = btnDel.id
-
-           var res = confirm("Tem Certeza Que Deseja Excluir Este Registro?")
-
-            if (res == true) {
-
-                let id_user = {
-                    idUser : idUser
-                }
-
-            fetch("/deletar_usuarios", {
-                    method: "POST",
-                    body: JSON.stringify(id_user),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then((resposta) => {
-                    if (resposta.status == 200)
-                        return resposta.text()
-                    else
-                        return alert("Erro Ao Deletar Usuario")
-                })
-                .then((respostaTexto) => {
-                    alert(respostaTexto)
-
-                })
-            } else
-                alert("Operação Cancelada")
-                 document.location.reload(true);
-                    
-            
-                
-
-        })
-    })
-
-    //Pesquisa de botão de atualizar e captura do evento de click
-
-    document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
-        btnAtt.addEventListener("click", (e) => {
-            idUser = btnAtt.id
-            sessionStorage.setItem('chave', idUser);   
-            window.location.href = "atualizar_usuarios"
-           
-
-        })
-    })
 }
 
+
+
+    
 function createTable(){
     var idUser = JSON.parse(sessionStorage.getItem('chave'))    
 
@@ -209,5 +153,62 @@ function atualizar_equipamento(){
     .then((respostaTexto) => {
          window.location.href = "visualizar_usuarios"
         alert(respostaTexto)
+    })
+}
+
+
+function del(){
+
+    //pesquisa de botão de delete e captura do evento de click
+     document.querySelectorAll(".exc").forEach(function (exc) {
+        exc.addEventListener("click", (e) => {           
+
+            var res = window.confirm("Deseja Excluir Este Registro?")
+            
+
+            if (res) {
+                let idUser = exc.id
+                let id_user = {
+                    idUser : idUser
+                }
+
+                fetch("/deletar_usuarios", {
+                    method: "POST",
+                    body: JSON.stringify(id_user),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then((resposta) => {
+                    if (resposta.status == 200)
+                        return resposta.text()
+                    else
+                        return alert("Erro Ao Deletar Usuario")
+                })
+                .then((respostaTexto) => {
+                    alert(respostaTexto)
+                    document.location.reload(true);
+                })
+            } else {
+                 alert("Operação Cancelada")
+                return document.location.reload(true);
+            }              
+               
+        })
+    })
+}
+
+function att(){
+        
+    //Pesquisa de botão de atualizar e captura do evento de click
+
+    document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
+        btnAtt.addEventListener("click", (e) => {
+            idUser = btnAtt.id
+            sessionStorage.setItem('chave', idUser);   
+            window.location.href = "atualizar_usuarios"
+           
+
+        })
     })
 }
