@@ -116,6 +116,53 @@ function createTable(){
                 })
         })
 }
+function confimacao(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Registro Foi Atualizado!',
+    showConfirmButton: false,
+    timer: 1500   
+})
+
+}
+
+function alerta_att(){
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+        title: 'Atualização!',
+        text: "Tem Certeza Que Deseja Atualizar?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: ' Sim ',
+        cancelButtonText: ' Não ',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+            atualizar_equipamento()
+            )
+        } else if (
+            
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelado!',
+            'Registro Não Foi Atualizado',
+            'error'
+            )
+        }
+        })
+        
+}
+
 
 function atualizar_equipamento(){
 
@@ -126,6 +173,7 @@ function atualizar_equipamento(){
     let cSenha = document.getElementById("cSenha").value
     let select = document.getElementById("tipos")
     let tipo = select.options[select.selectedIndex].value
+
 
 
     let dados_usuario = {
@@ -145,14 +193,13 @@ function atualizar_equipamento(){
         }
     })
     .then((resposta) => {
-        if (resposta.status == 200)
-            return resposta.text()        
-        else
-            return "Erro Ao Atualizar Usuário"
-    })
-    .then((respostaTexto) => {
-         window.location.href = "visualizar_usuarios"
-        alert(respostaTexto)
+        if (resposta.status == 200){
+            confimacao()
+        }            
+        else{
+            window.location.href = "visualizar_usuarios"
+            return alert("Erro Ao Atualizar Usuário")
+        }
     })
 }
 
