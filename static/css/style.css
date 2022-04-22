@@ -8,7 +8,7 @@
     border: none;
     }
     body{
-        background-image: url('../img/background.jpg');
+        background-color: white;
         background-size: cover;      
     }
     textarea:focus, input:focus{
@@ -122,4 +122,10 @@
 .template{
     display: none;
 }
-   
+body{
+    font-family: Georgia, serif; 
+    background-color: white;
+    padding-top: 5vh;
+    background-size: cover;
+    width: 100%;
+}

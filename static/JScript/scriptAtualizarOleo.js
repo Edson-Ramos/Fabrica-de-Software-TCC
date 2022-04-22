@@ -21,7 +21,7 @@ function atualizar_oleo() {
         method: "POST",
         body:JSON.stringify(dados_oleo),
         headers:{
-            "Content-Type" : "application/json"
+            "u-Type" : "application/json"
         }
     })
     .then((resposta) => {

@@ -48,7 +48,7 @@ function listaGraxa(arquivo){
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${arquivo.idGra}`
     let btAttIcon = document.createElement("img")
-    btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/arrow-repeat.svg"  
+    btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/pencil-square.svgf"  
 
     btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)

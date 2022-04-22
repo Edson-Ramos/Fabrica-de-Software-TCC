@@ -48,8 +48,7 @@ function createFile(file) {
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${file.id}`
     let btAttIcon = document.createElement("img")
-    btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/arrow-repeat.svg"
-
+    btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"
 
     if (file.tipo == 1) {
         var func = `Administrador`

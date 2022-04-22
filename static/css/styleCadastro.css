@@ -1,7 +1,9 @@
 body{
+    font-family: Georgia, serif; 
+    background-color: white;
     padding-top: 5vh;
-    background-image: url(../img/lubrificante-1.jpg);
     background-size: cover;
+    width: 100%;
 }
 .input-group{
 
@@ -31,7 +33,7 @@ body{
     left: 1px;
 }
 .titulo{
-    color: rgb(243, 243, 240)
+    color: black
 }
 .navbar{
     background-color: rgba(69, 136, 166, 0.239);
@@ -42,7 +44,7 @@ body{
     margin-left: 20px;
 }
 .btn{
-    color: white;
+    color: black
   
 }
 .btn:hover{

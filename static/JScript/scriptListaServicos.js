@@ -98,7 +98,7 @@ function createFile(file) {
     btAtt.id = `${file.idServ}`
     btAtt.title = "Atualizar"
     let btAttIcon = document.createElement("img")
-    btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/arrow-repeat.svg"
+    btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"
 
 
 

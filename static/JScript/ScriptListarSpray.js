@@ -51,7 +51,7 @@ function listaSpray(arquivo){
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${arquivo.idSpray}`
     let btAttIcon = document.createElement("img")
-    btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/arrow-repeat.svg"  
+    btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"  
 
     btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)

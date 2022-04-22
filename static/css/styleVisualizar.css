@@ -1,6 +1,6 @@
 body{
-    
-    background-image: url(../img/lubrificante-1.jpg);
+    font-family: Georgia, serif; 
+    background-color: white;
     padding-top: 5vh;
     background-size: cover;
     width: 100%;
@@ -32,29 +32,32 @@ body{
     left: 1px;
 }
 .titulo{
-    color: rgb(8, 9, 10)
+    font-family: Georgia, serif;
+    color: black;
 }
 .navbar-brand{
     margin-left: 20px;
+    font-family: Georgia, serif;
 }
 .navbar{
-    background-color: rgba(69, 136, 166, 0.239);
+    background-color: rgba(124, 157, 172, 0.239);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 .btn{
-    color: white;
+     color: black;
 }
 .btn:hover{
     background-color: rgb(115, 255, 255);
 }
 .lista{
-    color: rgb(253, 253, 253);
+    color: black;
     font-size: 11px;
     font-style: oblique;
     font-weight: bold;
 }
 .toplista{
+    font-family: Georgia, serif;
     color:rgb(13, 13, 14);
     font-size: 18px;
 }
