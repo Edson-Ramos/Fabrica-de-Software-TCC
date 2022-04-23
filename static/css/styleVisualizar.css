@@ -1,6 +1,6 @@
 body{
     font-family: Georgia, serif; 
-    background-color: white;
+    background-image: url(../img/wall.jpg);
     padding-top: 5vh;
     background-size: cover;
     width: 100%;
@@ -14,7 +14,7 @@ body{
 }
 .container{
     
-    background-color: rgba(69, 136, 166, 0.239);
+    background-color: rgba(69, 135, 166, 0.13);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     max-width: fit-content;
@@ -40,7 +40,7 @@ body{
     font-family: Georgia, serif;
 }
 .navbar{
-    background-color: rgba(124, 157, 172, 0.239);
+    background-color: rgba(69, 135, 166, 0.13);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -60,6 +60,7 @@ body{
     font-family: Georgia, serif;
     color:rgb(13, 13, 14);
     font-size: 18px;
+    padding: 20px;
 }
 .bnt-custom{
     padding: 1px, 15px, 3px, 2px;
