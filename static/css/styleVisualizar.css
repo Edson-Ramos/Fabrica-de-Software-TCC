@@ -14,7 +14,7 @@ body{
 }
 .container{
     
-    background-color: rgba(69, 135, 166, 0.13);
+    background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     max-width: fit-content;
@@ -32,7 +32,7 @@ body{
     left: 1px;
 }
 .titulo{
-    font-family: Georgia, serif;
+    font-family: Arial, Helvetica, sans-serif;
     color: black;
 }
 .navbar-brand{
@@ -40,7 +40,7 @@ body{
     font-family: Georgia, serif;
 }
 .navbar{
-    background-color: rgba(69, 135, 166, 0.13);
+    background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -48,17 +48,17 @@ body{
      color: black;
 }
 .btn:hover{
-    background-color: rgb(115, 255, 255);
+    background-color: rgb(93, 95, 95);
 }
 .lista{
     color: black;
-    font-size: 11px;
-    font-style: oblique;
+    font-size: 12px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
 }
 .toplista{
     font-family: Georgia, serif;
-    color:rgb(13, 13, 14);
+    color:rgb(0, 0, 0);
     font-size: 18px;
     padding: 20px;
 }

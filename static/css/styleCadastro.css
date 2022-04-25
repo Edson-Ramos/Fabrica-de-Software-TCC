@@ -14,7 +14,7 @@ body{
 }
 .container{
     
-    background-color: rgba(69, 135, 166, 0.13);
+    background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     max-width: fit-content;
@@ -37,7 +37,7 @@ body{
     color: black
 }
 .navbar{
-    background-color: rgba(69, 135, 166, 0.13);
+    background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }

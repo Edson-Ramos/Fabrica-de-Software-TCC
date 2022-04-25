@@ -1,4 +1,4 @@
-import flask 
+import flask
 from flask.globals import request
 from flask.templating import render_template
 import UsuarioDAO
@@ -46,6 +46,8 @@ def login():
 
 @app.route('/login', methods=['POST'])
 def login_post():
+    resposta = {'files': []}
+
     dado = request.get_json()
     email = dado['email']
     senha = dado['password']
@@ -61,7 +63,13 @@ def login_post():
         if email == emailBD and senha == senhaBD:
             access_token = create_access_token(identity = emailBD)
             token = jsonify(access_token = access_token)
-            
+
+            file = {
+                'nome': nomeBD,
+                'email': emailBD
+            }
+            resposta['files'].append(file)
+                        
             return (token)
         else:
             return flask.Response("Email ou Senha Incorretos", status=500)

@@ -115,14 +115,16 @@ function createTable(){
                 })
         })
 }
-function confimacao(){
+
+function confimacao_att(){
     Swal.fire({
     icon: 'success',
     title: 'Registro Foi Atualizado!',
-    showConfirmButton: false,
-    timer: 1500   
-})
-
+    showConfirmButton: false
+    })
+    setTimeout(() => {  window.location.href = "visualizar_usuarios"; }, 2000)
+    
+    
 }
 
 function alerta_att(){
@@ -162,6 +164,15 @@ function alerta_att(){
         
 }
 
+function erro_att(){
+
+    Swal.fire({
+    icon: 'error',
+    title: 'Erro Ao Atualizar Usuário',
+    text: 'Tente Novamente!'
+})
+setTimeout(() => {  location.reload(); }, 2000)
+}
 
 function atualizar_equipamento(){
 
@@ -193,11 +204,10 @@ function atualizar_equipamento(){
     })
     .then((resposta) => {
         if (resposta.status == 200){
-            confimacao()
+            confimacao_att()
         }            
         else{
-            window.location.href = "visualizar_usuarios"
-            return alert("Erro Ao Atualizar Usuário")
+            erro_att()
         }
     })
 }
@@ -207,38 +217,10 @@ function del(){
 
     //pesquisa de botão de delete e captura do evento de click
      document.querySelectorAll(".exc").forEach(function (exc) {
-        exc.addEventListener("click", (e) => {           
-
-            var res = window.confirm("Deseja Excluir Este Registro?")
-            
-
-            if (res) {
+        exc.addEventListener("click", (e) => {
                 let idUser = exc.id
-                let id_user = {
-                    idUser : idUser
-                }
-
-                fetch("/deletar_usuarios", {
-                    method: "POST",
-                    body: JSON.stringify(id_user),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then((resposta) => {
-                    if (resposta.status == 200)
-                        return resposta.text()
-                    else
-                        return alert("Erro Ao Deletar Usuario")
-                })
-                .then((respostaTexto) => {
-                    alert(respostaTexto)
-                    document.location.reload(true);
-                })
-            } else {
-                 alert("Operação Cancelada")
-                return document.location.reload(true);
-            }              
+                window.localStorage.setItem("id", idUser)       
+                alerta_del()              
                
         })
     })
@@ -257,4 +239,77 @@ function att(){
 
         })
     })
+}
+
+function alerta_del(){
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+        title: 'Delete!',
+        text: "Deseja Excluir Este Registro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: ' Sim ',
+        cancelButtonText: ' Não ',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            
+            
+                let id_user = {
+                    idUser : window.localStorage.getItem("id")
+                }
+
+                fetch("/deletar_usuarios", {
+                    method: "POST",
+                    body: JSON.stringify(id_user),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then((resposta) => {
+                    if (resposta.status == 200)
+                        return confimacao_del()
+                    else
+                        return erro_del()
+                })     
+        }else if (
+            
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelado!',
+            'Operação Cancelada',
+            'error'
+            )
+        }
+        })
+        
+}
+
+function confimacao_del(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Usuário Excluido!',
+    showConfirmButton: false,
+    timer: 1500   
+})
+setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro_del(){
+
+    Swal.fire({
+    icon: 'error',
+    title: 'Erro Ao Excluir Usuário',
+    text: 'Tente Novamente!'
+})
+
 }

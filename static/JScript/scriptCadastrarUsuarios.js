@@ -16,9 +16,9 @@ function cadastrar_usuario() {
        tipo : tipo  
        
     }
-    if(nome == "" || email == "" || senha == "" || cSenha == "" || tipo == ""){
+    if(nome == "" || email == "" || senha == "" || cSenha == "" || tipo == "Selecione o Tipo de Usuário"){
         
-        return alert("Todos os Campos São Obrigatorios!")
+        return erro_Campo_empty()
     }else{
        if (senha == cSenha) {
                 fetch("/cadastrar_usuario",
@@ -31,18 +31,51 @@ function cadastrar_usuario() {
             })
             .then((resposta) => {
                 if (resposta.status == 200)
-                    return resposta.text()
+                    return confimacao()
                 else
-                    return "Erro Ao Cadastrar Usuário"
-            })
-            .then((repostaTexto) => {
-                alert(repostaTexto)
-                document.location.reload(true);
+                    return erro()
             })
         }else
-            return alert("ERROR: Senhas Diferentes!")
+            return erro_senha()
             
             }
     
 }
-    
+function confimacao(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Usuário Cadastrado Com Sucesso!',
+    showConfirmButton: false,
+    timer: 1500   
+})
+setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro(){
+
+    Swal.fire({
+  icon: 'error',
+  title: 'Erro Ao Cadastrar Usuário',
+  text: 'Verifique os Campos Digitados!'
+})
+
+}
+
+function erro_senha(){
+
+    Swal.fire({
+  icon: 'error',
+  title: 'Senha Diferentes',
+  text: 'Digite sua Senha Novamente!'
+})
+
+}
+
+function erro_Campo_empty(){
+
+    Swal.fire({
+  icon: 'error',
+  title: 'Opss...',
+  text: 'Todos os Campos São Obrigatório!'
+    })  
+}

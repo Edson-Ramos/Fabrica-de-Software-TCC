@@ -86,8 +86,9 @@ function login(){
         
     })
     .then((data) =>{
-        let token = data.access_token;
-        localStorage.setItem("token", token);
+        console.log(data)
+                let token = data.access_token;
+                localStorage.setItem("token", token);                
         return window.location.href = "cadastrar_usuarios"
-    })
+        })
 }
