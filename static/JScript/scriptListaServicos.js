@@ -487,7 +487,7 @@ function atualizar_servico() {
         equip = ""
     }
 
-    if (codMaq.value == "" || maq.value =="" || linha.value == "" || trecho.value == "" || equip.value == "" || tipoLub == "" || codLub=="" ||  tipo == "" || prop == "" || dataApli.value == "" || dataProxApli.value == "" || status == "") {
+    if (codMaq.value == "" || maq.value =="" || linha.value == "" || trecho.value == "" || equip == "" || tipoLub == "" || codLub=="" ||  tipo == "" || prop == "" || dataApli.value == "" || dataProxApli.value == "" || status == "") {
         return erro_campo_empty()
     }else{
 

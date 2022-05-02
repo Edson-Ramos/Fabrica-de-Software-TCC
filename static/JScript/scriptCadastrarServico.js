@@ -10,14 +10,15 @@ var codLub=""
 var tipo =""
 var prop =""
 
-// Captura o input digitado id da maquina quanto mudo de foco.
+// Captura o input digitado codMaq da maquina quanto mudo de foco.
+
 codMaq.addEventListener("blur", (e) => {
 
     let cod_maq = {
         codMaq: codMaq.value
     }
-    if (codMaq == "") {
-        return alert("Preencha Campo ID Máquina")
+    if (codMaq.value == "") {
+        return alerta_empyt_codMaq()
     } else {
         const cod_Maquina = {
             method: "POST",
@@ -30,15 +31,42 @@ codMaq.addEventListener("blur", (e) => {
 
         fetch(`${rota}/lista_equipamento_cod`, cod_Maquina)
             .then(function (response) {
-                response.json()
+                if (response.status == 500){
+                    alerta_erro_codMaq()
+                }else if(response.status == 200){
+                   response.json()
                     .then(function (data) {
                         for (arquivo of data.arquivos)
                             createFile(arquivo);
-                    })
+                    }) 
+                }
+                
             })
     }
-
 })
+
+function alerta_erro_codMaq(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Campo Cód. Máquina Não Encontrado!'
+    })
+    document.querySelectorAll(".swal2-styled").forEach(function(btnOK){
+        btnOK.addEventListener("click", (e) =>{
+            location.reload(true)
+        })
+    })
+}
+
+
+
+function alerta_empyt_codMaq(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Campo Cód. Máquina Não Poder Ser Vazio!'
+    })
+}
 
 function createFile(arquivo) {
 
@@ -230,7 +258,7 @@ function cadastrar_servico() {
     }
     
 
-    if (equip == "Selecione o Equipamento") {
+    if (equip.value == "Selecione o Equipamento") {
         equip = ""
     }
 
