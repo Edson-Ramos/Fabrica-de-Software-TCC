@@ -14,7 +14,7 @@ function cadastrar_maquina() {
 	}
 
     if (cod == "" || nome == "" || linha == "" || trecho == ""){
-        return alert("Todos os Campos São Obrigatorios!")
+        return erro_Campo_empty()
     }else{
         fetch("/cadastrar_maquinas",
         {
@@ -27,17 +27,35 @@ function cadastrar_maquina() {
         .then((resposta) => {
             
             if (resposta.status == 200)
-                return resposta.text()
+                return success()
             else 
-                return "Erro Ao Cadastrar Máquina"          
-        })
-        .then((respostaTexto) => {
-            document.location.reload(true)
-            alert(respostaTexto)
+                return erro()          
         })
     }
-	  
-    
-    
 }
-    
+
+function success(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Máquina Cadastrada Com Sucesso!',
+    showConfirmButton: false,
+    timer: 1500     
+    })
+    setTimeout(() => {  location.reload(); }, 2000)
+}
+function erro(){
+
+    Swal.fire({
+    icon: 'error',
+    title: 'Erro Ao Cadastrar Máquina',
+    text: 'Verifique os Campos Digitados!'
+    })
+}
+function erro_Campo_empty(){
+
+    Swal.fire({
+    icon: 'error',
+    title: 'Opss...',
+    text: 'Todos os Campos São Obrigatório!'
+    })  
+}

@@ -5,7 +5,7 @@ function cadastro_oleo(){
     
 // precisa verificar o campo visco e id vai ser do tipo int ou string
     if (codOleo == "" || tipo == "" || visco == ""){
-        return alert("Todos os Campos São Obrigatorios!")
+        return erro_campo_empty()
     }else{
         let infor = {
             codOleo: codOleo,
@@ -23,14 +23,34 @@ function cadastro_oleo(){
         })
         .then((resposta) =>{
             if(resposta.status== 200)
-                return resposta.text()
+                return success()
             else
-                return "Erro Ao Cadastrar Oleo !"
+                return erro()
         })
-        .then((respostaTexto) =>{
-            alert(respostaTexto)
-            document.location.reload(true)
-        })
-
     }
+}
+function success(){
+    Swal.fire({
+        icon: 'success',
+        title: 'Óleo Cadastrado Com Sucesso!',
+        showConfirmButton: false,
+        timer: 1500   
+    })
+    setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Erro Ao Cadastrar Óleo',
+        text: 'Verifique os Campos Digitados!'
+    })
+}
+
+function erro_campo_empty(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Todos os Campos São Obrigatório!'
+    })  
 }

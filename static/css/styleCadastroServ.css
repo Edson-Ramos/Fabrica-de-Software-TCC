@@ -5,21 +5,15 @@ body{
     background-size: cover;
     width: 100%;
 }
-.input-group{
-
-    width: 100%;
-    height: auto;
-    left: 300px;
-    
-}
 .container{
     
-    background-color: rgba(69, 135, 166, 0.13);
+    background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    max-width: fit-content;
+    max-width: 55%;
     max-height: fit-content;
     margin-top: 60px;
+    padding-top: 10px;
     text-align: center;
     border-radius: 20px; 
 
@@ -27,36 +21,51 @@ body{
 .welcome{
     margin-right: 50px;
 }
-.row-d{
-    margin: 20px;
-    padding: 20px
-}
-.input-group{
-    left: 1px;
-}
-.titulo{
-    color: black
+.aNome{
+    color:blue;
 }
 .navbar{
-    background-color: rgba(69, 135, 166, 0.13);
+    background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 .navbar-brand{
     margin-left: 20px;
 }
-.btn{
+.titulo{
+    color: black
+}
+
+.btn{    
     color: black;
+  
 }
 .btn:hover{
-    background-color: rgb(115, 255, 255);
+    background-color: rgb(93, 95, 95);
 }
-.input-group{
-    width: auto  
+.checkBox{    
+    background: white;    
 }
-.input-group-text{
-    width: 15%;
+.form-check-label{
+    font-size: 13px;
+    
+} 
+.obs{
+    color: white
 }
-
-
-
+.row-d{
+    margin: 20px;
+    padding: 20px
+}
+.form-control{
+    border-radius: 50;
+}
+.span{
+    width: 100px;
+}
+.spanT{
+    width: 70px;
+}
+.spanM{
+    width: 70px;
+}

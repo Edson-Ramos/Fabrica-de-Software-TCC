@@ -116,17 +116,6 @@ function createTable(){
         })
 }
 
-function confimacao_att(){
-    Swal.fire({
-    icon: 'success',
-    title: 'Registro Foi Atualizado!',
-    showConfirmButton: false
-    })
-    setTimeout(() => {  window.location.href = "visualizar_usuarios"; }, 2000)
-    
-    
-}
-
 function alerta_att(){
 
       const swalWithBootstrapButtons = Swal.mixin({
@@ -148,7 +137,7 @@ function alerta_att(){
         }).then((result) => {
         if (result.isConfirmed) {
             swalWithBootstrapButtons.fire(
-            atualizar_equipamento()
+            atualizar_usuario()
             )
         } else if (
             
@@ -161,20 +150,9 @@ function alerta_att(){
             )
         }
         })
-        
 }
 
-function erro_att(){
-
-    Swal.fire({
-    icon: 'error',
-    title: 'Erro Ao Atualizar Usuário',
-    text: 'Tente Novamente!'
-})
-setTimeout(() => {  location.reload(); }, 2000)
-}
-
-function atualizar_equipamento(){
+function atualizar_usuario(){
 
     var idUser = JSON.parse(sessionStorage.getItem('chave')) 
     let nome = document.getElementById("nome").value
@@ -212,18 +190,34 @@ function atualizar_equipamento(){
     })
 }
 
-
-function del(){
-
-    //pesquisa de botão de delete e captura do evento de click
-     document.querySelectorAll(".exc").forEach(function (exc) {
-        exc.addEventListener("click", (e) => {
-                let idUser = exc.id
-                window.localStorage.setItem("id", idUser)       
-                alerta_del()              
-               
-        })
+function confimacao_att(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Registro Foi Atualizado!',
+    showConfirmButton: false
     })
+    setTimeout(() => {  window.location.href = "visualizar_usuarios"; }, 2000)
+    
+    
+}
+
+function erro_att(){
+
+    Swal.fire({
+    icon: 'error',
+    title: 'Erro Ao Atualizar Usuário',
+    text: 'Tente Novamente!'
+})
+setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro_campo_empty(){
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Todos os Campos São Obrigatório!'
+    })  
 }
 
 function att(){
@@ -241,32 +235,44 @@ function att(){
     })
 }
 
+//Área Delete
+
+function del(){
+
+    //pesquisa de botão de delete e captura do evento de click
+     document.querySelectorAll(".exc").forEach(function (exc) {
+        exc.addEventListener("click", (e) => {
+                let idUser = exc.id
+                window.localStorage.setItem("id", idUser)       
+                alerta_del()
+        })
+    })
+}
+
 function alerta_del(){
 
-      const swalWithBootstrapButtons = Swal.mixin({
+    const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+    },
         buttonsStyling: false
-        })
+    })
 
         swalWithBootstrapButtons.fire({
-        title: 'Delete!',
-        text: "Deseja Excluir Este Registro?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: ' Sim ',
-        cancelButtonText: ' Não ',
-        reverseButtons: true
+            title: 'Delete!',
+            text: "Deseja Excluir Este Registro?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: ' Sim ',
+            cancelButtonText: ' Não ',
+            reverseButtons: true
         }).then((result) => {
-        if (result.isConfirmed) {
-            
+            if (result.isConfirmed) {
             
                 let id_user = {
                     idUser : window.localStorage.getItem("id")
                 }
-
                 fetch("/deletar_usuarios", {
                     method: "POST",
                     body: JSON.stringify(id_user),
@@ -280,18 +286,16 @@ function alerta_del(){
                     else
                         return erro_del()
                 })     
-        }else if (
+        }else if(
             
             result.dismiss === Swal.DismissReason.cancel
-        ) {
+        ){
             swalWithBootstrapButtons.fire(
-            'Cancelado!',
-            'Operação Cancelada',
-            'error'
-            )
-        }
-        })
-        
+                'Cancelado!',
+                'Operação Cancelada',
+                'error'
+            )}
+    }) 
 }
 
 function confimacao_del(){
@@ -301,7 +305,7 @@ function confimacao_del(){
     showConfirmButton: false,
     timer: 1500   
 })
-setTimeout(() => {  location.reload(); }, 2000)
+    setTimeout(() => {  location.reload(); }, 2000)
 }
 
 function erro_del(){

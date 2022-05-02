@@ -234,11 +234,10 @@ function cadastrar_servico() {
         equip = ""
     }
 
-    if (codMaq.value == "" || equip.value == "" || tipoLub == "" || dataApli.value == "" || dataProxApli.value == "" || status == "") {
-        alert("Campos São Obrigatorios!")
-        document.location.reload(true)
+    if (codMaq.value == "" || maq.value =="" || linha.value == "" || trecho.value == "" || equip.value == "" || tipoLub == "" || codLub == "" || tipo == "" || prop == "" || dataApli.value == "" || dataProxApli.value == "" || status == "") {
+        
+        return erro_Campo_empty()
     } else {
-
 
         const dados_servicos = {
             codMaq: codMaq.value,
@@ -257,28 +256,45 @@ function cadastrar_servico() {
         }
 
         fetch("/cadastrar_servico", {
-                method: "POST",
-                body: JSON.stringify(dados_servicos),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then((resposta) => {
-                if (resposta.status == 200)
-                    return resposta.text()
-                else
-                    return "Erro Ao Cadastrar Serviço"
-            })
-            .then((repostaTexto) => {
-                alert(repostaTexto)
-                document.location.reload(true);
-            })
-
-
-
-
+            method: "POST",
+            body: JSON.stringify(dados_servicos),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((resposta) => {
+            if (resposta.status == 200)
+                return success()
+            else
+                return erro()
+        })
     }
+}
 
+function success(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Serviço Cadastrado Com Sucesso!',
+    showConfirmButton: false,
+    timer: 1500   
+    })
+    setTimeout(() => {  location.reload(); }, 2000)
+}
 
+function erro(){
 
+    Swal.fire({
+    icon: 'error',
+    title: 'Erro Ao Cadastrar Serviço',
+    text: 'Verifique os Campos Digitados!'
+    })
+}
+
+function erro_Campo_empty(){
+
+    Swal.fire({
+  icon: 'error',
+  title: 'Opss...',
+  text: 'Todos os Campos São Obrigatório!'
+    })  
 }

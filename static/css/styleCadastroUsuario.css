@@ -14,18 +14,23 @@ body{
 }
 .container{
     
-    background-color: rgba(69, 135, 166, 0.13);
+    background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     max-width: fit-content;
     max-height: fit-content;
-    margin-top: 60px;
+    margin-top: 100px;
+    margin-bottom:100px;
+    padding-top: 20px;
     text-align: center;
     border-radius: 20px; 
 
 }
 .welcome{
     margin-right: 50px;
+}
+.aNome{
+    color:blue;
 }
 .row-d{
     margin: 20px;
@@ -34,29 +39,53 @@ body{
 .input-group{
     left: 1px;
 }
+.inpCod{
+    width: 100%;
+}
+.cod{
+    width: 30%;
+}
+.input-group-text{
+    width: 20%;
+}
 .titulo{
     color: black
 }
 .navbar{
-    background-color: rgba(69, 135, 166, 0.13);
+    background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 .navbar-brand{
     margin-left: 20px;
 }
-.btn{
+.btn{    
     color: black;
+  
 }
 .btn:hover{
-    background-color: rgb(115, 255, 255);
-}
-.input-group{
-    width: auto  
-}
-.input-group-text{
-    width: 15%;
+    background-color: rgb(93, 95, 95);
 }
 
-
+.checkBox{
+    
+    background: white;
+    
+    }
+.form-check-label{
+    font-size: 13px;
+    
+} 
+.obs{
+    color: white
+}
+#input{
+    width: 100%;   
+}
+#btn{
+    left: 60px;
+}
+.form-control{
+    border-radius: 50
+}
 

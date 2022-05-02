@@ -15,10 +15,10 @@ function atualizar_maquina() {
         nomeMaq: nomeMaq,
     }    
     if (idMaq == "" || codMaq == "" || linhaMaq == "" || trechoMaq == "" || nomeMaq == ""){
-        return alert("Todos os Campos São Obrigatorios!")
+        return erro_Campo_empty()
     }else{
-       fetch("/atualizar_maquinas",
-    {
+       fetch("/atualizar_maquinas",{
+           
         method: "POST",
         body:JSON.stringify(dados_maquina),
         headers:{
@@ -38,4 +38,13 @@ function atualizar_maquina() {
     }) 
     }
     
+}
+
+function erro_Campo_empty(){
+
+    Swal.fire({
+  icon: 'error',
+  title: 'Opss...',
+  text: 'Todos os Campos São Obrigatório!'
+    })  
 }

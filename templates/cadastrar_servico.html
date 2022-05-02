@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleCadastro.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleCadastroServ.css')}}">
     <script src="{{url_for('static', filename='JScript/checkAuth.js')}}"></script>
  
     <title>Easylub</title>
@@ -71,39 +71,34 @@
                     </div>
                 </li>
             </ul>
+            <div class="welcome">             
+            </div>
+            <a class="navbar-brand">           
+                <button class="btn btn-outline-dark" type="button" onclick="logout()">Logout</button>
+            </a>
         </div>
     </nav>
     <div class="container">
         <section id="equipamentos">
             <div class="container-fluid agenda text-center margin">
                 <div class="titulo">
-                    <h1>Cadastrar serviço</h1>
+                    <h1>Cadastrar Serviço</h1>
                 </div>
                 <form action="" class="form">
                     <div class="input-group input-group-sm mb-3" id="inpId">
                         <span class="input-group-text" id="basic-addon1">Cód Máquina:</span>
                         <input id="codMaq" type="text" class="form-control">
-                    </div>
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="basic-addon1">Máquina:</span>
-                        <output id="maq" type="text" class="form-control">
-                    </div>
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="basic-addon1">linha: </span>
-                        <output id="linha" type="text" class="form-control" aria-label="Server">
-                    </div>
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="basic-addon1">Trecho: </span>
-                        <output id="trecho" type="text" class="form-control" aria-label="Server">
+                         <span class="input-group-text spanM" id="basic-addon1">Máquina:</span>
+                        <input id="maq" type="text" class="form-control">
                     </div>
 
                     <div class="input-group input-group-sm mb-3">
-                        <select class="form-select" aria-label="equip" id="equip">
-                            <option selected>Selecione o Equipamento</option>
-                            <option value="Redutor">Redutor</option>
-                            <option value="Mancal">Mancal</option>
-                            <option value="Correntes">Corrente</option>
-                        </select>
+                        
+                            <span class="input-group-text span" id="basic-addon1">linha: </span>                                                 
+                            <input id="linha" type="text" class="form-control output">                        
+                            <span class="input-group-text spanT" id="basic-addon1">Trecho: </span>                        
+                            <input id="trecho" type="text" class="form-control output"></output>
+                        
                     </div>
                     <div class="checkBox mb-3">
                         <div class="form-check form-check-inline">
@@ -120,17 +115,21 @@
                         </div>
                     </div>
                     <div class="input-group input-group-sm mb-3">
+                        <select class="form-select" aria-label="equip" id="equip">
+                            <option selected>Selecione o Equipamento</option>
+                            <option value="Redutor">Redutor</option>
+                            <option value="Mancal">Mancal</option>
+                            <option value="Correntes">Corrente</option>
+                        </select>
                         <select class="form-select" aria-label="Default select example" id = "sel">
                             <option selected>Selecione o Lubrificante</option>
                         </select>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="basic-addon1">Data de aplicação</span>
-                        <input id="dataAplic" type="date" class="form-control" aria-label="Server">
-                    </div>
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="basic-addon1">Próxima Aplicação</span>
-                        <input id="dataProAplic" type="date" class="form-control" aria-label="Server">
+                        <span class="input-group-text spanData" id="basic-addon1">Aplicação:</span>
+                        <input id="dataAplic" type="date" class="form-control inputData" aria-label="Server">
+                        <span class="input-group-text spanData" id="basic-addon1">Próx. Aplicação:</span>
+                        <input id="dataProAplic" type="date" class="form-control inputData" aria-label="Server">
                     </div>
                     <div class="checkBox mb-3">
                         <div class="">
@@ -160,7 +159,6 @@
             <div class="row-d">
                 <button onclick="cadastrar_servico()" type="submit" id="btn" class="btn btn-primary">Cadastrar</button>
             </div>
-
         </section>
     </div>
 
@@ -177,6 +175,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="{{url_for('static', filename='JScript/scriptCadastrarServico.js')}}"></script>
+    <script src="{{url_for('static', filename='JScript/sweetalert.js')}}"></script>
 </footer>
 
 </html>

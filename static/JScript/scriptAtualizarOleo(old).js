@@ -2,16 +2,16 @@
 
 function atualizar_oleo() {    
     
-    let idOleo = document.getElementById("id").value
+    let codOleo = document.getElementById("codOleo").value
     let tipo= document.getElementById("tipo").value
     let visco = document.getElementById("visco").value 
     
     
-    if (idOleo == "" || tipo == "" || visco == ""){
+    if (codOleo == "" || tipo == "" || visco == ""){
         return alert("Todos os Campos São Obrigatorios!")
     }else{
      let dados_oleo = {
-        idOleo : idOleo,
+        codOleo : codOleo,
         tipo: tipo,
         visco : visco,
     }    
