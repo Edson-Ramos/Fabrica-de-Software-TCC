@@ -48,7 +48,7 @@ function listaGraxa(arquivo){
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${arquivo.idGra}`
     let btAttIcon = document.createElement("img")
-    btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/pencil-square.svgf"  
+    btAttIcon.src = "/static/bootstrap/icons-1.8.1/icons/pencil-square.svg"  
 
     btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)
@@ -90,14 +90,53 @@ function createTable(){
         })
 }
 
-function atualizar_Graxa() {    
+// Área de Att
+
+function alerta_att(){
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+            title: 'Atualização!',
+            text: "Tem Certeza Que Deseja Atualizar?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: ' Sim ',
+            cancelButtonText: ' Não ',
+            reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+            atualizar_graxa()
+            
+      } else if (
+          
+          result.dismiss === Swal.DismissReason.cancel
+      ) {
+          swalWithBootstrapButtons.fire(
+          'Cancelado!',
+          'Registro Não Foi Atualizado',
+          'error'
+          )
+      }
+      })
+      
+}
+
+
+function atualizar_graxa() {    
     var idGra = JSON.parse(sessionStorage.getItem('chave'))  
     let codGra = document.getElementById("codGra").value
     let tipo= document.getElementById("tipo").value
     let consis = document.getElementById("consis").value 
    
     if (codGra == "" || tipo == "" || consis == ""){
-        return alert("Todos os Campos São Obrigatorios!")
+        return erro_campo_empty()
     }else{
      let dados_graxa = {
         idGra : idGra,
@@ -116,71 +155,135 @@ function atualizar_Graxa() {
     })
     .then((resposta) => {
         if (resposta.status == 200)
-            return resposta.text()     
+            return confimacao_att()       
         else
-            return "Erro Ao Atualizar Graxa"
-    })
-    .then((respostaTexto) => {
-        document.location.href ="visualizar_graxa"
-        alert(respostaTexto)
-    })
-       
+            return erro_att()
+    }) 
     }
-
-    
 }
-    
+
+function confimacao_att(){
+    Swal.fire({
+        icon: 'success',
+        title: 'Registro Foi Atualizado!',
+        showConfirmButton: false
+    })
+    setTimeout(() => {  window.location.href = "visualizar_graxa"; }, 2000)
+}
+
+function erro_att(){
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Erro Ao Atualizar Óleo',
+        text: 'Tente Novamente!'
+    })
+    setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro_campo_empty(){
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Todos os Campos São Obrigatório!'
+    })  
+}
+
+function att(){
+        
+    //Pesquisa de botão de atualizar e captura do evento de click
+   document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
+       btnAtt.addEventListener("click", (e) => {
+           idGraxa = btnAtt.id
+           sessionStorage.setItem('chave', idGraxa);   
+           window.location.href = "atualizar_graxa"
+          
+
+       })
+   })
+}
+
+//Área de Delete
+
 function del(){
 
     //pesquisa de botão de delete e captura do evento de click
      document.querySelectorAll(".btnDel").forEach(function (btnDel) {
         btnDel.addEventListener("click", (e) => {           
             let idGraxa = btnDel.id
-            var res = window.confirm("Deseja Excluir Este Registro?")
-            
-
-            if (res) {
-                
-                let id_graxa = {
-                    idGra : idGraxa
-                }
-
-                fetch("/deletar_graxa", {
-                    method: "POST",
-                    body: JSON.stringify(id_graxa),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then((resposta) => {
-                    if (resposta.status == 200)
-                        return resposta.text()
-                    else
-                        return resposta.text()
-                })
-                .then((respostaTexto) => {
-                    alert(respostaTexto)
-                    document.location.reload(true);
-                })
-            } else {
-                 alert("Operação Cancelada")
-                return document.location.reload(true);
-            }              
-               
+            window.localStorage.setItem("id", idGraxa)       
+            alerta_del()     
         })
     })
 }
 
-function att(){
-        
-     //Pesquisa de botão de atualizar e captura do evento de click
-    document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
-        btnAtt.addEventListener("click", (e) => {
-            idGraxa = btnAtt.id
-            sessionStorage.setItem('chave', idGraxa);   
-            window.location.href = "atualizar_graxa"
-           
+function alerta_del(){
 
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Delete!',
+        text: "Deseja Excluir Este Registro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: ' Sim ',
+        cancelButtonText: ' Não ',
+        reverseButtons: true
+      }).then((result) => {
+      if (result.isConfirmed) {
+          
+        let id_graxa = {
+            idGra : window.localStorage.getItem("id")
+        }
+        fetch("/deletar_graxa", {
+            method: "POST",
+            body: JSON.stringify(id_graxa),
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
-    })
+        .then((resposta) => {
+            if (resposta.status == 200)
+                return confimacao_del()
+            else
+                return erro_del()
+            })     
+        }else if (
+          
+          result.dismiss === Swal.DismissReason.cancel
+        ){
+          swalWithBootstrapButtons.fire(
+          'Cancelado!',
+          'Operação Cancelada',
+          'error'
+          )}
+        })
+      
+}
+
+function confimacao_del(){
+  Swal.fire({
+  icon: 'success',
+  title: 'Graxa Excluida!',
+  showConfirmButton: false,
+  timer: 1500   
+})
+  setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro_del(){
+
+  Swal.fire({
+  icon: 'error',
+  title: 'Erro Ao Excluir Graxa',
+  text: 'Tente Novamente!'
+})
+
 }

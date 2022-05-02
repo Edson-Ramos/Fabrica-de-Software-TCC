@@ -1,5 +1,7 @@
 
-function cadastrar_usuario() {   
+
+
+function cadastrar_usuario() {
     let nome = document.getElementById("nome").value;
     let email = document.getElementById("email").value;
     let senha = document.getElementById("password").value
@@ -7,6 +9,9 @@ function cadastrar_usuario() {
     let select = document.getElementById("tipos")
     let tipo = select.options[select.selectedIndex].value
     
+
+    
+
 
     let dados_usuarios = {
        nome : nome,
@@ -31,7 +36,7 @@ function cadastrar_usuario() {
             })
             .then((resposta) => {
                 if (resposta.status == 200)
-                    return confimacao()
+                    return success()
                 else
                     return erro()
             })
@@ -41,24 +46,23 @@ function cadastrar_usuario() {
             }
     
 }
-function confimacao(){
-    Swal.fire({
-    icon: 'success',
-    title: 'Usuário Cadastrado Com Sucesso!',
-    showConfirmButton: false,
-    timer: 1500   
-})
-setTimeout(() => {  location.reload(); }, 2000)
+function success(){
+        Swal.fire({
+        icon: 'success',
+        title: 'Usuário Cadastrado Com Sucesso!',
+        showConfirmButton: false,
+        timer: 1500   
+    })
+    setTimeout(() => {  location.reload(); }, 2000)
 }
 
 function erro(){
 
     Swal.fire({
-  icon: 'error',
-  title: 'Erro Ao Cadastrar Usuário',
-  text: 'Verifique os Campos Digitados!'
-})
-
+    icon: 'error',
+    title: 'Erro Ao Cadastrar Usuário',
+    text: 'Verifique os Campos Digitados!'
+    })
 }
 
 function erro_senha(){

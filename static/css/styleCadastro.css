@@ -19,12 +19,18 @@ body{
     -webkit-backdrop-filter: blur(10px);
     max-width: fit-content;
     max-height: fit-content;
-    margin-top: 110px;
+    margin-top: 100px;
     margin-bottom:100px;
     padding-top: 20px;
     text-align: center;
     border-radius: 20px; 
 
+}
+.welcome{
+    margin-right: 50px;
+}
+.aNome{
+    color:blue;
 }
 .row-d{
     margin: 20px;
@@ -32,6 +38,15 @@ body{
 }
 .input-group{
     left: 1px;
+}
+.inpCod{
+    width: 100%;
+}
+.cod{
+    width: 30%;
+}
+.input-group-text{
+    width: 38%;
 }
 .titulo{
     color: black
@@ -44,12 +59,12 @@ body{
 .navbar-brand{
     margin-left: 20px;
 }
-.btn{
+.btn{    
     color: black;
   
 }
 .btn:hover{
-    background-color: rgb(115, 255, 255);
+    background-color: rgb(93, 95, 95);
 }
 
 .checkBox{
@@ -64,8 +79,8 @@ body{
 .obs{
     color: white
 }
-#inpId{
-    width: 65%;   
+#input{
+    width: 100%;   
 }
 #btn{
     left: 60px;

@@ -17,7 +17,7 @@ function getMaquinas(){
 })
 }
 
-
+//Área de Criação da pg lista máquinas  
 
 function listaMaquinas(){     
    
@@ -70,6 +70,9 @@ function listaMaquinas(){
     tr.appendChild(btEx)
     tr.appendChild(btAtt) 
 }
+
+//Área de Atualização
+
 const codMaq = document.querySelector("#codMaq")
 codMaq.addEventListener("blur", (e) => {
 
@@ -90,23 +93,40 @@ codMaq.addEventListener("blur", (e) => {
 
         fetch(`${rota}/lista_equipamento_cod`, cod_Maquina)
             .then(function (response) {
-                response.json()
-                    .then(function (data) {
-                        for (arquivo of data.arquivos)
-                            var id = dados.idMaq;
-                    var nome = document.getElementById("codMaq")
-                    nome.value = `${arquivo.codMaq}`
-                    var email = document.getElementById("linhaMaq")
-                    email.value = `${arquivo.linha}`
-                    var senha = document.getElementById("trechoMaq")
-                    senha.value = `${arquivo.trecho}`
-                    var cSenha = document.getElementById("nomeMaq")
-                    cSenha.value = `${arquivo.nome}` 
-                    })
+                if (response.status == 500){
+                    alerta_erro_codMaq()
+                }else if (response.status == 200){
+                    response.json()
+                        .then(function (data) {
+                            for (arquivo of data.arquivos)
+                                var id = dados.idMaq;
+                                var nome = document.getElementById("codMaq")
+                                nome.value = `${arquivo.codMaq}`
+                                var email = document.getElementById("linhaMaq")
+                                email.value = `${arquivo.linha}`
+                                var senha = document.getElementById("trechoMaq")
+                                senha.value = `${arquivo.trecho}`
+                                var cSenha = document.getElementById("nomeMaq")
+                                cSenha.value = `${arquivo.nome}` 
+                        })
+                }   
             })
     }
 
 })
+
+function alerta_erro_codMaq(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Campo Cód. Máquina Não Encontrado!'
+    })
+    document.querySelectorAll(".swal2-styled").forEach(function(btnOK){
+        btnOK.addEventListener("click", (e) =>{
+            location.reload(true)
+        })
+    })
+}
 
 function createTable(){
     var idMaq = JSON.parse(sessionStorage.getItem('chave'))    
@@ -122,6 +142,7 @@ function createTable(){
         }
     }
     fetch(`${rota}/lista_equipamento_id`, dado_usuario)
+    
         .then(function(response){
             response.json()
                 .then(function(data){
@@ -140,7 +161,63 @@ function createTable(){
         })
 }
 
+function confimacao_att(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Registro Foi Atualizado!',
+    showConfirmButton: false
+    })
+    setTimeout(() => {  window.location.href = "visualizar_maquinas"; }, 2000)
+    
+    
+}
 
+function alerta_att(){
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+        title: 'Atualização!',
+        text: "Tem Certeza Que Deseja Atualizar?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: ' Sim ',
+        cancelButtonText: ' Não ',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+           
+            atualizar_maquina()
+           
+        } else if (
+            
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelado!',
+            'Registro Não Foi Atualizado',
+            'error'
+            )
+        }
+        })
+        
+}
+
+function erro_att(){
+
+    Swal.fire({
+    icon: 'error',
+    title: 'Erro Ao Atualizar Maquina',
+    text: 'Tente Novamente!'
+    })
+    setTimeout(() => {  location.reload(); }, 2000)
+}
 
 function atualizar_maquina() {    
     let idMaq = JSON.parse(sessionStorage.getItem('chave')) 
@@ -156,8 +233,8 @@ function atualizar_maquina() {
         trecho: trechoMaq,
         nomeMaq: nomeMaq,
     }    
-    if (idMaq == "" || codMaq == "" || linhaMaq == "" || trechoMaq == "" || nomeMaq == ""){
-        return alert("Todos os Campos São Obrigatorios!")
+    if (linhaMaq == "" || trechoMaq == "" || nomeMaq == ""){
+        return erro_campo_empty()
     }else{
        fetch("/atualizar_maquinas",
     {
@@ -169,15 +246,11 @@ function atualizar_maquina() {
     })
     .then((resposta) => {
         if (resposta.status == 200)
-            return resposta.text()
+            return confimacao_att()
         else
-            return "Erro Ao Atualizar Máquina"
+            return erro_att()
     })
-    .then((respostaTexto) => {
-        window.location.href = "visualizar_maquinas"
-        alert(respostaTexto)
-        
-    }) 
+    
     }
     
 }
@@ -187,38 +260,9 @@ function del(){
  
   document.querySelectorAll(".btnEx").forEach(function (btnEx) {
         btnEx.addEventListener("click", (e) => {
-            idDel = btnEx.id
-            var confirm = window.confirm(`Deseja Realmente Excluir Máquina` )
-
-            if (confirm)
-            {
-                let dado_maquina = {
-                        idMaq : idDel
-                    }
-
-                fetch("/deletar_maquinas", {
-                        method: "POST",
-                        body: JSON.stringify(dado_maquina),
-                        headers: {
-                                "Content-Type": "application/json"
-                        }
-                    })
-                    .then((resposta) => {
-                        if (resposta.status == 200)
-                            return resposta.text()
-                        else
-                            return "Erro Ao Deletar Máquina"
-                    })
-                    .then((respostaTexto) => {
-                        window.location.href = "visualizar_maquinas"
-                        alert(respostaTexto)
-                        
-                    }) 
-            } else
-                window.alert("Operação Cancelada!")
-                document.location.reload(true)
-                 
-
+            let idDel = btnEx.id
+            window.localStorage.setItem("id", idDel)       
+            alerta_del() 
         })
     })
 }
@@ -237,4 +281,83 @@ function att(){
 
         })
     })
+}
+
+function alerta_del(){
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+      title: 'Delete!',
+      text: "Deseja Excluir Este Registro?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: ' Sim ',
+      cancelButtonText: ' Não ',
+      reverseButtons: true
+      }).then((result) => {
+      if (result.isConfirmed) {
+          
+          
+              let dado_maquina = {
+                  idMaq : window.localStorage.getItem("id")
+              }
+
+              fetch("/deletar_maquinas", {
+                method: "POST",
+                body: JSON.stringify(dado_maquina),
+                headers: {
+                        "Content-Type": "application/json"
+                }
+            })
+              .then((resposta) => {
+                  if (resposta.status == 200)
+                      return confimacao_del()
+                  else
+                      return erro_del()
+              })     
+      }else if (
+          
+          result.dismiss === Swal.DismissReason.cancel
+      ) {
+          swalWithBootstrapButtons.fire(
+          'Cancelado!',
+          'Operação Cancelada',
+          'error'
+          )
+      }
+      })
+      
+}
+
+function confimacao_del(){
+    Swal.fire({
+        icon: 'success',
+        title: 'Máquina Excluida!',
+        showConfirmButton: false,
+        timer: 1500   
+    })
+    setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro_del(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Erro Ao Excluir Máquina',
+        text: 'Tente Novamente!'
+    })
+}
+function erro_campo_empty(){
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Todos os Campos São Obrigatório!'
+    })  
 }

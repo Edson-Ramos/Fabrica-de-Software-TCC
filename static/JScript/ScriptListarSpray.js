@@ -93,7 +93,45 @@ function createTable(){
         })
 }
 
-function atualizar_Spray() {    
+// Área de Att
+
+function alerta_att(){
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+            title: 'Atualização!',
+            text: "Tem Certeza Que Deseja Atualizar?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: ' Sim ',
+            cancelButtonText: ' Não ',
+            reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+            atualizar_spray()
+            
+      } else if (
+          
+          result.dismiss === Swal.DismissReason.cancel
+      ) {
+          swalWithBootstrapButtons.fire(
+          'Cancelado!',
+          'Registro Não Foi Atualizado',
+          'error'
+          )
+      }
+      })
+      
+}
+
+function atualizar_spray() {    
     
     let idSpray = sessionStorage.getItem('chave')
     let codSpray = document.getElementById("codSpray").value
@@ -101,15 +139,14 @@ function atualizar_Spray() {
     let visco = document.getElementById("visco").value 
    
     if (codSpray == "" || tipo == "" || visco == ""){
-        return alert("Todos os Campos São Obrigatorios!")
+        return erro_campo_empty()
     }else{
-     let dados_spray = {
-        idSpray : idSpray,
-        codSpray : codSpray,
-        tipo: tipo,
-        visco : visco,
-    }    
-    console.log( dados_spray)
+        let dados_spray = {
+            idSpray : idSpray,
+            codSpray : codSpray,
+            tipo: tipo,
+            visco : visco,
+    }
     fetch("/atualizar_spray",
     {
         method: "POST",
@@ -120,19 +157,56 @@ function atualizar_Spray() {
     })
     .then((resposta) => {
         if (resposta.status == 200)
-            return resposta.text()     
+            return confimacao_att()    
         else
-            return "Erro Ao Atualizar Spray"
-    })
-    .then((respostaTexto) => {
-        document.location.href = "visualizar_spray"
-        alert(respostaTexto)
-    })
-       
+            return erro_att()
+    }) 
     }
-
-    
 }
+
+function confimacao_att(){
+    Swal.fire({
+        icon: 'success',
+        title: 'Registro Foi Atualizado!',
+        showConfirmButton: false
+    })
+    setTimeout(() => {  window.location.href = "visualizar_spray"; }, 2000)
+}
+
+function erro_att(){
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Erro Ao Atualizar Spray',
+        text: 'Tente Novamente!'
+    })
+    setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro_campo_empty(){
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Todos os Campos São Obrigatório!'
+    })  
+}
+
+function att(){
+        
+    //Pesquisa de botão de atualizar e captura do evento de click
+   document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
+       btnAtt.addEventListener("click", (e) => {
+           idSpray = btnAtt.id
+           sessionStorage.setItem('chave', idSpray);   
+           window.location.href = "atualizar_spray"
+          
+
+       })
+   })
+}
+
+//Área de Delete
 
 function del(){
 
@@ -140,51 +214,79 @@ function del(){
      document.querySelectorAll(".btnDel").forEach(function (btnDel) {
         btnDel.addEventListener("click", (e) => {           
 
-            var res = window.confirm("Deseja Excluir Este Registro?")
-            
-
-            if (res) {
-                let idSpray = btnDel.id
-                let id_spray = {
-                    idSpray : idSpray
-                }
-
-                fetch("/deletar_spray", {
-                    method: "POST",
-                    body: JSON.stringify(id_spray),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then((resposta) => {
-                    if (resposta.status == 200)
-                        return resposta.text()
-                    else
-                        return resposta.text()
-                })
-                .then((respostaTexto) => {
-                    alert(respostaTexto)
-                    document.location.reload(true);
-                })
-            } else {
-                 alert("Operação Cancelada")
-                return document.location.reload(true);
-            }              
-               
+            let idSpray = btnDel.id
+            window.localStorage.setItem("id", idSpray)       
+            alerta_del() 
         })
     })
 }
 
-function att(){
-        
-     //Pesquisa de botão de atualizar e captura do evento de click
-    document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
-        btnAtt.addEventListener("click", (e) => {
-            idSpray = btnAtt.id
-            sessionStorage.setItem('chave', idSpray);   
-            window.location.href = "atualizar_spray"
-           
+function alerta_del(){
 
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Delete!',
+        text: "Deseja Excluir Este Registro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: ' Sim ',
+        cancelButtonText: ' Não ',
+        reverseButtons: true
+      }).then((result) => {
+      if (result.isConfirmed) {
+          
+        let id_spray = {
+            idSpray : window.localStorage.getItem("id")
+        }
+        fetch("/deletar_spray", {
+            method: "POST",
+            body: JSON.stringify(id_spray),
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
+        .then((resposta) => {
+            if (resposta.status == 200)
+                return confimacao_del()
+            else
+                return erro_del()
+        })     
+        }else if(
+          
+            result.dismiss === Swal.DismissReason.cancel
+        ){
+          swalWithBootstrapButtons.fire(
+          'Cancelado!',
+          'Operação Cancelada',
+          'error'
+        )}
     })
+      
 }
+
+function confimacao_del(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Spray Excluido!',
+    showConfirmButton: false,
+    timer: 1500   
+  })
+    setTimeout(() => {  location.reload(); }, 2000)
+  }
+  
+  function erro_del(){
+  
+    Swal.fire({
+    icon: 'error',
+    title: 'Erro Ao Excluir Spray',
+    text: 'Tente Novamente!'
+  })
+  
+  }

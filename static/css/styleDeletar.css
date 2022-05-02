@@ -24,6 +24,9 @@ body{
     border-radius: 20px; 
 
 }
+.welcome{
+    margin-right: 50px;
+}
 .row-d{
     margin: 20px;
     padding: 20px

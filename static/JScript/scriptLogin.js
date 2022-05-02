@@ -55,8 +55,10 @@ function pass(){
         })
 
         if (password) {
-        senha_valida = password
-        login()
+            senha_valida = password  
+            login()     
+        }else{
+            alerta_erro()
         }
     })()
 
@@ -76,19 +78,39 @@ function login(){
              "Content-Type" : "application/json"
          }
      }).then(function (response) {
-             if (response.status != 200)
-             {
-                  
+             if (response.status != 200){                  
                return  alerta_erro() 
              } 
             else
                 return response.json()
-        
     })
     .then((data) =>{
-        console.log(data)
-                let token = data.access_token;
-                localStorage.setItem("token", token);                
-        return window.location.href = "cadastrar_usuarios"
+        for (dados of data.files)
+        
+                token = dados.access_token
+                nome = dados.nome
+                tipo = dados.tipo
+                localStorage.setItem("token", token);
+                localStorage.setItem("nome", nome);
+                localStorage.setItem("tipo", tipo);
+            if(tipo != 1){
+                alerta_erro_usuario()
+            }else{
+                return window.location.href = "cadastrar_usuarios"
+            }    
+        
         })
+}
+
+function alerta_erro_usuario(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Login Web Apenas Para Administradores',
+        text: `Olá ${nome} Você deve Logar Pelo Aplicativo`
+    })
+    document.querySelectorAll(".swal2-styled").forEach(function(btnOK){
+        btnOK.addEventListener("click", (e) =>{
+            location.reload(true)
+        })
+    })
 }

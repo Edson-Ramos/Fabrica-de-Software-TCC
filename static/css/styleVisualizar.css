@@ -24,6 +24,12 @@ body{
     border-radius: 20px; 
 
 }
+.welcome{
+    margin-right: 50px;
+}
+.aNome{
+    color:blue;
+}
 .row-d{
     margin: 20px;
     padding: 20px

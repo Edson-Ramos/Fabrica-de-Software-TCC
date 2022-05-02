@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleAtualizar.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleCadastroUsuario.css')}}">
     <script src="{{url_for('static', filename='JScript/checkAuth.js')}}"></script>
     
     <title>Easylub</title>
@@ -71,6 +71,11 @@
                     </div>
                 </li>
             </ul>
+            <div class="welcome">             
+            </div>
+            <a class="navbar-brand">           
+                <button class="btn btn-outline-dark" type="button" onclick="logout()">Logout</button>
+            </a>
         </div>
     </nav>
     <div class="container">
@@ -81,7 +86,7 @@
                 </div>
                 <form action="">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Nome completo:</span>
+                        <span class="input-group-text" id="basic-addon1">Nome:</span>
                         <input id="nome" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">                        
                       </div>
                       <div class="input-group mb-3">
@@ -91,7 +96,7 @@
                      <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Senha: </span>
                         <input id="senha" type="password" class="form-control"  aria-label="Server">
-                        <span class="input-group-text" id="basic-addon1">Confirmar senha: </span>
+                        <span class="input-group-text" id="basic-addon1">Confirmar Senha: </span>
                         <input id="cSenha" type="password" class="form-control"  aria-label="Server">
                      </div>
                         <select id="tipos" class="form-select" aria-label="Default select example">
@@ -101,7 +106,7 @@
                           </select>                     
                 </form>
             </div>
-            <div>
+            <div class="row-d">
                 <button onclick="alerta_att()" type="submit" id="btn"
                                     class="btn btn-primary">Atualizar</button>        
             </div>

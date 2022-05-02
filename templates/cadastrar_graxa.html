@@ -71,13 +71,18 @@
                     </div>
                 </li>
             </ul>
+            <div class="welcome">             
+            </div>
+            <a class="navbar-brand">           
+                <button class="btn btn-outline-dark" type="button" onclick="logout()">Logout</button>
+            </a>
         </div>
     </nav>
     <div class="container">
         <section id="equipamentos">
             <div class="container-fluid agenda text-center margin">
                 <div class="titulo">
-                    <h1>Cadastro de graxa</h1>
+                    <h1>Cadastrar Graxa</h1>
                 </div>
             </div>
             <div>
@@ -122,6 +127,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="{{url_for('static', filename='JScript/scriptCadastroGraxa.js')}}"></script>
+    <script src="{{url_for('static', filename='JScript/sweetalert.js')}}"></script>
 
 
 </footer>

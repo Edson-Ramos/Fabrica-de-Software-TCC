@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleCadastro.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleCadastroUsuario.css')}}">
     <script src="{{url_for('static', filename='JScript/checkAuth.js')}}"></script>
     
     <title>Easylub</title>
@@ -71,17 +71,22 @@
                     </div>
                 </li>
             </ul>
+            <div class="welcome">             
+            </div>
+            <a class="navbar-brand">           
+                <button class="btn btn-outline-dark" type="button" onclick="logout()">Logout</button>
+            </a>
         </div>
     </nav>
     <div class="container">
         <section id="equipamentos">
             <div class="container-fluid agenda text-center margin">
                 <div class="titulo">
-                    <h1>Cadastrar usuário</h1>
+                    <h1>Cadastrar Usuário</h1>
                 </div>
                 <form action="" class="form">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Nome Completo:</span>
+                        <span class="input-group-text" id="basic-addon1">Nome:</span>
                         <input id="nome" name="name" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" data-max-length="16" data-only-letters data-required>
                       </div>
                      <div class="input-group mb-3">

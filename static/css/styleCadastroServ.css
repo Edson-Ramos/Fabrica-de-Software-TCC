@@ -1,0 +1,71 @@
+body{
+    font-family: Georgia, serif; 
+    background-image: url(../img/wall.jpg);
+    padding-top: 5vh;
+    background-size: cover;
+    width: 100%;
+}
+.container{
+    
+    background-color: rgba(99, 106, 109, 0.248);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    max-width: 55%;
+    max-height: fit-content;
+    margin-top: 60px;
+    padding-top: 10px;
+    text-align: center;
+    border-radius: 20px; 
+
+}
+.welcome{
+    margin-right: 50px;
+}
+.aNome{
+    color:blue;
+}
+.navbar{
+    background-color: rgba(99, 106, 109, 0.248);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+.navbar-brand{
+    margin-left: 20px;
+}
+.titulo{
+    color: black
+}
+
+.btn{    
+    color: black;
+  
+}
+.btn:hover{
+    background-color: rgb(93, 95, 95);
+}
+.checkBox{    
+    background: white;    
+}
+.form-check-label{
+    font-size: 13px;
+    
+} 
+.obs{
+    color: white
+}
+.row-d{
+    margin: 20px;
+    padding: 20px
+}
+.form-control{
+    border-radius: 50;
+}
+.span{
+    width: 100px;
+}
+.spanT{
+    width: 70px;
+}
+.spanM{
+    width: 70px;
+}

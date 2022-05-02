@@ -14,14 +14,18 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 from cryptography.hazmat.primitives import serialization
 import datetime
 
+
+
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-private_key = open('.ssh/key', 'r').read()
-prkey = serialization.load_ssh_private_key(private_key.encode(), password = b'87361542')
 
-public_key = open('.ssh/key.pub', 'r').read()
+
+private_key = open('/home/edsonramos/Documentos/workspace/app/Fabrica-de-Software-TCC/ssh/key', 'r').read()
+prkey = serialization.load_ssh_private_key(private_key.encode(), password =b'87361542')
+
+public_key = open('/home/edsonramos/Documentos/workspace/app/Fabrica-de-Software-TCC/ssh/key.pub', 'r').read()
 pubkey = serialization.load_ssh_public_key(public_key.encode())
 
 app.config["JWT_PRIVATE_KEY"] = prkey
@@ -46,7 +50,7 @@ def login():
 
 @app.route('/login', methods=['POST'])
 def login_post():
-    resposta = {'files': []}
+    token = {'files': []}
 
     dado = request.get_json()
     email = dado['email']
@@ -62,13 +66,15 @@ def login_post():
         
         if email == emailBD and senha == senhaBD:
             access_token = create_access_token(identity = emailBD)
-            token = jsonify(access_token = access_token)
+            
 
             file = {
+                'access_token':access_token,
                 'nome': nomeBD,
-                'email': emailBD
+                'email': emailBD,
+                'tipo' : tipoBD
             }
-            resposta['files'].append(file)
+            token['files'].append(file)
                         
             return (token)
         else:

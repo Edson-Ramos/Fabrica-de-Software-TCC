@@ -92,6 +92,44 @@ function createTable(){
 }
 
 
+// Área de Att
+
+function alerta_att(){
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+            title: 'Atualização!',
+            text: "Tem Certeza Que Deseja Atualizar?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: ' Sim ',
+            cancelButtonText: ' Não ',
+            reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+            atualizar_oleo()
+            
+      } else if (
+          
+          result.dismiss === Swal.DismissReason.cancel
+      ) {
+          swalWithBootstrapButtons.fire(
+          'Cancelado!',
+          'Registro Não Foi Atualizado',
+          'error'
+          )
+      }
+      })
+      
+}
+
 function atualizar_oleo() {    
     var idOleo = JSON.parse(sessionStorage.getItem('chave')) 
     let codOleo = document.getElementById("codOleo").value
@@ -100,13 +138,13 @@ function atualizar_oleo() {
     
     
     if (codOleo == "" || tipo == "" || visco == ""){
-        return alert("Todos os Campos São Obrigatorios!")
+        return erro_campo_empty()
     }else{
-     let dados_oleo = {
-        idOleo : idOleo,
-        codOleo : codOleo,
-        tipo: tipo,
-        visco : visco,
+        let dados_oleo = {
+            idOleo : idOleo,
+            codOleo : codOleo,
+            tipo: tipo,
+            visco : visco,
     }    
 
     fetch("/atualizar_oleo",
@@ -119,20 +157,58 @@ function atualizar_oleo() {
     })
     .then((resposta) => {
         if (resposta.status == 200)
-            return resposta.text()        
+            return confimacao_att()       
         else
-            return "Erro Ao Atualizar Óleo"
-    })
-    .then((respostaTexto) => {
-        document.location.href ="visualizar_oleo"
-        alert(respostaTexto)
-        
-    })
-       
+            return erro_att()
+    }) 
     }
-
-    
 }
+
+function confimacao_att(){
+    Swal.fire({
+        icon: 'success',
+        title: 'Registro Foi Atualizado!',
+        showConfirmButton: false
+    })
+    setTimeout(() => {  window.location.href = "visualizar_oleo"; }, 2000)
+}
+
+function erro_att(){
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Erro Ao Atualizar Óleo',
+        text: 'Tente Novamente!'
+    })
+    setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro_campo_empty(){
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Todos os Campos São Obrigatório!'
+    })  
+}
+
+function att(){
+        
+    //Pesquisa de botão de atualizar e captura do evento de click
+
+   document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
+       btnAtt.addEventListener("click", (e) => {
+           idOleo = btnAtt.id
+           sessionStorage.setItem('chave', idOleo);   
+           window.location.href = "atualizar_oleo"
+          
+
+       })
+   })
+}
+
+
+//Área de Delete
 
 
 function del(){
@@ -141,52 +217,80 @@ function del(){
      document.querySelectorAll(".btnDel").forEach(function (btnDel) {
         btnDel.addEventListener("click", (e) => {           
 
-            var res = window.confirm("Deseja Excluir Este Registro?")
-            
-
-            if (res) {
-                let idOleo = btnDel.id
-                let id_oleo = {
-                    idOleo : idOleo
-                }
-
-                fetch("/deletar_oleo", {
-                    method: "POST",
-                    body: JSON.stringify(id_oleo),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then((resposta) => {
-                    if (resposta.status == 200)
-                        return resposta.text()
-                    else
-                        return alert("Erro Ao Deletar Lubrificante")
-                })
-                .then((respostaTexto) => {
-                    alert(respostaTexto)
-                    document.location.reload(true);
-                })
-            } else {
-                 alert("Operação Cancelada")
-                return document.location.reload(true);
-            }              
-               
+            let idOleo = btnDel.id
+            window.localStorage.setItem("id", idOleo)       
+            alerta_del() 
         })
     })
 }
 
-function att(){
-        
-     //Pesquisa de botão de atualizar e captura do evento de click
+function alerta_del(){
 
-    document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
-        btnAtt.addEventListener("click", (e) => {
-            idOleo = btnAtt.id
-            sessionStorage.setItem('chave', idOleo);   
-            window.location.href = "atualizar_oleo"
-           
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
 
-        })
+      swalWithBootstrapButtons.fire({
+        title: 'Delete!',
+        text: "Deseja Excluir Este Registro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: ' Sim ',
+        cancelButtonText: ' Não ',
+        reverseButtons: true
+      }).then((result) => {
+      if (result.isConfirmed) {
+          
+        let id_oleo = {
+            idOleo : window.localStorage.getItem("id")
+        }
+        fetch("/deletar_oleo", {
+            method: "POST",
+            body: JSON.stringify(id_oleo),
+            headers: {
+                "Content-Type": "application/json"
+            }
+            })
+            .then((resposta) => {
+                if (resposta.status == 200)
+                    return confimacao_del()
+                else
+                    return erro_del()
+            })     
+        }else if(
+          
+          result.dismiss === Swal.DismissReason.cancel
+        ){
+          swalWithBootstrapButtons.fire(
+          'Cancelado!',
+          'Operação Cancelada',
+          'error'
+        )}
     })
+      
 }
+
+function confimacao_del(){
+  Swal.fire({
+  icon: 'success',
+  title: 'Óleo Excluido!',
+  showConfirmButton: false,
+  timer: 1500   
+})
+  setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro_del(){
+
+  Swal.fire({
+  icon: 'error',
+  title: 'Erro Ao Excluir Óleo',
+  text: 'Tente Novamente!'
+})
+
+}
+

@@ -7,6 +7,8 @@ const graxa = document.querySelector("#graxa")
 const spray = document.querySelector("#spray")
 const select = document.querySelector("#sel")
 var idLub =""
+var codLub = ""
+var tipo = ""
 
 
 
@@ -214,8 +216,8 @@ function createTable() {
     let cod_maq = {
         codMaq: codMaq.value
     }
-    if (codMaq == "") {
-        return alert("Preencha Campo Código da Máquina")
+    if (codMaq.value == "") {
+        return alerta_empyt_codMaq()
     } else {
         const cod_Maquina = {
             method: "POST",
@@ -228,15 +230,44 @@ function createTable() {
 
         fetch(`${rota}/lista_equipamento_cod`, cod_Maquina)
             .then(function (response) {
-                response.json()
+                if (response.status == 500){
+                    alerta_erro_codMaq()
+                }else if(response.status == 200){
+                   response.json()
                     .then(function (data) {
                         for (arquivo of data.arquivos)
                             createMaq(arquivo);
-                    })
+                    }) 
+                }
+                
             })
     }
 
+    
 })
+
+function alerta_erro_codMaq(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Campo Cód. Máquina Não Encontrado!'
+    })
+    document.querySelectorAll(".swal2-styled").forEach(function(btnOK){
+        btnOK.addEventListener("click", (e) =>{
+            location.reload(true)
+        })
+    })
+}
+
+
+
+function alerta_empyt_codMaq(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Campo Cód. Máquina Não Poder Ser Vazio!'
+    })
+}
 
 function createMaq(arquivo) {
 
@@ -285,7 +316,7 @@ oleo.addEventListener("click", (e) => {
                 response.json()
                 .then(function (data){
                     for (arquivo of data.arquivos)
-                    codLub = `${arquivo.codOleo}`
+                        codLub = `${arquivo.codOleo}`
                         tipo = `${arquivo.tipo}` 
                         prop = arquivo.visco
                     
@@ -383,7 +414,41 @@ spray.addEventListener("click", (e) => {
 })
 }
 
+//Área de Att
 
+function alerta_att(){
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+      title: 'Atualização!',
+      text: "Tem Certeza Que Deseja Atualizar?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: ' Sim ',
+      cancelButtonText: ' Não ',
+      reverseButtons: true
+      }).then((result) => {
+      if (result.isConfirmed) {
+          atualizar_servico()
+          
+      }else if(
+          
+          result.dismiss === Swal.DismissReason.cancel
+        ){
+          swalWithBootstrapButtons.fire(
+            'Cancelado!',
+            'Registro Não Foi Atualizado',
+            'error'
+        )}
+      })
+}
 
 function atualizar_servico() {
 
@@ -400,31 +465,30 @@ function atualizar_servico() {
     let obs = document.getElementById("obs")
 
    
-   if (status [0].checked){
+    if (status [0].checked){
        status = "Aguardando"
-   }else if (status [1].checked){
+    }else if (status [1].checked){
        status = "Em Execução"
-   }else if (status [2].checked){
+    }else if (status [2].checked){
        status = "Atrasado"
-   }else if (status [3].checked){
+    }else if (status [3].checked){
        status = "Concluido"
-   }
+    }
 
-   if(tipoLub[0].checked){
+    if(tipoLub[0].checked){
        tipoLub = "Óleo"
-   }else if (tipoLub[1].checked){
+    }else if (tipoLub[1].checked){
        tipoLub = "Graxa"
-   }else if (tipoLub[2].checked){
+    }else if (tipoLub[2].checked){
        tipoLub = "Spray"
-   }
+    }
 
     if (equip == "Selecione o Equipamento") {
         equip = ""
     }
 
-    if (codMaq.value == "" || equip.value == "" || tipoLub == "" || dataApli.value == "" || dataProxApli.value == "" || status == "") {
-        alert("Campos São Obrigatorios!")
-        document.location.reload(true)
+    if (codMaq.value == "" || maq.value =="" || linha.value == "" || trecho.value == "" || equip.value == "" || tipoLub == "" || codLub=="" ||  tipo == "" || prop == "" || dataApli.value == "" || dataProxApli.value == "" || status == "") {
+        return erro_campo_empty()
     }else{
 
          const dados_servicos = {
@@ -443,30 +507,66 @@ function atualizar_servico() {
             status : status,
             obs : obs.value,
         }
-           fetch("/atualizar_servico",
-                {
-                    method: "POST",
-                    body:JSON.stringify(dados_servicos),
-                    headers:{
-                        "Content-Type" : "application/json"
-                    }
-                })
-                .then((resposta) => {
-                    if (resposta.status == 200)
-                        return resposta.text()
-                    else
-                        return "Erro Ao Atualizar Serviço"
-                })
-                .then((repostaTexto) => {
-                    alert(repostaTexto)
-                    window.location.href = "visualizar_servico"
-                    
-                })
+        fetch("/atualizar_servico",
+            {
+                method: "POST",
+                body:JSON.stringify(dados_servicos),
+                headers:{
+                    "Content-Type" : "application/json"
+                }
+            })
+            .then((resposta) => {
+                if (resposta.status == 200)
+                    return confimacao_att()
+                else
+                    return erro_att()
+            })
     }
-
-
-
 }
+
+function confimacao_att(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Registro Foi Atualizado!',
+    showConfirmButton: false
+    })
+    setTimeout(() => {  window.location.href = "visualizar_servico"; }, 2000)
+}
+
+function erro_att(){
+
+    Swal.fire({
+    icon: 'error',
+    title: 'Erro Ao Atualizar Usuário',
+    text: 'Tente Novamente!'
+})
+setTimeout(() => {  location.reload(); }, 2000)
+}
+
+function erro_campo_empty(){
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Opss...',
+        text: 'Todos os Campos São Obrigatório!'
+    })  
+}
+
+function att(){
+    //Pesquisa de botão de atualizar e captura do evento de click
+
+document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
+   btnAtt.addEventListener("click", (e) => {
+       idServ = btnAtt.id
+       sessionStorage.setItem('chave', idServ );   
+       window.location.href = "atualizar_servico"
+      
+
+   })
+})
+}
+
+//Área Delete
 
 function del(){
 
@@ -475,16 +575,37 @@ function del(){
     document.querySelectorAll(".btnDel").forEach(function (btnDel) {
         btnDel.addEventListener("click", (e) => {
             let idServ = btnDel.id
+            window.localStorage.setItem("id", idServ)       
+                alerta_del()
+        })
+    })
+}
 
-            var confirm = window.confirm("Tem Certeza Que Deseja Excluir Este Registro?")
+function alerta_del(){
 
-            if (confirm) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+    },
+        buttonsStyling: false
+    })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Delete!',
+        text: "Deseja Excluir Este Registro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: ' Sim ',
+        cancelButtonText: ' Não ',
+        reverseButtons: true
+      }).then((result) => {
+            if (result.isConfirmed) {
 
                 let dado_servico = {
-                    idServ: idServ
+                    idServ: window.localStorage.getItem("id")
                 }
-
-            fetch("/deletar_servico", {
+                fetch("/deletar_servico", {
                     method: "POST",
                     body: JSON.stringify(dado_servico),
                     headers: {
@@ -492,33 +613,39 @@ function del(){
                     }
                 })
                 .then((resposta) => {
-                    if (resposta.status == 200)
-                        return resposta.text()
-                    else
-                        return alert("Erro Ao Deletar Serviço")
-                })
-                .then((respostaTexto) => {
-                    alert(respostaTexto)
-                    document.location.reload(true);
-                })
-            } else
-                alert("Operação Cancelada")
-                 document.location.reload(true);
-
+                  if (resposta.status == 200)
+                      return confimacao_del()
+                  else
+                      return erro_del()
+              })     
+            }else if(
+          
+                result.dismiss === Swal.DismissReason.cancel
+            ){
+                swalWithBootstrapButtons.fire(
+                    'Cancelado!',
+                    'Operação Cancelada',
+                    'error'
+                )}
         })
-    })
 }
 
-function att(){
-         //Pesquisa de botão de atualizar e captura do evento de click
+function confimacao_del(){
+    Swal.fire({
+    icon: 'success',
+    title: 'Serviço Excluido!',
+    showConfirmButton: false,
+    timer: 1500   
+})
+    setTimeout(() => {  location.reload(); }, 2000)
+}
 
-    document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
-        btnAtt.addEventListener("click", (e) => {
-            idServ = btnAtt.id
-            sessionStorage.setItem('chave', idServ );   
-            window.location.href = "atualizar_servico"
-           
+function erro_del(){
 
-        })
-    })
+    Swal.fire({
+    icon: 'error',
+    title: 'Erro Ao Excluir Serviço',
+    text: 'Tente Novamente!'
+})
+
 }
