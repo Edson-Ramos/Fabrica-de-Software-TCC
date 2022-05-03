@@ -15,17 +15,16 @@ from cryptography.hazmat.primitives import serialization
 import datetime
 
 
-
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
+private_key = open('/ssh/key', 'r').read()
+prkey = serialization.load_ssh_private_key(
+    private_key.encode(), password=b'87361542')
 
-private_key = open('/home/edsonramos/Documentos/workspace/app/Fabrica-de-Software-TCC/ssh/key', 'r').read()
-prkey = serialization.load_ssh_private_key(private_key.encode(), password =b'87361542')
-
-public_key = open('/home/edsonramos/Documentos/workspace/app/Fabrica-de-Software-TCC/ssh/key.pub', 'r').read()
+public_key = open('/ssh/key.pub', 'r').read()
 pubkey = serialization.load_ssh_public_key(public_key.encode())
 
 app.config["JWT_PRIVATE_KEY"] = prkey
@@ -38,10 +37,12 @@ jwt = JWTManager(app)
 
 # Área Usuários
 
+
 @app.route("/checkAuth")
 @jwt_required()
 def check():
     return "OK"
+
 
 @app.route("/")
 def login():
@@ -56,26 +57,25 @@ def login_post():
     email = dado['email']
     senha = dado['password']
     user = User(None, None, email, senha, None)
-    
+
     for user in UsuarioDAO.listUserEmail(user):
         idDB = user.id
         nomeBD = user.nome
         emailBD = user.email
         senhaBD = user.senha
         tipoBD = user.tipo
-        
+
         if email == emailBD and senha == senhaBD:
-            access_token = create_access_token(identity = emailBD)
-            
+            access_token = create_access_token(identity=emailBD)
 
             file = {
-                'access_token':access_token,
+                'access_token': access_token,
                 'nome': nomeBD,
                 'email': emailBD,
-                'tipo' : tipoBD
+                'tipo': tipoBD
             }
             token['files'].append(file)
-                        
+
             return (token)
         else:
             return flask.Response("Email ou Senha Incorretos", status=500)
@@ -85,8 +85,8 @@ def login_post():
 def cadastrar_usuario_Get():
     return render_template('cadastrar_usuario.html')
 
-@app.route('/cadastrar_usuario', methods=['POST'])
 
+@app.route('/cadastrar_usuario', methods=['POST'])
 def cadastrar_usuarios_Post():
     try:
         dados = request.get_json()
@@ -102,12 +102,13 @@ def cadastrar_usuarios_Post():
     except:
         return flask.Response("Erro Ao Cadastrar o usuário!", status=500)
 
+
 @app.route("/visualizar_usuarios", methods=['GET'])
 def visualizar_usuarios_Get():
     return render_template('visualizar_usuarios.html')
 
-@app.route("/listar", methods=['GET'])
 
+@app.route("/listar", methods=['GET'])
 def visualizar_Usuarios_Get_1():
 
     resposta = {'files': []}
@@ -129,6 +130,7 @@ def visualizar_Usuarios_Get_1():
 
     return(resposta)
 
+
 @app.route('/listar_usuario_id', methods=["GET", "POST"])
 def listar_usuario_id():
     resposta = {'files': []}
@@ -149,10 +151,11 @@ def listar_usuario_id():
                 'email': email,
                 'senha': senha,
                 'tipo': tipo,
-                
+
                 }
         resposta['files'].append(file)
     return(resposta)
+
 
 @app.route('/atualizar_usuarios', methods=['GET'])
 def atualizar_usuarios_Get():
@@ -189,13 +192,14 @@ def deletar_usuarios_Post():
         idUser = int(idUser)
         idusuario = User(idUser, None, None, None, None)
         UsuarioDAO.deleteUser(idusuario)
-        
+
         return "Usuario Excluido!"
 
     except:
         return flask.Response("Erro ao Deletar Usuário!", status=500)
 
 # Área Maquina
+
 
 @app.route('/cadastrar_maquinas', methods=['GET'])
 def cadastrar_maquina_Get():
@@ -269,6 +273,7 @@ def lista_equipamento_cod_Get():
         resposta['arquivos'].append(file)
         print(resposta)
     return(resposta)
+
 
 @app.route('/lista_equipamento_id', methods=['POST', 'GET'])
 def lista_equipamento_id_Get():
@@ -615,7 +620,7 @@ def visualizar_spray_Post():
                 'codSpray': codSpray,
                 'tipo': tipo,
                 'visco': visco}
-        
+
         resposta['arquivos'].append(file)
     return(resposta)
 
@@ -753,7 +758,7 @@ def visualizar_servicos_Get_1():
                 'trecho': trecho,
                 'equip': equip,
                 'tipoLub': tipoLub,
-                'codLub' : codLub,
+                'codLub': codLub,
                 'tipo': tipo,
                 'prop': prop,
                 'dataApli': dataApli,
