@@ -1,0 +1,78 @@
+body{
+    font-family: Georgia, serif; 
+    background-image: url(../img/wall.jpg);
+    padding-top: 5vh;
+    background-size: cover;
+    width: 100%;
+}
+.input-group{
+
+    width: 100%;
+    height: auto;
+    left: 300px;
+    
+}
+.container{
+    
+    background-color: rgba(99, 106, 109, 0.248);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    max-width: fit-content;
+    max-height: fit-content;
+    margin-top: 60px;
+    text-align: center;
+    border-radius: 20px; 
+
+}
+.welcome{
+    margin-right: 50px;
+}
+.aNome{
+    color:blue;
+}
+.row-d{
+    margin: 20px;
+    padding: 20px
+}
+.input-group{
+    left: 1px;
+}
+.titulo{
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+.navbar-brand{
+    margin-left: 20px;
+    font-family: Georgia, serif;
+}
+.navbar{
+    background-color: rgba(99, 106, 109, 0.248);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+.btn{
+     color: black;
+}
+.btn:hover{
+    background-color: rgb(93, 95, 95);
+}
+.lista{
+    color: black;
+    font-size: 12px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+.toplista{
+    font-family: Georgia, serif;
+    color:rgb(0, 0, 0);
+    font-size: 18px;
+    padding: 20px;
+}
+.bnt-custom{
+    padding: 1px, 15px, 3px, 2px;
+    border-radius: 50px;
+}
+.btn-icon{
+    padding: 8px;
+    background: white;
+}
