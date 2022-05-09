@@ -1,14 +1,9 @@
-from servico import Servicos
-import mysql.connector
-from connection import getConnection, closeConnection
+from Connection import mysql_connection
+from Model import Servicos
 
 
-connection = getConnection()[0]
-cursor = getConnection()[1]
-
-
-def closeConnection():
-    closeConnection()
+connection = mysql_connection.getConnection()[0]
+cursor = mysql_connection.getConnection()[1]
 
 
 def insertServicos(servicos):
@@ -19,7 +14,7 @@ def insertServicos(servicos):
         cursor.execute(sql_query, tuple)
         connection.commit()
         print("Registro foi inserido com sucesso na Base de Dados!")
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao Tentar Inserir um Registro no Banco de Dados!")
         raise error
@@ -33,7 +28,7 @@ def updateServicos(servicos):
         cursor.execute(sql_query, tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao atualizar registro de usuário no banco de dados!")
         raise error
@@ -49,7 +44,7 @@ def listAllServicos():
                                 serv[6], serv[7], serv[8], serv[9], serv[10], serv[11], serv[12], serv[13])
             retorno.append(servicos)
         return retorno
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao carregar a lista de serviços cadastrados")
         raise error
@@ -65,7 +60,7 @@ def listServId(servicos):
                                 serv[6], serv[7], serv[8], serv[9], serv[10], serv[11], serv[12], serv[13])
             retorno.append(servicos)            
             return retorno
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao Carregar Registro")
         raise error
@@ -76,7 +71,7 @@ def deleteServicos(servicos):
         cursor.execute(sql_query)
         connection.commit()
         print(" Excluido com Sucesso!")
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao deletar registro da base de dados!")
         raise error

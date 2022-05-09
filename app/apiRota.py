@@ -1,14 +1,8 @@
 import flask
 from flask.globals import request
 from flask.templating import render_template
-import UsuarioDAO
-import EquipamentosDAO
-import LubrificantesDAO
-import ServDAO
-from equipamento import Equipamento
-from user import User
-from lubrificantes import Oleo, Graxa, Spray
-from servico import Servicos
+from DAO import *
+from Model import *
 from flask import Flask, jsonify, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from cryptography.hazmat.primitives import serialization
@@ -20,11 +14,11 @@ app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-private_key = open('app/ssh/key', 'r').read()
+private_key = open('ssh/key', 'r').read()
 prkey = serialization.load_ssh_private_key(
     private_key.encode(), password=b'87361542')
 
-public_key = open('app/ssh/key.pub', 'r').read()
+public_key = open('ssh/key.pub', 'r').read()
 pubkey = serialization.load_ssh_public_key(public_key.encode())
 
 app.config["JWT_PRIVATE_KEY"] = prkey

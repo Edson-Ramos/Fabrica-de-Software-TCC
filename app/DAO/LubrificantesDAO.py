@@ -1,12 +1,10 @@
-from lubrificantes import Oleo, Graxa, Spray
-import mysql.connector
-from connection import getConnection, closeConnection
+from Model import Oleo, Graxa, Spray
+from Connection import mysql_connection
 
-connection = getConnection()[0]
-cursor = getConnection()[1]
 
-def closeConnection():
-	closeConnection()
+connection = mysql_connection.getConnection()[0]
+cursor = mysql_connection.getConnection()[1]
+
 
 def insertGraxa(lubrificantes):
 	try:
@@ -15,7 +13,7 @@ def insertGraxa(lubrificantes):
 		cursor.execute(sql_query, tuple)
 		connection.commit()
 		print("Registro foi inserido com sucesso na Base de Dados!")
-	except mysql.connector.Error as error:
+	except connection.connector.Error as error:
 		connection.rollback()
 		print("Falha ao Tentar Inserir um Registro no Banco de Dados!")
 		raise error
@@ -27,7 +25,7 @@ def updateGraxa(lubrificantes):
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao Atualizar Registro no banco de dados!")
         raise error
@@ -42,7 +40,7 @@ def listGraxa():
             graxa = Graxa(us[0], us[1], us[2], us[3])
             retorno.append(graxa)
         return retorno
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao carregar o Lubrificantes")
         raise error
@@ -55,7 +53,7 @@ def deleteGraxa(lubrificantes):
         connection.commit()
         print("Id: ", id_get, " Excluido com Sucesso!")
         
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao deletar registro da base de dados!")
         raise error
@@ -70,7 +68,7 @@ def listGraxaId(lubrificantes):
             lub = Graxa(eq[0], eq[1], eq[2], eq[3])
             retorno.append(lub)
             return retorno
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao Carregar Registro")
         raise error   
@@ -84,7 +82,7 @@ def insertOleo(lubrificantes):
         cursor.execute(sql_query, tuple)
         connection.commit()
         print("Registro foi inserido com sucesso na Base de Dados!")
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao Tentar Inserir um Registro no Banco de Dados!")
         raise error
@@ -96,7 +94,7 @@ def updateOleo(lubrificantes):
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao atualizar registro no banco de dados!")
         raise error
@@ -111,7 +109,7 @@ def listOleo():
             oleo = Oleo(us[0], us[1], us[2], us[3])
             retorno.append(oleo)
         return retorno
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao carregar os Lubrificantes")
         raise error
@@ -126,7 +124,7 @@ def listOleoId(lubrificantes):
             lub = Oleo(eq[0], eq[1], eq[2], eq[3])
             retorno.append(lub)
             return retorno
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao Carregar Registro")
         raise error   
@@ -140,7 +138,7 @@ def deleteOleo(lubrificantes):
         connection.commit()
         print("Id: ", id_get, " Excluido com Sucesso!")
         
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao deletar registro da base de dados!")
         raise error
@@ -156,7 +154,7 @@ def insertSpray(lubrificantes):
         cursor.execute(sql_query, tuple)
         connection.commit()
         print("Registro foi inserido com sucesso na Base de Dados!")
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao Tentar Inserir um Registro no Banco de Dados!")
         raise error
@@ -168,7 +166,7 @@ def updateSpray(lubrificantes):
         cursor.execute(sql_query,tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao atualizar registro no banco de dados!")
         raise error
@@ -183,7 +181,7 @@ def listSpray():
             spray = Spray(us[0], us[1], us[2], us[3])
             retorno.append(spray)
         return retorno
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao carregar os Lubrificantes")
         raise error
@@ -198,7 +196,7 @@ def listSprayId(lubrificantes):
             lub = Spray(eq[0], eq[1], eq[2], eq[3])
             retorno.append(lub)
             return retorno
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao Carregar Registro")
         raise error   
@@ -212,7 +210,7 @@ def deleteSpray(lubrificantes):
         connection.commit()
         print("Id: ", id_get, " Excluido com Sucesso!")
         
-    except mysql.connector.Error as error:
+    except connection.connector.Error as error:
         connection.rollback()
         print("Falha ao deletar registro da base de dados!")
         raise error
