@@ -188,7 +188,7 @@ function createTable() {
                     let codLub = arquivo.codLub
                        if (prop != "" && tipo != "" && codLub !=""){
                         select.options.length = 0
-                        select.options[select.options.length] = new Option(`Cód: ${codLub} - Tipo: ${tipo} - Viscosidade: ${prop}`, `${arquivo.id}`)
+                        select.options[select.options.length] = new Option(`Tipo: ${tipo} - Viscosidade: ${prop}`, `${arquivo.id}`)
                     }
                     let dataApli = document.getElementById("dataAplic")
                     dataApli.value = `${arquivo.dataApli}`
@@ -299,7 +299,7 @@ oleo.addEventListener("click", (e) => {
     select.addEventListener("blur", (e) => {
 
         let id_lub = {
-            idOleo: idLub
+            idOleo: select.value
         }
 
         const id_lubrificante = {
@@ -344,7 +344,7 @@ graxa.addEventListener("click", (e) => {
     select.addEventListener("blur", (e) => {
 
         let id_lub = {
-            idGra: idLub
+            idGra: select.value
         }
 
         const id_lubrificante = {
@@ -386,7 +386,7 @@ spray.addEventListener("click", (e) => {
     select.addEventListener("blur", (e) => {
       
         let id_lub = {
-            idSpray: idLub
+            idSpray: select.value
         }
 
         const id_lubrificante = {
