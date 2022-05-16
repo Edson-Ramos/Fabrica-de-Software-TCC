@@ -14,13 +14,11 @@ app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-private_key = open(
-    'C:/workspace/EasyLub/Fabrica-de-Software-TCC/app/ssh/key', 'r').read()
+private_key = open('ssh/key', 'r').read()
 prkey = serialization.load_ssh_private_key(
     private_key.encode(), password=b'87361542')
 
-public_key = open(
-    'C:/workspace/EasyLub/Fabrica-de-Software-TCC/app/ssh/key.pub', 'r').read()
+public_key = open('ssh/key.pub', 'r').read()
 pubkey = serialization.load_ssh_public_key(public_key.encode())
 
 app.config["JWT_PRIVATE_KEY"] = prkey

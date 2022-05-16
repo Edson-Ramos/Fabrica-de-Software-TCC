@@ -91,6 +91,7 @@ function createFile(file) {
     btDel.className = "btn btn-default btnDel"
     btDel.id = `${file.idServ}`
     btDel.title = "Excluir"
+    btDel.style.background = "#FF4A4A"
     let btIcon = document.createElement("img")
     btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
 
@@ -99,10 +100,9 @@ function createFile(file) {
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${file.idServ}`
     btAtt.title = "Atualizar"
+    btAtt.style.background = "#416EFF"
     let btAttIcon = document.createElement("img")
     btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"
-
-
 
 
     btDel.appendChild(btIcon)

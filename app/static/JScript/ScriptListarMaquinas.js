@@ -50,6 +50,7 @@ function listaMaquinas(){
     var btEx = document.createElement("button")
     btEx.className = "btn btn-default btnEx"
     btEx.id = `${arquivo.idMaq}`
+    btEx.style.background = "#FF4A4A"
     let btIcon = document.createElement("img")
     btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
 
@@ -57,6 +58,7 @@ function listaMaquinas(){
     var btAtt = document.createElement("button")
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${arquivo.idMaq}`
+    btAtt.style.background = "#416EFF"
     let btAttIcon = document.createElement("img")
     btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"
 

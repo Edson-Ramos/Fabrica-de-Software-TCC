@@ -28,9 +28,10 @@ body{
 }
 .welcome{
     margin-right: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .aNome{
-    color:blue;
+    color:rgb(243, 49, 49);
 }
 .row-d{
     margin: 20px;
@@ -60,8 +61,17 @@ body{
     margin-left: 20px;
 }
 .btn{    
-    color: black;
+    color: rgb(45, 57, 235);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   
+}
+.btn-cad{
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.btn-att{
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .btn:hover{
     background-color: rgb(93, 95, 95);

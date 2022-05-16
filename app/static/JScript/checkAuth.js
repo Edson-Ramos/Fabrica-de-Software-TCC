@@ -13,14 +13,21 @@ function validaction(){
     })
 
 
-    let nomeTitulo = localStorage.getItem("nome")
+     let nomeTitulo = localStorage.getItem("nome")
     let welcome = document.querySelector(".welcome")
+    let nomeCli = document.querySelector(".nomeCli")
     
-    let aNome = document.createElement("output")
-    aNome.className = "aNome"
-    aNome.innerText = `Bem Vindo: ${nomeTitulo}`
+    let bemVindo = document.createElement("output")
+    bemVindo.innerText = "Bem Vindo: "
+    bemVindo.style.color = "#2D36EB"
 
-    welcome.appendChild(aNome)
+    let nome = document.createElement("output")
+    nome.innerText = ` ${nomeTitulo}`
+    nome.style.color = "#FF1A00"
+
+    welcome.appendChild(bemVindo)
+    bemVindo.appendChild(nome)
+
 }
 
 function logout(){

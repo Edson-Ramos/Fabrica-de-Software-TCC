@@ -43,6 +43,7 @@ function listaSpray(arquivo){
     var btDel = document.createElement("button")
     btDel.className = "btn btn-default btnDel"
     btDel.id = `${arquivo.idSpray}`
+    btDel.style.background = "#FF4A4A"
     let btIcon = document.createElement("img")
     btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
 
@@ -50,6 +51,7 @@ function listaSpray(arquivo){
     let btAtt = document.createElement("button")
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${arquivo.idSpray}`
+    btAtt.style.background = "#416EFF"
     let btAttIcon = document.createElement("img")
     btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"  
 

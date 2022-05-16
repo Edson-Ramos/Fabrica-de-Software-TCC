@@ -55,8 +55,13 @@ body{
     margin-left: 20px;
 }
 .btn{    
-    color: black;
+    color: rgb(45, 57, 235);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   
+}
+.btn-att{
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .btn-primary{
     color: rgb(0, 0, 0);
