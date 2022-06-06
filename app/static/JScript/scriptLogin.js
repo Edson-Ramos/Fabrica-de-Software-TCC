@@ -77,19 +77,18 @@ function login(){
          headers : {
              "Content-Type" : "application/json"
          }
-     }).then(function (response) {
-             if (response.status != 200){                  
+     }).then(response => {
+             if (response.status != 200){                                 
                return  alerta_erro() 
              } 
             else
                 return response.json()
     })
-    .then((data) =>{
-        for (dados of data.files)
+    .then((data) =>{      
         
-                token = dados.access_token
-                nome = dados.nome
-                tipo = dados.tipo
+                token = data.access_token
+                nome = data.nome
+                tipo = data.tipo
                 localStorage.setItem("token", token);
                 localStorage.setItem("nome", nome);
                 localStorage.setItem("tipo", tipo);

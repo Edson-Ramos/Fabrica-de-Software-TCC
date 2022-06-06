@@ -1,5 +1,5 @@
 class Servicos:
-	def __init__(self, idServ, codMaq, maq, linha, trecho, equip, tipoLub, cod, tipo, prop, dataApli, dataProxApli, status, obs):
+	def __init__(self, idServ, codMaq, maq, linha, trecho, equip, tipoLub, cod, tipo, prop, dataApli, dataProxApli, status, obs, nome_tec, uri_img):
 		self.idServ = idServ
 		self.codMaq = codMaq
 		self.maq = maq
@@ -14,6 +14,8 @@ class Servicos:
 		self.dataProxApli = dataProxApli
 		self.status = status
 		self.obs = obs
+		self.nome_tec = nome_tec
+		self.uri_img = uri_img
   
 	def getIdServ(self):
 		return self.idServ
@@ -84,3 +86,13 @@ class Servicos:
 		return self.obs
 	def setObs(self, obs):
 		self.obs = obs
+
+	def getUri(self):
+		return self.uri_img
+	def setUri(self, uri_img):
+		self.uri_img = uri_img
+
+	def getNome_tec(self):
+		return self.nome_tec
+	def setNome_tec(self, nome_tec):
+		self.nome_tec = nome_tec

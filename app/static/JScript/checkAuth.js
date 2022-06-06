@@ -13,7 +13,7 @@ function validaction(){
     })
 
 
-     let nomeTitulo = localStorage.getItem("nome")
+    let nomeTitulo = localStorage.getItem("nome")
     let welcome = document.querySelector(".welcome")
     let nomeCli = document.querySelector(".nomeCli")
     

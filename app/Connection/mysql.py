@@ -34,12 +34,12 @@ class MysqlConnect:
         cursor = self.teste()    
         return (self.connection, cursor)
 
-   # def closeConnection():
-   #     if connection.is_connected():        
-   #         cursor = teste() 
-   #         cursor.close()
-    #        connection.close()
-   #     print("Conexao Encerrada!")
+    def closeConnection(self):
+        if self.connection.is_connected():        
+            cursor = self.teste() 
+            cursor.close()
+            self.connection.close()
+            print("Conexao Encerrada!")
 
 
  

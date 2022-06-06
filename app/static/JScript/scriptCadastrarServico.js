@@ -1,5 +1,5 @@
 //const rota = "https://easylub.herokuapp.com"
-const rota = "http://localhost:5000"
+const rota = "http://192.168.0.109:5000"
 const codMaq = document.querySelector("#codMaq")
 const oleo = document.querySelector("#oleo")
 const graxa = document.querySelector("#graxa")
@@ -242,10 +242,6 @@ function cadastrar_servico() {
     if (status[0].checked) {
         status = "Aguardando"
     } else if (status[1].checked) {
-        status = "Em Execução"
-    } else if (status[2].checked) {
-        status = "Atrasado"
-    } else if (status[3].checked) {
         status = "Concluido"
     }
 

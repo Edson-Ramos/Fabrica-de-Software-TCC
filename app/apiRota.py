@@ -7,6 +7,7 @@ from flask import Flask, jsonify, request
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from cryptography.hazmat.primitives import serialization
 import datetime
+from datetime import date
 
 
 app = flask.Flask(__name__)
@@ -14,11 +15,11 @@ app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-private_key = open('ssh/key', 'r').read()
+private_key = open('D:/WorkStation/GitHub/Fabrica-de-Software-TCC/app/ssh/key', 'r').read()
 prkey = serialization.load_ssh_private_key(
     private_key.encode(), password=b'87361542')
 
-public_key = open('ssh/key.pub', 'r').read()
+public_key = open('D:/WorkStation/GitHub/Fabrica-de-Software-TCC/app/ssh/key.pub', 'r').read()
 pubkey = serialization.load_ssh_public_key(public_key.encode())
 
 app.config["JWT_PRIVATE_KEY"] = prkey
@@ -70,7 +71,7 @@ def login_post():
             }
             token['files'].append(file)
 
-            return (token)
+            return (file)
         else:
             return flask.Response("Email ou Senha Incorretos", status=500)
 
@@ -711,7 +712,7 @@ def cadastrar_servico_Post():
         obs = dados["obs"]
 
         servicos = Servicos(None, codMaq, maq, linha, trecho, equip,
-                            tipoLub, codLub, tipo, prop, dataApli, dataProxApli, status, obs)
+                            tipoLub, codLub, tipo, prop, dataApli, dataProxApli, status, obs, None, None)
         ServDAO.insertServicos(servicos)
 
         return "Serviço Cadastrado Com Sucesso!"
@@ -744,6 +745,7 @@ def visualizar_servicos_Get_1():
         dataProxApli = servicos.dataProxApli
         status = servicos.status
         obs = servicos.obs
+        uri_img = servicos.uri_img
 
         file = {'idServ': idServ,
                 'codMaq': codMaq,
@@ -758,7 +760,8 @@ def visualizar_servicos_Get_1():
                 'dataApli': dataApli,
                 'dataProxApli': dataProxApli,
                 'status': status,
-                'obs': obs
+                'obs': obs,
+                'uri_img': uri_img
                 }
         resposta['files'].append(file)
     return(resposta)
@@ -772,7 +775,7 @@ def listar_servico_id():
     idServ = id["idServ"]
     idServ = int(idServ)
     servicos = Servicos(idServ, None, None, None, None,
-                        None, None, None, None, None, None, None, None, None)
+                        None, None, None, None, None, None, None, None, None, None, None)
 
     for servicos in ServDAO.listServId(servicos):
         idServ = servicos.idServ
@@ -789,6 +792,7 @@ def listar_servico_id():
         dataProxApli = servicos.dataProxApli
         status = servicos.status
         obs = servicos.obs
+        uri_img = servicos.uri_img
 
         dataA = dataApli.strftime("%Y-%m-%d")
         dataP = dataProxApli.strftime("%Y-%m-%d")
@@ -806,7 +810,8 @@ def listar_servico_id():
                 'dataApli': dataA,
                 'dataProxApli': dataP,
                 'status': status,
-                'obs': obs
+                'obs': obs,
+                'uri_img': uri_img
                 }
         resposta['files'].append(file)
     return(resposta)
@@ -820,6 +825,7 @@ def atualizar_servico_Get():
 @app.route('/atualizar_servico', methods=['POST'])
 def atualizar_servico_Post():
     try:
+        
         dados = request.get_json()
         idServ = dados["idServ"]
         idServ = int(idServ)
@@ -836,9 +842,50 @@ def atualizar_servico_Post():
         dataProxApli = dados["dataProxApli"]
         status = dados["status"]
         obs = dados["obs"]
+        nome_tec = dados["nome_tec"]
+        uri_img = dados['img'] 
 
         servicos = Servicos(idServ, codMaq, maq, linha, trecho, equip,
-                            tipoLub, codLub, tipo, prop, dataApli, dataProxApli, status, obs)
+                            tipoLub, codLub, tipo, prop, dataApli, dataProxApli, status, obs, nome_tec, uri_img)
+        ServDAO.updateServicos(servicos)
+
+        return "Serviço Atualizado Com Sucesso!"
+
+    except:
+        return flask.Response("Erro ao Atualizar Serviço!", status=500)
+
+@app.route('/atualizar_servico_app', methods=['POST'])
+def atualizar_servico_Post_App():
+    try:
+        
+        dados = request.get_json()
+        idServ = dados["idServ"]
+        idServ = int(idServ)
+        codMaq = dados["codMaq"]
+        maq = dados["maq"]
+        linha = dados["linha"]
+        trecho = dados["trecho"]
+        equip = dados["equip"]
+        tipoLub = dados["tipoLub"]
+        codLub = dados["codLub"]
+        tipo = dados["tipo"]
+        prop = dados["prop"]
+        dataApli = dados["dataApli"]
+        dataProxApli = dados["dataProxApli"]
+        status = dados["status"]
+        obs = dados["obs"]
+        nome_tec = dados["nome_tec"]
+        uri_img = dados['img'] 
+
+        print(dataApli)
+        print(dataProxApli)
+        dataA = datetime.datetime.strptime(dataApli, '%d/%m/%Y').date()
+        dataP = datetime.datetime.strptime(dataProxApli, '%d/%m/%Y').date()
+       
+       
+
+        servicos = Servicos(idServ, codMaq, maq, linha, trecho, equip,
+                            tipoLub, codLub, tipo, prop, dataA, dataP, status, obs, nome_tec, uri_img)
         ServDAO.updateServicos(servicos)
 
         return "Serviço Atualizado Com Sucesso!"
@@ -865,4 +912,4 @@ def deletar_servico_Post():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="192.168.0.109")

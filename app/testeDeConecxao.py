@@ -1,14 +1,16 @@
 import mysql.connector
-from servico import Servicos
-import EquipamentosDAO
-from equipamento import Equipamento
-import LubrificantesDAO
-from lubrificantes import Oleo, Graxa, Spray
 
-import ServDAO
-from servico import Servicos
+con = mysql.connector.connect(host='127.0.0.1', user='sa', password='87361542', database='BRK', port="1433")
 
+if con.is_connected():
+    db_info = con.get_server_info()
+    print("Conectado ao servidor MySQL versão ",db_info)
+    cursor = con.cursor()
+    cursor.execute("select database();")
+    linha = cursor.fetchone()
+    print("Conectado ao banco de dados ",linha)
 
-
-lubrificantes = Oleo(1, None, None)
-LubrificantesDAO.listOleoId(lubrificantes)
+if con.is_connected():
+    cursor.close()
+    con.close()
+    print("Conexão ao MySQL foi encerrada")
