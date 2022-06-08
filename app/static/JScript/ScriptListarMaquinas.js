@@ -1,26 +1,43 @@
 //const rota = 'https://easylub.herokuapp.com'
 const rota = 'http://192.168.0.109:5000'
 
+
 function getMaquinas(){
 
     fetch(`${rota}/listar_maquinas`)
     .then(data => {
         return data.json();
     })
-.then(data => {
-    for(arquivo of data.arquivos)
-        listaMaquinas(arquivo);
-    })
-.then(data => {
-    del();
-    att();
+    .then(data => {
+            let tamanho = data.arquivos.length
+            let perPage = 10
+            const state = {
+                page: 1,
+                perPage,
+                totalPage: Math.ceil(tamanho / perPage)
+            }
+            
+            console.log(state.totalPage)
+        })
+    .then(data => {
+        del();
+        att();
 })
+}
+
+
+function lista(){
+    const state = {
+        page:1,
+        perpage:5,
+        totalPage: ""
+    }
+    
 }
 
 //Área de Criação da pg lista máquinas  
 
-function listaMaquinas(){     
-   
+function listaMaquinas(){  
     var tbody = document.getElementById("tbody")
 
     let tr = document.createElement("tr");    

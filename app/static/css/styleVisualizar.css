@@ -85,3 +85,30 @@ body{
     padding: 8px;
     background: white;
 }
+#equipamentos .pagination{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 1px;
+   margin-bottom: 30px;
+}
+#equipamentos .pagination div{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    background-color: rgba(0, 0, 255, 0.304);
+    color: white;
+}
+#equipamentos .pagination div:not(numbers),
+#equipamentos .pagination div.numbers div{
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+#equipamentos .pagination div.numbers div:hover,
+#equipamentos .pagination div.numbers div:active{
+    color:"#F4A460";
+}
+
