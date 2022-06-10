@@ -1,5 +1,4 @@
-//const rota = 'https://easylub.herokuapp.com'
-const rota = 'http://192.168.0.109:5000'
+funcaoElemento = listaOleo
 
 
 function getOleo(){
@@ -9,16 +8,15 @@ fetch(`${rota}/listar_oleo`)
         return data.json();
     })
 .then(data => {
-    for(arquivo of data.arquivos)
-        listaOleo(arquivo);
+        arquivos = data.arquivos;
+        pagination.update()
     })
     .then(data => {
-        del();
-        att();
+        exibirPage()
     })
 }
 
-var tbody = document.getElementById("tbody")
+var tbody = document.getElementById("lista")
 
 function listaOleo(arquivo){     
 
@@ -41,17 +39,18 @@ function listaOleo(arquivo){
     var btDel = document.createElement("button")
     btDel.className = "btn btn-default btnDel"
     btDel.id = `${arquivo.idOleo}`
-    btDel.style.background = "#FF4A4A"
-    let btIcon = document.createElement("img")
-    btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
+    btDel.title = "Excluir"
+    let btIcon = document.createElement("i")
+    btIcon.className="fa-solid fa-trash"
 
     //Botões de Atualizar
     let btAtt = document.createElement("button")
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${arquivo.idOleo}`
-    btAtt.style.background = "#416EFF"
-    let btAttIcon = document.createElement("img")
-    btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"  
+    btAtt.title = "Atualizar"
+    let btAttIcon = document.createElement("i")
+    btAttIcon.className = "fa-solid fa-pen-to-square"
+
 
     btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)

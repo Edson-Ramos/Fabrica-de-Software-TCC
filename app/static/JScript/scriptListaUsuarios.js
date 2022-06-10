@@ -1,6 +1,4 @@
-//const rota = 'https://easylub.herokuapp.com'
-const rota = 'http://192.168.0.109:5000'
-
+funcaoElemento = createFile
 
 function getArquivos() {
 
@@ -9,12 +7,11 @@ function getArquivos() {
             return data.json();
         })
         .then(data => {
-            for (file of data.files)
-                createFile(file);
+           arquivos = data.arquivos
+           pagination.update()
         })
         .then(data => {
-            del();
-            att();
+            exibirPage()
         })
 }
 
@@ -22,7 +19,7 @@ function getArquivos() {
 function createFile(file) {
 
 
-    var tbody = document.getElementById("tbody")
+    var tbody = document.getElementById("lista")
     let tr = document.createElement("tr")
 
 
@@ -38,19 +35,20 @@ function createFile(file) {
 
     // Botões de Excluir
     var btDel = document.createElement("button")
-    btDel.className = "btn btn-default exc"
-    btDel.id = `${file.id}`
-    btDel.style.background = "#FF4A4A"
-    let btIcon = document.createElement("img")
-    btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
+    btDel.className = "btn btn-default btnDel"
+    btDel.id = `${file.idServ}`
+    btDel.title = "Excluir"
+    let btIcon = document.createElement("i")
+    btIcon.className="fa-solid fa-trash"
 
     //Botões de Atualizar
     let btAtt = document.createElement("button")
     btAtt.className = "btn btn-default btnAtt"
-    btAtt.id = `${file.id}`
-    btAtt.style.background = "#416EFF"
-    let btAttIcon = document.createElement("img")
-    btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"
+    btAtt.id = `${file.idServ}`
+    btAtt.title = "Atualizar"
+    let btAttIcon = document.createElement("i")
+    btAttIcon.className = "fa-solid fa-pen-to-square"
+
 
     if (file.tipo == 1) {
         var func = `Administrador`
@@ -92,7 +90,7 @@ function createTable(){
         .then(function(response){
             response.json()
                 .then(function(data){
-                    for (dados of data.files)
+                    for (dados of data.arquivos)
 
                     var id = dados.idUser;
                     var nome = document.getElementById("nome")

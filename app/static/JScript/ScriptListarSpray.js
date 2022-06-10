@@ -1,5 +1,4 @@
-//const rota = 'https://easylub.herokuapp.com'
-const rota = 'http://192.168.0.109:5000'
+funcaoElemento = listaSpray
 
 
 function getSpray(){
@@ -9,16 +8,15 @@ function getSpray(){
         return data.json();
     })
 .then(data => {
-    for(arquivo of data.arquivos)
-      listaSpray(arquivo);
+        arquivos = data.arquivos;
+        pagination.update()
     })
     .then(data => {
-        del();
-        att();
+        exibirPage()
     })
 }
 
-var tbody = document.getElementById("tbody")
+var tbody = document.getElementById("lista")
 
 function listaSpray(arquivo){     
 
@@ -39,21 +37,22 @@ function listaSpray(arquivo){
     tdVisco.innerText = `${arquivo.visco}` 
 
 
-     // Botões de Excluir
+    // Botões de Excluir
     var btDel = document.createElement("button")
     btDel.className = "btn btn-default btnDel"
     btDel.id = `${arquivo.idSpray}`
-    btDel.style.background = "#FF4A4A"
-    let btIcon = document.createElement("img")
-    btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
+    btDel.title = "Excluir"
+    let btIcon = document.createElement("i")
+    btIcon.className="fa-solid fa-trash"
 
     //Botões de Atualizar
     let btAtt = document.createElement("button")
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${arquivo.idSpray}`
-    btAtt.style.background = "#416EFF"
-    let btAttIcon = document.createElement("img")
-    btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"  
+    btAtt.title = "Atualizar"
+    let btAttIcon = document.createElement("i")
+    btAttIcon.className = "fa-solid fa-pen-to-square"
+
 
     btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)

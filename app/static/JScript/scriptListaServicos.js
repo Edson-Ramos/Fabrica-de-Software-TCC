@@ -1,5 +1,4 @@
-//const rota = 'https://easylub.herokuapp.com'
-const rota = 'http://192.168.0.109:5000'
+funcaoElemento = createFile
 
 const codMaq = document.querySelector("#codMaq")
 const oleo = document.querySelector("#oleo")
@@ -19,19 +18,18 @@ function getServicos() {
             return data.json();
         })
         .then(data => {
-            for (file of data.files)
-                createFile(file);
+            arquivos = data.arquivos;
+            pagination.update()
         })
         .then(data => {
-            del()
-            att()
+            exibirPage()
         })
 }
 
 
 function createFile(file) {
 
-    var tbody = document.getElementById("tbody")
+    var tbody = document.getElementById("lista")
     let tr = document.createElement("tr")
 
 
@@ -91,22 +89,29 @@ function createFile(file) {
     btDel.className = "btn btn-default btnDel"
     btDel.id = `${file.idServ}`
     btDel.title = "Excluir"
-    btDel.style.background = "#FF4A4A"
-    let btIcon = document.createElement("img")
-    btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
+    let btIcon = document.createElement("i")
+    btIcon.className="fa-solid fa-trash"
 
     //Botões de Atualizar
     let btAtt = document.createElement("button")
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${file.idServ}`
     btAtt.title = "Atualizar"
-    btAtt.style.background = "#416EFF"
-    let btAttIcon = document.createElement("img")
-    btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"
+    let btAttIcon = document.createElement("i")
+    btAttIcon.className = "fa-solid fa-pen-to-square"
+
+    // Botões de imagen
+    var btnImg = document.createElement("button")
+    btnImg.className = "btn btn-default btnImg"
+    btnImg.id = `${file.idServ}`
+    btnImg.title = "Excluir"
+    let btnImgIcon = document.createElement("i")
+    btnImgIcon.className = "fa-solid fa-image"
 
 
     btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)
+    btnImg.appendChild(btnImgIcon)
     tbody.appendChild(tr)
     tr.appendChild(tdCodMaq)
     tr.appendChild(tdMaq)
@@ -122,8 +127,26 @@ function createFile(file) {
     tr.appendChild(tdObs)
     tr.appendChild(btDel)
     tr.appendChild(btAtt)
+    tr.appendChild(btnImg)
 }
 
+
+function AbrirModal(){
+    
+    //Pesquisa de botão de img e captura do evento de click
+
+document.querySelectorAll(".btnImg").forEach(function (btnImg) {
+   btnImg.addEventListener("click", (e) => {
+       idServ = btnImg.id      
+        document.getElementById("dv-modal").style.display = "block"
+
+   })
+})
+}
+
+function FecharModal(){
+    document.getElementById("dv-modal").style.display = "none"
+}
  
 function createTable() {
     
@@ -146,7 +169,7 @@ function createTable() {
         .then(function (response) {
             response.json()
                 .then(function (data) {
-                    for (arquivo of data.files)
+                    for (arquivo of data.arquivos)
                 
                     
                     var codMaq = document.getElementById("codMaq")

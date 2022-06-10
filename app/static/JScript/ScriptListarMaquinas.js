@@ -1,6 +1,4 @@
-//const rota = 'https://easylub.herokuapp.com'
-const rota = 'http://192.168.0.109:5000'
-
+funcaoElemento = mostrarMaquina
 
 function getMaquinas(){
 
@@ -9,36 +7,19 @@ function getMaquinas(){
         return data.json();
     })
     .then(data => {
-            let tamanho = data.arquivos.length
-            let perPage = 10
-            const state = {
-                page: 1,
-                perPage,
-                totalPage: Math.ceil(tamanho / perPage)
-            }
-            
-            console.log(state.totalPage)
+        arquivos = data.arquivos;
+        pagination.update()
+        
         })
-    .then(data => {
-        del();
-        att();
+    .then(data => {       
+        exibirPage()
 })
-}
-
-
-function lista(){
-    const state = {
-        page:1,
-        perpage:5,
-        totalPage: ""
-    }
-    
 }
 
 //Área de Criação da pg lista máquinas  
 
-function listaMaquinas(){  
-    var tbody = document.getElementById("tbody")
+function mostrarMaquina(arquivo){  
+    var tbody = document.getElementById("lista")
 
     let tr = document.createElement("tr");    
 
@@ -64,35 +45,36 @@ function listaMaquinas(){
 
     
     // Botões de Excluir
-    var btEx = document.createElement("button")
-    btEx.className = "btn btn-default btnEx"
-    btEx.id = `${arquivo.idMaq}`
-    btEx.style.background = "#FF4A4A"
-    let btIcon = document.createElement("img")
-    btIcon.src = "/static/bootstrap/icons-1.8.1/icons/trash-fill.svg"
+    var btDel = document.createElement("button")
+    btDel.className = "btn btn-default btnDel"
+    btDel.id = `${arquivo.idMaq}`
+    btDel.title = "Excluir"
+    let btIcon = document.createElement("i")
+    btIcon.className="fa-solid fa-trash"
 
     //Botões de Atualizar
-    var btAtt = document.createElement("button")
+    let btAtt = document.createElement("button")
     btAtt.className = "btn btn-default btnAtt"
     btAtt.id = `${arquivo.idMaq}`
-    btAtt.style.background = "#416EFF"
-    let btAttIcon = document.createElement("img")
-    btAttIcon.src = "static/bootstrap/icons-1.8.1/icons/pencil-square.svg"
+    btAtt.title = "Atualizar"
+    let btAttIcon = document.createElement("i")
+    btAttIcon.className = "fa-solid fa-pen-to-square"
 
-    btEx.appendChild(btIcon)
+    btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)
     tbody.appendChild(tr)
     tr.appendChild(tdCod)
     tr.appendChild(tdLinha)
     tr.appendChild(tdTrecho)
     tr.appendChild(tdNome)
-    tr.appendChild(btEx)
+    tr.appendChild(btDel)
     tr.appendChild(btAtt) 
 }
 
 //Área de Atualização
 
 const codMaq = document.querySelector("#codMaq")
+if(codMaq !== null){
 codMaq.addEventListener("blur", (e) => {
 
     let cod_maq = {
@@ -133,6 +115,7 @@ codMaq.addEventListener("blur", (e) => {
     }
 
 })
+}
 
 function alerta_erro_codMaq(){
     Swal.fire({
@@ -165,7 +148,7 @@ function createTable(){
         .then(function(response){
             response.json()
                 .then(function(data){
-                    for (dados of data.files)
+                    for (dados of data.arquivos)
 
                     var id = dados.idMaq;
                     var nome = document.getElementById("codMaq")
@@ -277,7 +260,7 @@ function atualizar_maquina() {
 function del(){
        //pesquisa de botão de delete e captura do evento de click
  
-  document.querySelectorAll(".btnEx").forEach(function (btnEx) {
+  document.querySelectorAll(".btnDel").forEach(function (btnEx) {
         btnEx.addEventListener("click", (e) => {
             let idDel = btnEx.id
             window.localStorage.setItem("id", idDel)       

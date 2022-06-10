@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/93e0484d74.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static' , filename = 'css/styleVisualizar.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -97,18 +98,20 @@
                         </tr>
                     </thead>
                     <div>
-                        <tbody id="tbody"></tbody>
+                        <tbody id="lista"></tbody>
                     </div>                    
                 </table>                
             </div>
             <div class="pagination">
-                <div class="first">&#171;</div>
-                <div class="prev">&lt;</div>
-                <div class="number">
-                    <div>1</div>
-                </div>
-                <div class="next">&gt;</div>
-                <div class="last">&#187;</div>
+                <div class="first" onclick="moverPage(0)">&#171;</div>
+                <div class="prev" onclick="moverPage(pagination.page -1)">&lt;</div>
+                <div id="prev2" class="numbers" onclick="moverPage(pagination.page -2)"></div>
+                <div id="prev1" class="numbers" onclick="moverPage(pagination.page -1)"></div>
+                <div id="current" class="currentNumber">1</div>
+                <div id="next1" class="numbers" onclick="moverPage(pagination.page +1)"></div>
+                <div id="next2" class="numbers" onclick="moverPage(pagination.page +2)"></div>
+                <div class="next" onclick="moverPage(pagination.page +1)">&gt;</div>
+                <div class="last" onclick="moverPage(pagination.totalPage -1)">&#187;</div>
             </div>
         </section>
 
@@ -127,6 +130,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <script src="{{url_for('static', filename='JScript/parametros.js')}}"></script>
+    <script src="{{url_for('static', filename='JScript/scriptPagination.js')}}"></script>
     <script src="{{url_for('static', filename='JScript/ScriptListarMaquinas.js')}}"></script>
     <script src="{{url_for('static', filename='JScript/sweetalert.js')}}"></script>
 </footer>

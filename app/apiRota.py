@@ -8,7 +8,8 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 from cryptography.hazmat.primitives import serialization
 import datetime
 from datetime import date
-
+import base64
+import hashlib
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -46,7 +47,7 @@ def login():
 
 @app.route('/login', methods=['POST'])
 def login_post():
-    token = {'files': []}
+    token = {'arquivos': []}
 
     dado = request.get_json()
     email = dado['email']
@@ -69,7 +70,7 @@ def login_post():
                 'email': emailBD,
                 'tipo': tipoBD
             }
-            token['files'].append(file)
+            token['arquivos'].append(file)
 
             return (file)
         else:
@@ -106,7 +107,7 @@ def visualizar_usuarios_Get():
 @app.route("/listar", methods=['GET'])
 def visualizar_Usuarios_Get_1():
 
-    resposta = {'files': []}
+    resposta = {'arquivos': []}
 
     for arquivos in UsuarioDAO.listAllUsers():
         id_Usuario = arquivos.id
@@ -121,14 +122,14 @@ def visualizar_Usuarios_Get_1():
                 'senha': senha_Usuario,
                 'tipo': tipo_Usuario}
 
-        resposta['files'].append(file)
+        resposta['arquivos'].append(file)
 
     return(resposta)
 
 
 @app.route('/listar_usuario_id', methods=["GET", "POST"])
 def listar_usuario_id():
-    resposta = {'files': []}
+    resposta = {'arquivos': []}
 
     idUser = request.get_json()
     idUser = idUser["idUser"]
@@ -148,7 +149,7 @@ def listar_usuario_id():
                 'tipo': tipo,
 
                 }
-        resposta['files'].append(file)
+        resposta['arquivos'].append(file)
     return(resposta)
 
 
@@ -272,7 +273,7 @@ def lista_equipamento_cod_Get():
 
 @app.route('/lista_equipamento_id', methods=['POST', 'GET'])
 def lista_equipamento_id_Get():
-    resposta = {'files': []}
+    resposta = {'arquivos': []}
 
     idMaq = request.get_json()
     idMaq = idMaq["idMaq"]
@@ -290,7 +291,7 @@ def lista_equipamento_id_Get():
                 'linha': linha,
                 'trecho': trecho,
                 'nome': nome}
-        resposta['files'].append(file)
+        resposta['arquivos'].append(file)
         print(resposta)
     return(resposta)
 
@@ -728,7 +729,7 @@ def visualizar_servicos_Get():
 
 @app.route("/listar_servico", methods=['GET'])
 def visualizar_servicos_Get_1():
-    resposta = {'files': []}
+    resposta = {'arquivos': []}
 
     for servicos in ServDAO.listAllServicos():
         idServ = servicos.idServ
@@ -763,13 +764,13 @@ def visualizar_servicos_Get_1():
                 'obs': obs,
                 'uri_img': uri_img
                 }
-        resposta['files'].append(file)
+        resposta['arquivos'].append(file)
     return(resposta)
 
 
 @app.route('/listar_servico_id', methods=["GET", "POST"])
 def listar_servico_id():
-    resposta = {'files': []}
+    resposta = {'arquivos': []}
 
     id = request.get_json()
     idServ = id["idServ"]
@@ -813,7 +814,7 @@ def listar_servico_id():
                 'obs': obs,
                 'uri_img': uri_img
                 }
-        resposta['files'].append(file)
+        resposta['arquivos'].append(file)
     return(resposta)
 
 
@@ -875,17 +876,19 @@ def atualizar_servico_Post_App():
         status = dados["status"]
         obs = dados["obs"]
         nome_tec = dados["nome_tec"]
-        uri_img = dados['img'] 
+        uri_img = dados['img'].encode("utf-8")
 
-        print(dataApli)
-        print(dataProxApli)
         dataA = datetime.datetime.strptime(dataApli, '%d/%m/%Y').date()
         dataP = datetime.datetime.strptime(dataProxApli, '%d/%m/%Y').date()
+
+        nome_img = f"{hashlib.sha256(uri_img).hexdigest()}.jpg"
+
        
-       
+        with open(f"D:/WorkStation/GitHub/Fabrica-de-Software-TCC/app/static/pictures/{nome_img}", "wb") as file:
+            file.write(base64.b64decode(uri_img))
 
         servicos = Servicos(idServ, codMaq, maq, linha, trecho, equip,
-                            tipoLub, codLub, tipo, prop, dataA, dataP, status, obs, nome_tec, uri_img)
+                            tipoLub, codLub, tipo, prop, dataA, dataP, status, obs, nome_tec, nome_img)
         ServDAO.updateServicos(servicos)
 
         return "Serviço Atualizado Com Sucesso!"

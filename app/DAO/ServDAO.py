@@ -1,3 +1,4 @@
+from loguru import logger
 from Connection import mysql_connection
 from Model import Servicos
 
@@ -22,9 +23,10 @@ def insertServicos(servicos):
 
 def updateServicos(servicos):
     try:
-        sql_query = """UPDATE `servicos` SET codMaq=%s, maq=%s, linha=%s, trecho=%s, equip =%s, tipoLub=%s, codLub = %s, tipo=%s, prop=%s, dataApli=%s, dataProxApli=%s, status=%s, obs=%s, nome_tec=%s, uri_img =%s WHERE idServ=%s;"""
+        sql_query = """UPDATE `servicos` SET codMaq=%s, maq=%s, linha=%s, trecho=%s, equip =%s, tipoLub=%s, codLub = %s, tipo=%s, prop=%s, dataApli=%s, dataProxApli=%s, status=%s, obs=%s, nome_tec=%s, uri_img=%s WHERE idServ=%s;"""
         tuple = (servicos.getCodMaq(), servicos.getMaq(), servicos.getLinha(), servicos.getTrecho(), servicos.getEquip(), servicos.getTipoLub(),servicos.getCodLub(), servicos.getTipo(), servicos.getProp(),
-                 servicos.getDataApli(), servicos.getDataProxApli(), servicos.getStatus(), servicos.getObs(), servicos.getNome_tec(), servicos.getUri(), servicos.getIdServ())
+                 servicos.getDataApli(), servicos.getDataProxApli(), servicos.getStatus(), servicos.getObs(), servicos.getNome_tec(), servicos.getUri(), servicos.getIdServ())        
+        logger.debug(servicos)
         cursor.execute(sql_query, tuple)
         connection.commit()
         print("O Registro foi atualizado com sucesso!")
