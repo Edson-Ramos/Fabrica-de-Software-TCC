@@ -14,6 +14,9 @@ function getArquivos() {
             exibirPage()
         })
 }
+function AbrirModal(){
+    
+}
 
 
 function createFile(file) {
@@ -36,7 +39,7 @@ function createFile(file) {
     // Botões de Excluir
     var btDel = document.createElement("button")
     btDel.className = "btn btn-default btnDel"
-    btDel.id = `${file.idServ}`
+    btDel.id = `${file.id}`
     btDel.title = "Excluir"
     let btIcon = document.createElement("i")
     btIcon.className="fa-solid fa-trash"
@@ -44,7 +47,7 @@ function createFile(file) {
     //Botões de Atualizar
     let btAtt = document.createElement("button")
     btAtt.className = "btn btn-default btnAtt"
-    btAtt.id = `${file.idServ}`
+    btAtt.id = `${file.id}`
     btAtt.title = "Atualizar"
     let btAttIcon = document.createElement("i")
     btAttIcon.className = "fa-solid fa-pen-to-square"
@@ -74,7 +77,8 @@ function createFile(file) {
 
     
 function createTable(){
-    var idUser = JSON.parse(sessionStorage.getItem('chave'))    
+    var idUser = sessionStorage.getItem('chave')
+    
 
     const id_user={
         idUser : idUser
@@ -240,7 +244,7 @@ function att(){
 function del(){
 
     //pesquisa de botão de delete e captura do evento de click
-     document.querySelectorAll(".exc").forEach(function (exc) {
+     document.querySelectorAll(".btnDel").forEach(function (exc) {
         exc.addEventListener("click", (e) => {
                 let idUser = exc.id
                 window.localStorage.setItem("id", idUser)       

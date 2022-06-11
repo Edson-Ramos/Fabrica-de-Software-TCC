@@ -18,6 +18,7 @@ function getServicos() {
             return data.json();
         })
         .then(data => {
+            
             arquivos = data.arquivos;
             pagination.update()
         })
@@ -137,9 +138,31 @@ function AbrirModal(){
 
 document.querySelectorAll(".btnImg").forEach(function (btnImg) {
    btnImg.addEventListener("click", (e) => {
-       idServ = btnImg.id      
-        document.getElementById("dv-modal").style.display = "block"
+       idServ = btnImg.id
+       const id_serv = {
+        idServ : idServ
+    }
 
+    const dado_Servico = {
+        method: "POST",
+        body: JSON.stringify(id_serv),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    fetch(`${rota}/listar_servico_id`, dado_Servico)
+        .then(function (response) {
+            response.json()
+                .then(function (data) {
+                    for (arquivo of data.arquivos){
+                       let imgModal = document.getElementById("imgModal")
+                       imgModal.src = `../static/pictures/${arquivo.uri_img}`                                              
+                       document.getElementById("dv-modal").style.display = "block"
+                        
+                    }   
+                   
+          })
+        })
    })
 })
 }
@@ -222,12 +245,8 @@ function createTable() {
 
                     if (status.value == "Aguardando"){
                         status[0].checked = true
-                    }else if (status.value == "Em Execução"){
-                        status[1].checked = true
-                    }else if (status.value == "Atrasado"){
-                        status[2].checked = true
                     }else if (status.value == "Concluido"){
-                        status[3].checked = true
+                        status[1].checked = true
                     }
                     let obs = document.getElementById("obs")
                     obs.value = `${arquivo.obs}`

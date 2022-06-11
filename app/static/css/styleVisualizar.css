@@ -1,25 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@900&display=swap');
 
-*{
-    font-family: 'Open Sans', sans-serif;
-}
+
 
 body{
-    font-family: Georgia, serif; 
+    font-family: 'Open Sans', sans-serif;
     background-image: url(../img/wall.jpg);
     padding-top: 5vh;
     background-size: cover;
     width: 100%;
 }
 .input-group{
-
+    font-family: 'Open Sans', sans-serif;
     width: 100%;
     height: auto;
     left: 300px;
     
 }
 .container{
-    
+    font-family: 'Open Sans', sans-serif;
     background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -31,90 +30,114 @@ body{
 
 }
 .welcome{
+    font-family: 'Open Sans', sans-serif;
     margin-right: 50px;
 }
 .aNome{
+    font-family: 'Open Sans', sans-serif;
     color:blue;
 }
 .row-d{
+    font-family: 'Open Sans', sans-serif;
     margin: 20px;
     padding: 20px
 }
 .input-group{
+    font-family: 'Open Sans', sans-serif;
     left: 1px;
 }
 .titulo{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
     color: black;
 }
 .navbar-brand{
+    font-family: 'Open Sans', sans-serif;
     margin-left: 20px;
-    font-family: Georgia, serif;
 }
 .navbar{
+    font-family: 'Open Sans', sans-serif;
     background-color: rgba(99, 106, 109, 0.248);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 .btn{
+    font-family: 'Open Sans', sans-serif;
+    color: rgb(45, 57, 235);
 }
 .btn-cad{
+    font-family: 'Open Sans', sans-serif;
     color: black;
 }
 .btn-att{
+    font-family: 'Open Sans', sans-serif;
     color: black;
 }
 .btn:hover{
+    font-family: 'Open Sans', sans-serif;
     background-color: rgb(93, 95, 95);
 }
 .lista{
-    font-size: 12px;
-    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
 }
 .toplista{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Merriweather', serif;
+    font-weight: 600;
     color:rgb(0, 0, 0);
     font-size: 18px;
     padding: 20px;
 }
 .bnt-custom{
+    font-family: 'Open Sans', sans-serif;
     padding: 1px, 15px, 3px, 2px;
     border-radius: 50px;
 }
 .btn-icon{
+
     padding: 8px;
     background: white;
 }
 .pagination{
+    font-family: 'Open Sans', sans-serif;
    display: flex;
    align-items: center;
    justify-content: center;
    margin-top: 1px;
    margin-bottom: 30px;
 }
-
 .pagination div{
+    font-family: 'Open Sans', sans-serif;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    background-color: rgba(21, 0, 255, 0.304);
+    background-color: rgba(56, 56, 57, 0.304);
     color: rgb(0, 0, 0);
+}
+.pagination div:hover{
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgba(0, 20, 243, 0.534);
 }
 .pagination div:not(numbers),
 .pagination div.numbers div{
+    font-family: 'Open Sans', sans-serif;
     width: 30px;
     height: 30px;
     border-radius: 5px;
 }
 .pagination div.numbers:hover{
+    font-family: 'Open Sans', sans-serif;
     color: "rgb(0, 0, 0)";
 }
 .pagination .currentNumber{
+    font-family: 'Open Sans', sans-serif;
     background-color: rgba(255, 0, 0, 0.519);
 }
 .pagination .numbers{
+    font-family: 'Open Sans', sans-serif;
     display: none;
 }
 .fa-trash{
@@ -147,6 +170,7 @@ body{
     padding: auto;
 }
 .btn-fecha-modal{
+    font-family: 'Open Sans', sans-serif;
     background-color: rgb(12, 87, 247);
     padding: 5px 10px 5px 10px;
     border: 2px solid rgba(0, 0, 0, 0.513);
@@ -156,6 +180,50 @@ body{
     margin-top: 15px;
 }
 .btn-fecha-modal:hover{
+    font-family: 'Open Sans', sans-serif;
     background-color: rgb(0, 166, 255);
     color: black;
+}
+.div-filtro{
+    font-family: 'Open Sans', sans-serif;
+    width: 400px;    
+    top: 5px;
+}
+.select-filtro{
+    font-family: 'Open Sans', sans-serif;
+    width: 160px;    
+    border-color: black;
+    border-radius: 10px;
+}
+.input-filtro{
+    font-family: 'Open Sans', sans-serif;
+    width: 130px;
+    border: 1px solid black;
+    border-radius: 0 10px 10px 0;
+    background-color: rgba(255, 255, 255, 0.782);
+    
+
+}
+.input-filtro:focus
+{
+    font-family: 'Open Sans', sans-serif;
+    border: 1px solid rgba(255, 0, 0, 0.29);
+    outline: none;
+}
+.submit-lente {
+  position:absolute;
+  top:0; right:0;
+  z-index:10;
+  border:none;
+  background:transparent;
+  outline:none;
+}
+
+.submit-line {
+  position: relative;
+  width: 200px;
+}
+
+.submit-line input {
+  width: 100%;
 }

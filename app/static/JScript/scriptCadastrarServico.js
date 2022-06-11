@@ -15,7 +15,7 @@ var prop =""
 codMaq.addEventListener("blur", (e) => {
 
     let cod_maq = {
-        codMaq: codMaq.value
+        codMaq: codMaq.value.toUpperCase()
     }
     if (codMaq.value == "") {
         return alerta_empyt_codMaq()
@@ -264,7 +264,7 @@ function cadastrar_servico() {
     } else {
 
         const dados_servicos = {
-            codMaq: codMaq.value,
+            codMaq: codMaq.value.toUpperCase(),
             maq: maq.value,
             linha: linha.value,
             trecho: trecho.value,

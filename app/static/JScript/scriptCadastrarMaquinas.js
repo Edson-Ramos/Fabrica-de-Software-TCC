@@ -1,9 +1,10 @@
 
 function cadastrar_maquina() {
-    let cod = document.getElementById("codMaq").value;
-	let linha = document.getElementById("linhaMaq").value;
-	let trecho = document.getElementById("trechoMaq").value;
-	let nome = document.getElementById("nomeMaq").value;
+    let cod = document.getElementById("codMaq").value.toUpperCase()
+	let linha = document.getElementById("linhaMaq").value.toUpperCase()
+	let trecho = document.getElementById("trechoMaq").value.toUpperCase()
+	let nome = document.getElementById("nomeMaq").value.toUpperCase()
+
     
 	let dados_maquina = {
 		cod: cod,		

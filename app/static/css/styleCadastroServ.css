@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@900&display=swap');
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
 body{
-    font-family: Georgia, serif; 
     background-image: url(../img/wall.jpg);
     padding-top: 5vh;
     background-size: cover;
@@ -33,21 +38,20 @@ body{
     margin-left: 20px;
 }
 .titulo{
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
     color: black
 }
 
 .btn{    
     color: rgb(45, 57, 235);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   
 }
 .btn-cad{
     color: black;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .btn-att{
     color: black;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .btn:hover{
     background-color: rgb(93, 95, 95);

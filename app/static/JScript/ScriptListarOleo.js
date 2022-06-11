@@ -16,6 +16,10 @@ fetch(`${rota}/listar_oleo`)
     })
 }
 
+function AbrirModal(){
+    
+}
+
 var tbody = document.getElementById("lista")
 
 function listaOleo(arquivo){     
@@ -133,9 +137,9 @@ function alerta_att(){
 
 function atualizar_oleo() {    
     var idOleo = JSON.parse(sessionStorage.getItem('chave')) 
-    let codOleo = document.getElementById("codOleo").value
-    let tipo= document.getElementById("tipo").value
-    let visco = document.getElementById("visco").value 
+    let codOleo = document.getElementById("codOleo").value.toUpperCase()
+    let tipo= document.getElementById("tipo").value.toUpperCase()
+    let visco = document.getElementById("visco").value.toUpperCase()
     
     
     if (codOleo == "" || tipo == "" || visco == ""){

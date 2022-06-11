@@ -16,6 +16,10 @@ function getSpray(){
     })
 }
 
+function AbrirModal(){
+    
+}
+
 var tbody = document.getElementById("lista")
 
 function listaSpray(arquivo){     
@@ -135,9 +139,9 @@ function alerta_att(){
 function atualizar_spray() {    
     
     let idSpray = sessionStorage.getItem('chave')
-    let codSpray = document.getElementById("codSpray").value
-    let tipo= document.getElementById("tipo").value
-    let visco = document.getElementById("visco").value 
+    let codSpray = document.getElementById("codSpray").value.toUpperCase()
+    let tipo= document.getElementById("tipo").value.toUpperCase()
+    let visco = document.getElementById("visco").value.toUpperCase() 
    
     if (codSpray == "" || tipo == "" || visco == ""){
         return erro_campo_empty()

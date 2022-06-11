@@ -16,6 +16,10 @@ function getMaquinas(){
 })
 }
 
+function AbrirModal(){
+    
+}
+
 //Área de Criação da pg lista máquinas  
 
 function mostrarMaquina(arquivo){  
@@ -223,10 +227,10 @@ function erro_att(){
 
 function atualizar_maquina() {    
     let idMaq = JSON.parse(sessionStorage.getItem('chave')) 
-    let codMaq = document.getElementById("codMaq").value
-    let linhaMaq = document.getElementById("linhaMaq").value
-    let trechoMaq = document.getElementById("trechoMaq").value
-    let nomeMaq = document.getElementById("nomeMaq").value
+    let codMaq = document.getElementById("codMaq").value.toUpperCase()
+    let linhaMaq = document.getElementById("linhaMaq").value.toUpperCase()
+    let trechoMaq = document.getElementById("trechoMaq").value.toUpperCase()
+    let nomeMaq = document.getElementById("nomeMaq").value.toUpperCase()
 
     let dados_maquina = {
         idMaq: idMaq,

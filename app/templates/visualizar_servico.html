@@ -70,7 +70,19 @@
                             <li><a class="dropdown-item" href="/visualizar_servico">Listar serviços</a></li>
                         </ul>
                     </div>
-                </li>
+                </li>                
+                    <div class="input-group input-group-sm mb-3 div-filtro">
+                        <select class="select-filtro" aria-label="equip" id="tipo_pesquisa">
+                            <option selected>Tipo de Pesquisa</option>
+                            <option value="codMaq">Cód Máquina</option>
+                            <option value="trecho">Trecho</option>
+                            <option value="status">Status</option>
+                        </select>
+                        <div class="submit-line">
+                            <input id="pesquisa" type="text" class=" input-filtro" onkeyup="pesquisar()" aria-label="Text input with dropdown button">
+                            <button class="submit-lente" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
             </ul>
             <div class="welcome">             
             </div>
@@ -123,7 +135,7 @@
             </div>
               <div id="dv-modal" class="modal">
     <div class="modal-content">
-        <img src="../static/pictures/bfdc66405244438c839933652dd0fc323a3818a262cc457298229508ccec046b.jpg">
+        <img id="imgModal">
     </div>
     <button class="btn-fecha-modal" onclick="FecharModal()">Fechar</button>
 </div>

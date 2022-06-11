@@ -2,8 +2,8 @@
 
 
 function cadastrar_usuario() {
-    let nome = document.getElementById("nome").value;
-    let email = document.getElementById("email").value;
+    let nome = document.getElementById("nome").value
+    let email = document.getElementById("email").value.toLowerCase()
     let senha = document.getElementById("password").value
     let cSenha = document.getElementById("confpassword").value;
     let select = document.getElementById("tipos")
@@ -14,7 +14,7 @@ function cadastrar_usuario() {
 
 
     let dados_usuarios = {
-       nome : nome,
+       nome : nome[0].toUpperCase() + nome.substr(1),
        email : email,
        senha : senha,
        cSenha : cSenha,

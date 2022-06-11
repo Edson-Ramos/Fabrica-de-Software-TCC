@@ -1,7 +1,7 @@
 function cadastro_oleo(){
-    codOleo = document.getElementById("codOleo").value
-    tipo = document.getElementById("tipo").value
-    visco = document.getElementById("visco").value
+    codOleo = document.getElementById("codOleo").value.toUpperCase()
+    tipo = document.getElementById("tipo").value.toUpperCase()
+    visco = document.getElementById("visco").value.toUpperCase()
     
 // precisa verificar o campo visco e id vai ser do tipo int ou string
     if (codOleo == "" || tipo == "" || visco == ""){

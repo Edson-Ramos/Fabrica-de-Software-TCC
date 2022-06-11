@@ -1,7 +1,7 @@
 function cadastro_graxa() {
-    let codGra = document.getElementById("codGra").value
-    let tipo = document.getElementById("tipo").value
-    let consis = document.getElementById("consis").value
+    let codGra = document.getElementById("codGra").value.toUpperCase()
+    let tipo = document.getElementById("tipo").value.toUpperCase()
+    let consis = document.getElementById("consis").value.toUpperCase()
   
     if (codGra == "" || tipo == "" || consis == ""){
         return erro_campo_empty()

@@ -71,6 +71,15 @@
                         </ul>
                     </div>
                 </li>
+                <div class="input-group input-group-sm mb-3 div-filtro">
+                        <select class="select-filtro" aria-label="equip" id="tipo_pesquisa">
+                            <option selected>Tipo de Pesquisa</option>
+                            <option value="codSpray">Cód Spray</option>
+                            <option value="tipo">Tipo</option>
+                        </select>
+                        <input id="pesquisa" type="text" class=" input-filtro" onkeyup="pesquisar()" aria-label="Text input with dropdown button">
+                   
+                </div>
             </ul>
             <div class="welcome">             
             </div>
@@ -86,9 +95,9 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>      
-                        <th class="lista" scope="col">Cód Spray</th>
-                        <th class="lista" scope="col">Tipo</th>
-                        <th class="lista" scope="col">Viscosidade</th>           
+                        <th class="toplista" scope="col">Cód Spray</th>
+                        <th class="toplista" scope="col">Tipo</th>
+                        <th class="toplista" scope="col">Viscosidade</th>           
                         </tr>
                     </thead>
                     <div>

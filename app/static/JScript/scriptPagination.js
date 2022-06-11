@@ -1,5 +1,126 @@
-var arquivos, funcaoElemento;
+var arquivos, funcaoElemento, arquivosFiltrados = [], arquivosFil;
 
+
+
+function pesquisar(){
+    let filtro = document.getElementById("pesquisa").value    
+    let tp_pesquisa = document.getElementById("tipo_pesquisa").value
+    for (let pos = 0; pos < arquivos.length ;pos++){        
+        arquivosFiltrados[pos] = arquivos[pos]
+    }
+    if(tp_pesquisa == "Tipo de Pesquisa"){
+        alert("Selecione o tipo de Pesquisa")
+    }else if(tp_pesquisa == "codMaq"){
+        if(filtro != ""){
+            filtro = filtro.toUpperCase()
+            const filtrados = arquivosFiltrados.filter(function (elemento){
+            return elemento.codMaq.includes(filtro)
+            })
+            arquivosFil = filtrados
+            limparLista()
+            exibirPageFiltro()            
+        }
+        else
+            exibirPage()    
+    }else if(tp_pesquisa == "trecho"){        
+        if(filtro != ""){
+            filtro = filtro.toUpperCase()
+            const filtrados = arquivosFiltrados.filter(function (elemento){
+            return elemento.trecho.includes(filtro)
+            })
+            arquivosFil = filtrados
+            limparLista()
+            exibirPageFiltro()            
+        }
+        else
+            exibirPage()
+    }else if(tp_pesquisa == "status"){        
+        if(filtro != ""){
+            filtro = filtro[0].toUpperCase() + filtro.substr(1)
+            const filtrados = arquivosFiltrados.filter(function (elemento){
+            return elemento.status.includes(filtro)
+            })
+            arquivosFil = filtrados
+            limparLista()
+            exibirPageFiltro()            
+        }
+        else
+            exibirPage()
+    }else if(tp_pesquisa == "linha"){        
+        if(filtro != ""){
+            filtro = filtro.toUpperCase()
+            const filtrados = arquivosFiltrados.filter(function (elemento){
+            return elemento.linha.includes(filtro)
+            })
+            arquivosFil = filtrados
+            limparLista()
+            exibirPageFiltro()            
+        }
+        else
+            exibirPage()
+    }else if(tp_pesquisa == "nome"){        
+        if(filtro != ""){
+            filtro = filtro[0].toUpperCase() + filtro.substr(1)
+            const filtrados = arquivosFiltrados.filter(function (elemento){
+            return elemento.nome.includes(filtro)
+            })
+            arquivosFil = filtrados
+            limparLista()
+            exibirPageFiltro()            
+        }
+        else
+            exibirPage()
+    }else if(tp_pesquisa == "tipo"){        
+        if(filtro != ""){
+            filtro = filtro[0].toUpperCase() + filtro.substr(1)
+            const filtrados = arquivosFiltrados.filter(function (elemento){
+            return elemento.tipo.includes(filtro)
+            })
+            arquivosFil = filtrados
+            limparLista()
+            exibirPageFiltro()            
+        }
+        else
+            exibirPage()
+    }else if(tp_pesquisa == "codOleo"){        
+        if(filtro != ""){
+            filtro = filtro.toUpperCase()
+            const filtrados = arquivosFiltrados.filter(function (elemento){
+            return elemento.codOleo.includes(filtro)
+            })
+            arquivosFil = filtrados
+            limparLista()
+            exibirPageFiltro()            
+        }
+        else
+            exibirPage()
+    }else if(tp_pesquisa == "codGra"){        
+        if(filtro != ""){
+            filtro = filtro.toUpperCase()
+            const filtrados = arquivosFiltrados.filter(function (elemento){
+            return elemento.codGra.includes(filtro)
+            })
+            arquivosFil = filtrados
+            limparLista()
+            exibirPageFiltro()            
+        }
+        else
+            exibirPage()
+    }else if(tp_pesquisa == "codSpray"){        
+        if(filtro != ""){
+            filtro = filtro.toUpperCase()
+            const filtrados = arquivosFiltrados.filter(function (elemento){
+            return elemento.codSpray.includes(filtro)
+            })
+            arquivosFil = filtrados
+            limparLista()
+            exibirPageFiltro()            
+        }
+        else
+            exibirPage()
+    }
+           
+}
 
 var pagination = {
         page: 0,
@@ -10,6 +131,18 @@ var pagination = {
     } 
 
 
+function exibirPageFiltro(){
+    limparLista()
+    var positionInit = pagination.page * pagination.perpage
+    var positionFinal = positionInit + pagination.perpage -1
+    for (let pos = positionInit; pos <= positionFinal && pos < arquivosFil.length; pos++){
+        funcaoElemento(arquivosFil[pos])
+    }
+    del();
+    att();
+    AbrirModal()
+    attBotao()
+}
 
 function exibirPage(){
     limparLista()

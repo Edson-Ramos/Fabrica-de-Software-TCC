@@ -90,7 +90,6 @@ def cadastrar_usuarios_Post():
         email = dados['email']
         senha = dados['senha']
         tipo = dados['tipo']
-        print(dados)
         usuario = User(None, nome, email, senha, tipo)
         UsuarioDAO.insertUser(usuario)
         return "Usuário Cadastrado Com Sucesso!"
@@ -267,7 +266,6 @@ def lista_equipamento_cod_Get():
                 'trecho': trecho,
                 'nome': nome}
         resposta['arquivos'].append(file)
-        print(resposta)
     return(resposta)
 
 
@@ -292,7 +290,6 @@ def lista_equipamento_id_Get():
                 'trecho': trecho,
                 'nome': nome}
         resposta['arquivos'].append(file)
-        print(resposta)
     return(resposta)
 
 
@@ -424,7 +421,6 @@ def lista_graxa_id_Get():
                 'consis': consis
                 }
         resposta['arquivos'].append(file)
-        print(resposta)
     return(resposta)
 
 
@@ -459,7 +455,6 @@ def deletar_graxa_Get():
 def deletar_graxa_Post():
     try:
         dados = request.get_json()
-        print(dados)
         idGra = dados["idGra"]
         idGra = int(idGra)
         graxa = Graxa(idGra, None, None, None)
@@ -815,6 +810,7 @@ def listar_servico_id():
                 'uri_img': uri_img
                 }
         resposta['arquivos'].append(file)
+       
     return(resposta)
 
 
@@ -903,10 +899,9 @@ def deletar_servico_Post():
         dados = request.get_json()
         idServ = dados["idServ"]
         idServ = int(idServ)
-        print(idServ)
 
         servico = Servicos(idServ, None, None, None, None,
-                           None, None, None, None, None, None, None, None, None)
+                           None, None, None, None, None, None, None, None, None, None, None)
 
         ServDAO.deleteServicos(servico)
         return "Serviço Excluido Com Sucesso!"

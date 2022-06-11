@@ -15,6 +15,10 @@ function getGraxa(){
     })
 }
 
+function AbrirModal(){
+    
+}
+
 var tbody = document.getElementById("lista")
 
 function listaGraxa(arquivo){     
@@ -132,9 +136,9 @@ function alerta_att(){
 
 function atualizar_graxa() {    
     var idGra = JSON.parse(sessionStorage.getItem('chave'))  
-    let codGra = document.getElementById("codGra").value
-    let tipo= document.getElementById("tipo").value
-    let consis = document.getElementById("consis").value 
+    let codGra = document.getElementById("codGra").value.toUpperCase()
+    let tipo= document.getElementById("tipo").value.toUpperCase()
+    let consis = document.getElementById("consis").value.toUpperCase()
    
     if (codGra == "" || tipo == "" || consis == ""){
         return erro_campo_empty()
