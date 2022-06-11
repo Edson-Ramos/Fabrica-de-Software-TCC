@@ -741,6 +741,7 @@ def visualizar_servicos_Get_1():
         dataProxApli = servicos.dataProxApli
         status = servicos.status
         obs = servicos.obs
+        nomeTec = servicos.nome_tec
         uri_img = servicos.uri_img
 
         file = {'idServ': idServ,
@@ -757,6 +758,7 @@ def visualizar_servicos_Get_1():
                 'dataProxApli': dataProxApli,
                 'status': status,
                 'obs': obs,
+                "nomeTec": nomeTec,
                 'uri_img': uri_img
                 }
         resposta['arquivos'].append(file)
@@ -788,6 +790,7 @@ def listar_servico_id():
         dataProxApli = servicos.dataProxApli
         status = servicos.status
         obs = servicos.obs
+        nomeTec = servicos.nome_tec
         uri_img = servicos.uri_img
 
         dataA = dataApli.strftime("%Y-%m-%d")
@@ -807,6 +810,7 @@ def listar_servico_id():
                 'dataProxApli': dataP,
                 'status': status,
                 'obs': obs,
+                "nomeTec": nomeTec,
                 'uri_img': uri_img
                 }
         resposta['arquivos'].append(file)

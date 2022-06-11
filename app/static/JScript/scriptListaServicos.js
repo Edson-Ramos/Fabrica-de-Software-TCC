@@ -8,6 +8,8 @@ const select = document.querySelector("#sel")
 var idLub =""
 var codLub = ""
 var tipo = ""
+var nomeTec;
+var uri_img;
 
 
 
@@ -35,7 +37,9 @@ function createFile(file) {
 
 
     let tdIdSer = `${file.idServ}`
-   
+    uri_img = file.uri_img
+    nomeTec = file.nomeTec
+
     let tdCodMaq = document.createElement("td")
     tdCodMaq.className = "lista"
     tdCodMaq.innerText = `${file.codMaq}`
@@ -83,7 +87,7 @@ function createFile(file) {
 
     let tdObs = document.createElement("td")
     tdObs.className = "lista"
-    tdObs.innerText = `${file.obs}`
+    tdObs.innerText = `${file.obs} | Tec. Resp: ${file.nomeTec}`
 
     // Botões de Excluir
     var btDel = document.createElement("button")
@@ -199,6 +203,11 @@ function createTable() {
                     codMaq.value = `${arquivo.codMaq}`
 
 
+                    let uri_img = `${arquivo.uri_img}`
+                    let nome_tec = `${arquivo.nomeTec}`
+                    sessionStorage.setItem('uri_img', uri_img );
+                    sessionStorage.setItem('nome_tec', nome_tec );
+
                     let maq = document.getElementById("maq")
                     maq.value = `${arquivo.maq}`
                     let linha = document.getElementById("linha")
@@ -251,6 +260,9 @@ function createTable() {
                     let obs = document.getElementById("obs")
                     obs.value = `${arquivo.obs}`
                      })
+
+
+                   
         })
 
         codMaq.addEventListener("blur", (e) => {
@@ -544,8 +556,8 @@ function atualizar_servico() {
             dataProxApli : dataProxApli.value,
             status : status,
             obs : obs.value,
-            nome_tec : "",
-            img : ""
+            nome_tec : sessionStorage.getItem("nome_tec"),
+            img : sessionStorage.getItem("uri_img")
 
         }
         fetch("/atualizar_servico",
@@ -597,7 +609,7 @@ function att(){
     //Pesquisa de botão de atualizar e captura do evento de click
 
 document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
-   btnAtt.addEventListener("click", (e) => {
+   btnAtt.addEventListener("click", (e) => {       
        idServ = btnAtt.id
        sessionStorage.setItem('chave', idServ );   
        window.location.href = "atualizar_servico"
@@ -612,7 +624,7 @@ document.querySelectorAll(".btnAtt").forEach(function (btnAtt) {
 function del(){
 
     //pesquisa de botão de delete e captura do evento de click
-
+    
     document.querySelectorAll(".btnDel").forEach(function (btnDel) {
         btnDel.addEventListener("click", (e) => {
             let idServ = btnDel.id

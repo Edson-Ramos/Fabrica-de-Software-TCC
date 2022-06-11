@@ -1,5 +1,6 @@
-//const rota = "https://easylub.herokuapp.com"
-const rota = "http://192.168.0.109:5000"
+
+
+
 const codMaq = document.querySelector("#codMaq")
 const oleo = document.querySelector("#oleo")
 const graxa = document.querySelector("#graxa")
