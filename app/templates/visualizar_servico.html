@@ -96,24 +96,18 @@
             <div class="container-fluid agenda text-center margin">
 
                 <table class="table table-striped">
-                    <div class="titulo">
-                        <h1>Visualizar Serviços</h1>
+                    <div >
+                        <h1 class="titulo">Visualizar Serviços</h1>
                     </div>
 
                     <thead>
                         <tr>
-                            <th class="lista" scope="col">Cód Máquina</th>
-                            <th class="lista" scope="col">Máquina</th>
-                            <th class="lista" scope="col">Linha</th>
-                            <th class="lista" scope="col">Trecho</th>
-                            <th class="lista" scope="col">Equipamentos</th>
-                            <th class="lista" scope="col">Lubrificante</th>
-                            <th class="lista" scope="col">Tipo de Lubrificante</th>
-                            <th class="lista" scope="col">Propriedade</th>
-                            <th class="lista" scope="col">Aplicação</th>
-                            <th class="lista" scope="col">Próx. aplicação</th>
-                            <th class="lista" scope="col">Status</th>
-                            <th class="lista" scope="col">Observação</th>
+                            <th class="toplista" scope="col">Cód Máquina</th>
+                            <th class="toplista" scope="col">Máquina</th>
+                            <th class="toplista" scope="col">Linha</th>
+                            <th class="toplista" scope="col">Trecho</th>
+                            <th class="toplista" scope="col">Status</th>
+                            
 
                         </tr>
                     </thead>
@@ -133,12 +127,67 @@
                 <div class="next" onclick="moverPage(pagination.page +1)">&gt;</div>
                 <div class="last" onclick="moverPage(pagination.totalPage -1)">&#187;</div>
             </div>
-              <div id="dv-modal" class="modal">
-    <div class="modal-content">
-        <img id="imgModal">
-    </div>
-    <button class="btn-fecha-modal" onclick="FecharModal()">Fechar</button>
-</div>
+            <div id="dv-modal" class="modal">
+                <div class="modal-content">
+                    <img id="imgModal">
+                </div>
+                <button class="btn-fecha-modal" onclick="FecharModal()">Fechar</button>
+            </div>
+            <div id="modal-info" class="modal-info">
+                <h1 class="titulo-info">Informação do Serviço</h1>
+                <div class="modal-info-content">
+                    <div class="input-group input-group-sm mb-3" id="info-line1">
+
+                        <span class="input-group-text span_cod span_geral" id="basic-addon1">Cód Máquina:</span>
+                            <input id="codMaq" type="text" class="form-control" disabled>
+
+                        <span class="input-group-text span_maq span_geral" id="basic-addon1">Máquina:</span>
+                            <input id="maq" type="text" class="form-control" disabled>
+
+                        <span class="input-group-text span_linha span_geral" id="basic-addon1">linha: </span>                                                 
+                            <input id="linha" type="text" class="form-control output" disabled> 
+
+                        <span class="input-group-text span_trecho span_geral" id="basic-addon1">Trecho: </span>                        
+                            <input id="trecho" type="text" class="form-control" disabled>
+                    </div>
+                    <div class="input-group input-group-sm mb-3" id="info-line1">
+
+                        <span class="input-group-text span_equip span_geral" id="basic-addon1">Equipamento:</span>
+                            <input id="equip" type="text" class="form-control" disabled>
+
+                        <span class="input-group-text span_tipo_lub span_geral" id="basic-addon1">Lubrificante:</span>
+                            <input id="tipoLub" type="text" class="form-control" disabled>
+
+                            <span class="input-group-text span_tipo span_geral" id="basic-addon1">Tipo:</span>
+                            <input id="tipo" type="text" class="form-control" disabled>
+
+                        <span class="input-group-text span_prop span_geral" id="basic-addon1">Propriedade:</span>
+                            <input id="prop" type="text" class="form-control" disabled>
+                    </div>
+                    <div class="input-group input-group-sm mb-3" id="info-line1">
+
+                        <span class="input-group-text span_apli span_geral" id="basic-addon1">Aplicação:</span>
+                            <input id="apli" type="date" class="form-control" disabled>
+
+                        <span class="input-group-text span_prox_apli span_geral" id="basic-addon1">Próx. Aplicação:</span>
+                            <input id="proApli" type="date" class="form-control" disabled>
+
+                        <span class="input-group-text span_status span_geral" id="basic-addon1">Status:</span>
+                            <input id="status" type="text" class="form-control" disabled>
+
+                        <span class="input-group-text span_resp span_geral" id="basic-addon1">Téc. Responsável:</span>
+                            <input id="nomeTec" type="text" class="form-control" disabled>
+                    </div>
+                    <div class="obs mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">
+                            <h5 class="titulo-obs">Observação</h5>
+                        </label>
+                        <textarea class="form-control" id="obs" rows="3"></textarea>
+                    </div>
+                     <button class="btn-info-modal" onclick="FecharModal()">Fechar</button>
+                </div>
+                
+            </div>
         </section>
       
     </div>

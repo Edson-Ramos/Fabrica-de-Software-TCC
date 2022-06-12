@@ -77,8 +77,15 @@ body{
     width: 100px;
 }
 .spanT{
-    width: 70px;
+    width: 75px;
+    left: 20px;
 }
 .spanM{
-    width: 70px;
+    width: 75px;
+}
+.sapn_cod{
+    width: 110px;
+}
+.span_linha{
+    width: 110px;
 }

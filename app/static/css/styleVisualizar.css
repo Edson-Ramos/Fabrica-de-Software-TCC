@@ -47,6 +47,7 @@ body{
     left: 1px;
 }
 .titulo{
+    margin-top: 100px;
     font-family: 'Merriweather', serif;
     font-weight: 900;
     color: black;
@@ -152,12 +153,19 @@ body{
     color: rgb(11, 165, 3);
     font-size: 20px;
 }
+.fa-circle-plus{
+    color: rgb(1, 1, 4);
+    font-size: 20px;
+}
 .modal{
     display: none;
     background-color: rgba(0, 0, 0, 0.564);
     position: fixed;
+    top:0;
+    z-index: 99999;
+    left: -256px;
     width: 66vw;
-    height: 81vh;
+    height: 75vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -168,6 +176,10 @@ body{
     margin-top: 15px;
     max-width: 900px;
     padding: auto;
+}
+#imgModal{
+    max-width: 66vw;
+    max-height: 64vh;
 }
 .btn-fecha-modal{
     font-family: 'Open Sans', sans-serif;
@@ -188,6 +200,7 @@ body{
     font-family: 'Open Sans', sans-serif;
     width: 400px;    
     top: 5px;
+    margin-left: 75px;
 }
 .select-filtro{
     font-family: 'Open Sans', sans-serif;
@@ -226,4 +239,66 @@ body{
 
 .submit-line input {
   width: 100%;
+}
+.modal-info{
+    display: none;
+    top:0;
+    left: -256px;
+    z-index: 99999;    
+    background-color: rgba(0, 0, 0, .8);
+    opacity: 10;
+    position:fixed;
+    width: 66vw;
+    height: 60vh;
+    flex-direction: column;
+    border-radius: 15px;
+    
+}
+.titulo-info{
+    margin-top: 30px;
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    color: rgb(252, 252, 252);
+    font-size: 60px;
+}
+.modal-info-content{
+    margin: auto;
+    margin-top: 40px;
+    max-width: 900px;
+    padding: auto;
+}
+.btn-info-modal{
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgb(12, 87, 247);
+    padding: 5px 10px 5px 10px;
+    border: 2px solid rgba(0, 0, 0, 0.513);
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}
+.btn-info-modal:hover{
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgb(0, 166, 255);
+    color: black;
+}
+.titulo-obs{
+    color:white;
+}
+.span_geral{
+    background-color: rgba(226, 226, 226, 0.726);
+}
+.span_maq{
+    width: 100px;
+}
+.span_tipo_lub{
+    width: 100px;
+}
+.span_tipo{
+    width: 100px;
+}
+.span_trecho{
+    width: 100px;
+}
+.span_linha{
+    width: 100px;
 }

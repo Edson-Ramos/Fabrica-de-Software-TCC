@@ -54,40 +54,14 @@ function createFile(file) {
 
     let tdTrecho = document.createElement("td")
     tdTrecho.className = "lista"
-    tdTrecho.innerText = `${file.trecho}`
-
-    let tdEquip = document.createElement("td")
-    tdEquip.className = "lista"
-    tdEquip.innerText = `${file.equip}`
-
-    let tdTipoLub = document.createElement("td")
-    tdTipoLub.className = "lista"
-    tdTipoLub.innerText = `${file.tipoLub}`
-
-    let tdTipo = document.createElement("td")
-    tdTipo.className = "lista"
-    tdTipo.innerText = `${file.tipo}`
-
-    let tdProp = document.createElement("td")
-    tdProp.className = "lista"
-    tdProp.innerText = `${file.prop}`
-
-    let tdDataApli = document.createElement("td")
-    tdDataApli.className = "lista"
-    tdDataApli.innerText = `${file.dataApli}`
-
-    let tdDataProxApli = document.createElement("td")
-    tdDataProxApli.className = "lista"
-    tdDataProxApli.innerText = `${file.dataProxApli}`
+    tdTrecho.innerText = `${file.trecho}`   
 
 
     let tdStatus = document.createElement("td")
     tdStatus.className = "lista"
     tdStatus.innerText = `${file.status}`
 
-    let tdObs = document.createElement("td")
-    tdObs.className = "lista"
-    tdObs.innerText = `${file.obs} | Tec. Resp: ${file.nomeTec}`
+    
 
     // Botões de Excluir
     var btDel = document.createElement("button")
@@ -109,43 +83,105 @@ function createFile(file) {
     var btnImg = document.createElement("button")
     btnImg.className = "btn btn-default btnImg"
     btnImg.id = `${file.idServ}`
-    btnImg.title = "Excluir"
+    btnImg.title = "Imagem"
     let btnImgIcon = document.createElement("i")
     btnImgIcon.className = "fa-solid fa-image"
+
+     // Botões de mais informações
+    var btnInfo = document.createElement("button")
+    btnInfo.className = "btn btn-default btnInfo"
+    btnInfo.id = `${file.idServ}`
+    btnInfo.title = "Informações"
+    let btninfoIcon = document.createElement("i")
+    btninfoIcon.className = "fa-solid fa-circle-plus"
 
 
     btDel.appendChild(btIcon)
     btAtt.appendChild(btAttIcon)
     btnImg.appendChild(btnImgIcon)
+    btnInfo.appendChild(btninfoIcon)
     tbody.appendChild(tr)
     tr.appendChild(tdCodMaq)
     tr.appendChild(tdMaq)
     tr.appendChild(tdLinha)
-    tr.appendChild(tdTrecho)
-    tr.appendChild(tdEquip)
-    tr.appendChild(tdTipoLub)
-    tr.appendChild(tdTipo)
-    tr.appendChild(tdProp)
-    tr.appendChild(tdDataApli)
-    tr.appendChild(tdDataProxApli)
-    tr.appendChild(tdStatus)
-    tr.appendChild(tdObs)
+    tr.appendChild(tdTrecho)   
+    tr.appendChild(tdStatus)    
     tr.appendChild(btDel)
     tr.appendChild(btAtt)
     tr.appendChild(btnImg)
+    tr.appendChild(btnInfo)
 }
 
 
 function AbrirModal(){
+
+
+    document.querySelectorAll(".btnInfo").forEach(function (btnInfo) {
+        btnInfo.addEventListener("click", (e) => {
+            idServ = btnInfo.id
+
+            const id_serv = {
+                idServ : idServ
+            }   
+
+        const dado_Servico = {
+            method: "POST",
+            body: JSON.stringify(id_serv),
+            headers: {
+                "Content-Type": "application/json"
+        }
+    }
+    fetch(`${rota}/listar_servico_id`, dado_Servico)
+        .then(function (response) {
+            response.json()
+                .then(function (data) {
+                    for (arquivo of data.arquivos){
+                            let codMaq = document.getElementById("codMaq")
+                                codMaq.value = `${arquivo.codMaq}`
+                            let maq = document.getElementById("maq")
+                                maq.value = `${arquivo.maq}`
+                            let linha = document.getElementById("linha")
+                                linha.value = `${arquivo.linha}`
+                            let trecho = document.getElementById("trecho")
+                                trecho.value = `${arquivo.trecho}`
+                            let equip = document.getElementById("equip")
+                                equip.value = `${arquivo.equip}`
+                            let tipoLub  = document.getElementById("tipoLub")
+                                tipoLub.value = `${arquivo.tipoLub}`
+                            let tipo = document.getElementById("tipo")
+                                tipo.value = `${arquivo.tipo}`
+                            let prop = document.getElementById("prop")
+                                prop.value = `${arquivo.prop}`
+                            let apli = document.getElementById("apli")
+                                apli.value = `${arquivo.dataApli}`
+                            let proxApli = document.getElementById("proApli")
+                                proxApli.value = `${arquivo.dataProxApli}`
+                            let status = document.getElementById("status")
+                                status.value = `${arquivo.status}`
+                            let nomeTec = document.getElementById("nomeTec")
+                                nomeTec.value = `${arquivo.nomeTec}`
+                            let obs = document.getElementById("obs")
+                                obs.value = `${arquivo.obs}`
+                            
+
+                            document.getElementById("modal-info").style.display = "block"
+                        
+                    }   
+                   
+          })
+        })
+    })
+    })
     
     //Pesquisa de botão de img e captura do evento de click
 
-document.querySelectorAll(".btnImg").forEach(function (btnImg) {
-   btnImg.addEventListener("click", (e) => {
+    document.querySelectorAll(".btnImg").forEach(function (btnImg) {
+        btnImg.addEventListener("click", (e) => {
        idServ = btnImg.id
        const id_serv = {
         idServ : idServ
-    }
+    }   
+    
 
     const dado_Servico = {
         method: "POST",
@@ -173,6 +209,7 @@ document.querySelectorAll(".btnImg").forEach(function (btnImg) {
 
 function FecharModal(){
     document.getElementById("dv-modal").style.display = "none"
+    document.getElementById("modal-info").style.display = "none"
 }
  
 function createTable() {
