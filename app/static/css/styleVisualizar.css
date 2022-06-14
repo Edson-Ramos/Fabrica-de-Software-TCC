@@ -243,13 +243,13 @@ body{
 .modal-info{
     display: none;
     top:0;
-    left: -256px;
+    left: -248px;
     z-index: 99999;    
     background-color: rgba(0, 0, 0, .8);
     opacity: 10;
     position:fixed;
     width: 66vw;
-    height: 60vh;
+    height: 67vh;
     flex-direction: column;
     border-radius: 15px;
     
@@ -264,7 +264,7 @@ body{
 .modal-info-content{
     margin: auto;
     margin-top: 40px;
-    max-width: 900px;
+    max-width: 990px;
     padding: auto;
 }
 .btn-info-modal{
